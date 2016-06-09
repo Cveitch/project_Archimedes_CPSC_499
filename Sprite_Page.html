@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SPRITE</title>
+    <script type = "text/javascript" src="Buttons.js"></script>
+
+    <!--Gives text and button aligning options-->
+    <style>
+        .alignleft {
+            float: left;
+        }
+        .alignright {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <!--Gives a value to the page number, used in context switches-->
+    <script>var PAGE = "SPRITE";</script>
+    <!--User name information on top left of screen, and button to go between pages on top right-->
+    <div id="TOP_SCREEN_INFO">
+        <p class="alignleft">USER_NAME</p>
+        <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
+    </div>
+
+    <!--Clears float for align function-->
+    <div style="clear: both;"></div>
+</body>
+
+</html>

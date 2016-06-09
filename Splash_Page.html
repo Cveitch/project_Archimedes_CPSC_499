@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SPLASH</title>
+    <script type = "text/javascript" src="Buttons.js"></script>
+
+    <!--Alignment css that allows for centring of text/etc-->
+    <style>
+        .centred {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            /* bring your own prefixes */
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <!--Gives a value to the page number, used in context switches-->
+    <script>var PAGE = "SPLASH";</script>
+    <!--Centres some text on page-->
+    <div>
+        <p class="centred">SPLASH PAGE - CLICK ME</p>
+    </div>
+    <!--On click, changes page to Sprite page.  Clicking on anything in body will work-->
+    <body onclick="window.location.href='Sprite_Page.html';" style="cursor:pointer; width:100%; height:100%;"></body>
+</body>
+
+</html>
