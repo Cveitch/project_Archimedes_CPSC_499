@@ -5,6 +5,7 @@
     <title>CANVAS</title>
     <script type = "text/javascript" src="phaser.js"></script>
     <script type = "text/javascript" src="Buttons.js"></script>
+  
 
     <!--Gives text and button aligning options-->
     <style>
@@ -18,16 +19,29 @@
 </head>
 
 <body>
+
     <!--Gives a value to the page number, used in context switches-->
     <script>var PAGE = "CANVAS";</script>
     <!--User name information on top left of screen, and button to go between pages on top right-->
+  
     <div id="TOP_SCREEN_INFO">
         <p class="alignleft">USER_NAME</p>
         <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
+        
     </div>
+    <!--Canvas to draw on-->
+       <canvas onclick="draw(event)" id="Canvas" width="600" height="500" style="border:1px solid #000000" > </canvas>
+       <script type = "text/javascript" src="Drawing.js"></script>
 
     <!--Clears float for align function-->
     <div style="clear: both;"></div>
+    
+    <center id=XL>X</center>
+    <center id=X>0</center>
+    <center id=YL>Y</center>
+    <center id=Y>0</center>
+
+    
 </body>
 
 </html>
