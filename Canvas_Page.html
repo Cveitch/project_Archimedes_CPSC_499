@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width,initial-scale=1.0">
     <title>CANVAS</title>
     <script type = "text/javascript" src="phaser.js"></script>
     <script type = "text/javascript" src="Buttons.js"></script>
@@ -18,8 +19,8 @@
     </style>
 </head>
 
-<body>
-
+<body onload = "canvas_Size()" onresize="canvas_Size()" >
+    
     <!--Gives a value to the page number, used in context switches-->
     <script>var PAGE = "CANVAS";</script>
     <!--User name information on top left of screen, and button to go between pages on top right-->
@@ -30,7 +31,7 @@
         
     </div>
     <!--Canvas to draw on-->
-       <canvas onclick="change(event)" id="Canvas"  width="600" height="1500" style="border:1px solid #000000" > </canvas>
+       <canvas onclick="change(event)" id="Canvas"  width="1000" height="750" style="border:1px solid #000000" > </canvas>
        <script type = "text/javascript" src="Drawing.js"></script>
 
 
