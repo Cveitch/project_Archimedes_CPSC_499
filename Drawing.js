@@ -15,7 +15,7 @@ var Drawing;
 //if mouse has been pressed, move to mouse location, and set drawing to true. 
 canvas.onmousedown = function (e) {
     
-    canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetLeft); 
+    //canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetLeft); 
     
         Drawing = true; 
     
@@ -23,18 +23,24 @@ canvas.onmousedown = function (e) {
 
 //while mouse is pressed draw
 canvas.onmousemove = function (e) {
+        
+
 
     if(Drawing) {
         
         canvas_Context.lineTo(e.pageX-this.offsetLeft, e.pageY-this.offsetTop); 
+        
         canvas_Context.stroke();
        
        
+    }else{
+        canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetTop); 
+
     }
 }
 //when mouse is released stop drawing
 canvas.onmouseup = function (e) {
-    
+   // canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetLeft);
         Drawing = false; 
     
 }
