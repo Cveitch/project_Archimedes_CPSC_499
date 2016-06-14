@@ -9,14 +9,41 @@ var mainState = {
     },
 
     create: function () {
-        this.background = this.game.add.sprite(0,0,'background');
 
-        this.dude = game.add.sprite(100,245,'dude');
-        
+        //game.stage.backgroundColor = '71c5cf';
+
+        //set physics system
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        this.background = this.game.add.sprite(0,0,'background');
+        this.background.scale.setTo(2);
+
+        this.dude = game.add.sprite(this.game.world.centerX,this.game.world.centerY,'dude');
+        this.dude.anchor.setTo(0.5,0.5);
+
+        game.physics.arcade.enable(this.dude);
+
+        this.dude.body.gravity.y = 500;
+
+
+        var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        spaceKey.onDown.add(this.jump, this);
     },
 
     update: function () {
+        if(this.dude.y<0|| this.dude.y > 490){
+            this.restartGame();
+        };
+    },
 
+    jump: function() {
+
+        this.dude.body.velocity.y = -350;
+    },
+
+    restartGame: function(){
+
+        game.state.start('main');
     },
 };
 
