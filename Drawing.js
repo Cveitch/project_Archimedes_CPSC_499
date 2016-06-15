@@ -27,13 +27,12 @@ window.addEventListener('resize', canvas_Size, false);
 
 var touch_drawing_True = function(e){
     
-
-    
 //move cords to new start location. 
- canvas_Context.moveTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
-
-        Drawing = true; 
-        event.preventDefault(); 
+ canvas_Context.moveTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop);
+    //prevent scrolling
+ event.preventDefault(); 
+    //add X values to array
+    //xValue.push(e.touches[0].clientX-this.offsetLeft); 
 }
 
 
@@ -102,8 +101,27 @@ var touch_Draw = function (e){
     
     //prevents scrolling
     event.preventDefault(); 
-    canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
+    //add to array 
+        xValue.push(e.touches[0].clientX-this.offsetLeft); 
+    
+    //check X value 
+    if(xValue[i] < e.touches[0].clientX-this.offsetLeft){
+        //draw
+     canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
     canvas_Context.stroke(); 
+        i++; 
+    } else if(xValue[i] >= e.touches[0].clientX-this.offsetLeft){
+           //clear canvas
+            canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
+            canvas_Context.beginPath();
+                
+             //reset Xvalue array
+            xValue.length = 1; 
+            i = 0; 
+            
+        
+    }
+    
  
 
     
