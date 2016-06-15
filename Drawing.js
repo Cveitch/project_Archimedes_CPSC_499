@@ -6,34 +6,57 @@ var canvas_Context = canvas.getContext("2d");
 var xValue = [0]; 
 var i = 0; 
 
-
-//checks to see if the window gets resized
-window.addEventListener('resize', canvas_Size, false);
+//start touch location
+var touch_Start_Location = 0; 
 
 //Drawing tells if mouse button has been pressed. 
 var Drawing; 
 
+var touchX, touchY; 
+
+//checks to see if the window gets resized
+window.addEventListener('resize', canvas_Size, false);
 
 
 
 
-//if mouse has been pressed, move to mouse location, and set drawing to true. 
-canvas.onmousedown = function (e) {
+
+
+//methods for drawing
+
+
+var touch_drawing_True = function(e){
     
-    //canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetLeft); 
+
+    
+//move cords to new start location. 
+ canvas_Context.moveTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
+
+        Drawing = true; 
+        event.preventDefault(); 
+}
+
+
+var drawing_True = function (e) {
+    
     
         Drawing = true; 
+        event.preventDefault(); 
+
+}
+
+//sets drawing to false
+var drawing_False = function (e) {
+        Drawing = false; 
     
 }
 
-//while mouse is pressed draw
-canvas.onmousemove = function (e) {
-        
+//draws the lines while the mouse is pressed
+var draw = function (e) {
 
 
     if(Drawing) {
         
-        // canvas_Context.lineTo(e.pageX-this.offsetLeft, e.pageY-this.offsetTop); 
         //add X value to array 
         xValue.push(e.pageX-this.offsetLeft); 
         
@@ -45,39 +68,54 @@ canvas.onmousemove = function (e) {
                 i++;  
             //if Xvalue is greater or equal to current X then it means the user is going backwards and thats trouble.
             //So lets erase the line and make them start over. 
+                
             } else if(xValue[i] >= e.pageX-this.offsetLeft) {
+                
             //Disable drawing
-            Drawing = false; 
+                Drawing = false; 
+                
             //clear canvas
-            canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
-            canvas_Context.beginPath();
-            //reset Xvalue array
-            xValue.length = 1; 
-            i = 0; 
+                canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
+                canvas_Context.beginPath();
+                
+             //reset Xvalue array
+                xValue.length = 1; 
+                i = 0; 
             
         }
         
-    }else{
+    } else {
         canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetTop); 
 
     }
 }
-    //when mouse is released stop drawing
-canvas.onmouseup = function (e) {
-    // canvas_Context.moveTo(e.pageX-this.offsetLeft, e.pageY-this.offsetLeft);
-        Drawing = false; 
+
+
+
+
+
+//draw on Touchscreens 
+/*
+-no bounds yet, so can go backwards and in loops
+*/
+var touch_Draw = function (e){
+    
+    //prevents scrolling
+    event.preventDefault(); 
+    canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
+    canvas_Context.stroke(); 
+ 
+
+    
+    
+ 
+    
     
 }
 
-    //If mouse leaves the canvas, then it stops drawing
-canvas.onmouseleave = function (e){
-        Drawing = false; 
-}
 
-
-
-    //dynamic canvas size
-var canvas_Size = function(){
+//dynamic canvas size
+var canvas_Size = function() {
     
     canvas.height = window.outerHeight-150; 
     canvas.width = window.outerWidth-30; 
@@ -86,6 +124,16 @@ var canvas_Size = function(){
 }
 
 
+//event listeners for drawing with mouse
+canvas.addEventListener("mousemove",draw,false ); 
+canvas.addEventListener("mousedown",drawing_True,false ); 
+canvas.addEventListener("mouseup",drawing_False,false ); 
+canvas.addEventListener("mouseleave",drawing_False,false ); 
+
+//event listeners for drawing with finger on touch screen
+canvas.addEventListener('touchstart', touch_drawing_True,false); 
+canvas.addEventListener("touchmove", touch_Draw, false); 
+canvas.addEventListener("touchend", drawing_False, false); 
 
 
 
@@ -98,33 +146,15 @@ var canvas_Size = function(){
 
 
 
- /* random notes
-        
-        
-        todo: 
-        X-Canvas should be the size of the screen. Right now its only as big as I make it. 
-        X-Line does not start where the mouse cursor is. I think this has something to do with how the x and y values are being measured. 
-        X-Not be able to draw backwards. Think I can just check for the mouse x values and compare them to the previous values. 
-        -Play around with storing x,y values. 
-        
-        
-        
-        
-         can take values and store them in data structure. 
-        array? 
-        2d array [x,y]
-        Only 1 of each x value
-        x is gong to be plus one each time, its never going to go backwards
-        Y does not matter
-        really only need x values? ---maybe
-        might be to strict? 
-        BUT WHATS THE SCALE???????
-        It cant be 1 pixel = 1 value (x or y)
-        
-        Scale?
-        Divide screen length into 10? 
-        Divide screen length 
-        
-        
-        
-        */
+
+
+
+
+
+
+
+
+
+
+
+
