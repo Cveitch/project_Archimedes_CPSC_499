@@ -14,13 +14,14 @@ var mainState = {
 
         //set physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
-
+        
+        //sets a background
         this.background = this.game.add.sprite(0,0,'background');
         this.background.scale.setTo(2);
 
         this.dude = game.add.sprite(this.game.world.centerX,this.game.world.centerY,'dude');
         this.dude.anchor.setTo(0.5,0.5);
-
+        //gives phyics to given object
         game.physics.arcade.enable(this.dude);
 
         this.dude.body.gravity.y = 500;
@@ -37,12 +38,12 @@ var mainState = {
     },
 
     jump: function() {
-
+        //preform jump
         this.dude.body.velocity.y = -350;
     },
 
     restartGame: function(){
-
+        // restart the game after death
         game.state.start('main');
     },
 };
