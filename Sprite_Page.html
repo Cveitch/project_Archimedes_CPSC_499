@@ -5,6 +5,7 @@
     <title>SPRITE</title>
     <script type = "text/javascript" src="phaser.js"></script>
     <script type = "text/javascript" src="Buttons.js"></script>
+    <script type = "text/javascript" src="UserInfo.js"></script>
 
     <!--Gives text and button aligning options-->
     <style>
@@ -17,17 +18,18 @@
     </style>
 </head>
 
-<body>
-    <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "SPRITE";</script>
-    <!--User name information on top left of screen, and button to go between pages on top right-->
-    <div id="TOP_SCREEN_INFO">
-        <p class="alignleft">USER_NAME</p>
-        <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
-    </div>
+<body onload="getUsername('usernameLbl')">
+<!--Gives a value to the page number, used in context switches-->
+<script>var PAGE = "SPRITE";</script>
 
-    <!--Clears float for align function-->
-    <div style="clear: both;"></div>
+<!--User name information on top left of screen, and button to go between pages on top right-->
+<div id="TOP_SCREEN_INFO">
+    <p class="alignleft" id="usernameLbl"></p>
+    <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
+</div>
+
+<!--Clears float for align function-->
+<div style="clear: both;"></div>
 </body>
 
 </html>
