@@ -8,7 +8,8 @@
  * saves it and moves on to the next page.
  * @param {String} buttonID
  */
-function signIn(buttonID) {
+function signIn(buttonID) 
+{
     var name;
 
     //Gets the name of the user from the options that they select on the splash screen
@@ -21,10 +22,10 @@ function signIn(buttonID) {
     {
         name = document.getElementById("userNameInput").value;
 
-        //Checks to make sure the user has actually entered something into the text box.
+        //Checks that the username length is not less then 2 or greater then 20 characters.
         if(name.length < 2 || name.length > 20)
         {
-            document.getElementById("invalidLengthLbl").style.visibility = "visible";
+            document.getElementById("invalidLengthLabel").style.visibility = "visible";
             return;
         }
     }
@@ -47,6 +48,7 @@ function signIn(buttonID) {
  * Sets the text of the container given by the id to the username that the user gave.
  * @param {String} container
  */
-function getUsername(container) {
+function getUsername(container)
+{
     document.getElementById(container).innerHTML = sessionStorage.getItem("Username");
 }
