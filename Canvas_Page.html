@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>CANVAS</title>
-    <script type = "text/javascript" src="phaser.js"></script>
-    <script type = "text/javascript" src="Buttons.js"></script>
+    <script type = "text/javascript" src="jsFiles/Phaser.js"></script>
+    <script type = "text/javascript" src="jsFiles/Buttons.js"></script>
 
     <!--Gives text and button aligning options-->
     <style>
@@ -19,11 +19,23 @@
 
 <body>
     <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "CANVAS";</script>
+    <script>
+        var PAGE = "CANVAS";
+        setCompare();
+    </script>
     <!--User name information on top left of screen, and button to go between pages on top right-->
     <div id="TOP_SCREEN_INFO">
         <p class="alignleft">USER_NAME</p>
-        <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
+
+        <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
+        do it this way...
+        --AD: the hash and the FALSE value allows the Sprite page to identify when not to recreate the physics again
+        -->
+        <p class = alignright>
+            <button type="button" onclick="window.location.href='Sprite_Page.html'+ '#' + 'FALSE';">
+                TO SPRITE
+            </button>
+        </p>
     </div>
 
     <!--Clears float for align function-->
