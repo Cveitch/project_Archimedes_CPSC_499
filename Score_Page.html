@@ -5,11 +5,27 @@
     <title>SCORE</title>
     <script type = "text/javascript" src="phaser.js"></script>
     <script type = "text/javascript" src="Buttons.js"></script>
+    <script type = "text/javascript" src="UserInfo.js"></script>
+
+    <!--Gives text and button aligning options-->
+    <style>
+        .alignleft {
+            float: left;
+        }
+        .alignright {
+            float: right;
+        }
+    </style>
 </head>
 
-<body>
-    <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "SCORE";</script>
+<body onload="getUsername('usernameLabel')">
+<!--Gives a value to the page number, used in context switches-->
+<script>var PAGE = "SCORE";</script>
+
+<!--Username goes on the top left of the screen-->
+<div id="TOP_SCREEN_INFO">
+    <p class="alignleft" id="usernameLabel"></p>
+</div>
 </body>
 
 </html>

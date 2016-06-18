@@ -5,6 +5,7 @@
     <title>SPLASH</title>
     <script type = "text/javascript" src="phaser.js"></script>
     <script type = "text/javascript" src="Buttons.js"></script>
+    <script type = "text/javascript" src="UserInfo.js"></script>
 
     <!--Alignment css that allows for centring of text/etc-->
     <style>
@@ -15,18 +16,43 @@
             /* bring your own prefixes */
             transform: translate(-50%, -50%);
         }
+
+        .boxed {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #f1f1f1;
+            border-style: solid;
+            border-width: medium;
+            border-color: #888888;
+        }
     </style>
 </head>
 
 <body>
-    <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "SPLASH";</script>
-    <!--Centres some text on page-->
-    <div>
-        <p class="centred">SPLASH PAGE - CLICK ME</p>
-    </div>
-    <!--On click, changes page to Sprite page.  Clicking on anything in body will work-->
-    <body onclick="window.location.href='Sprite_Page.html';" style="cursor:pointer; width:100%; height:100%;"></body>
+<!--Gives a value to the page number, used in context switches-->
+<script>var PAGE = "SPLASH";</script>
+
+<!--Creates a box containing the information about username login-->
+<div class="boxed" align="center">
+
+    <!-- Information about signing in under a username-->
+    <h3>Sign in as user</h3>
+    <input type="text" placeholder="Username" id="userNameInput"><br>
+    <button onclick="signIn(this.id)" id="signInButton">Sign in</button><br>
+
+    <!--If the username they entered has an invalid length, then this label becomes visible-->
+    <pr id="invalidLengthLabel"  style="font-size:12px; visibility:hidden " >Username can<br>only be 2 - 20 characters</pr><br>
+
+    <!--Seperates the two sections with a line-->
+    <hr>
+
+    <!-- Information about signing in as a guest-->
+    <h3>Sign in as guest</h3>
+    <button onclick="signIn(this.id)" id="continueGuestButton">Continue as guest</button><br>
+</div>
+
 </body>
 
 </html>
