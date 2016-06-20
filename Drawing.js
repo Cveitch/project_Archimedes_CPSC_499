@@ -9,6 +9,10 @@ var i = 0;
 //Drawing tells if mouse button has been pressed. 
 var isDrawing; 
 
+// bool to tell if the user has been alerted to drawing backwards, so that it does not become annoying. 
+var hasBeenAlerted = false
+
+
 //methods for drawing
 
 var setTouchDrawingTrue = function (e) 
@@ -50,7 +54,7 @@ var mouseDraw = function (e)
         //add X value to array 
         xVal.push(e.pageX - this.offsetLeft); 
         
-        //if Xvalue is less than current X value, then draw
+        //if    Xvalue is less than current X value, then draw
             if (xVal[i] < e.pageX - this.offsetLeft)
             {
             
@@ -66,18 +70,30 @@ var mouseDraw = function (e)
         */
             else if(xVal[i] >= e.pageX-this.offsetLeft) 
             {
-                
+                 //window.alert("Cannot draw backwards");
+                errorAlert(); 
             //Disable drawing
                 isDrawing = false; 
                 
             //clear canvas
                 canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
                 canvas_Context.beginPath();
+            
+               
+                
                 
              //reset Xvalue array
                 xVal.length = 1; 
                 i = 0; 
             
+                
+                 //alert user they cannot draw backwards
+                canvas_Context.font = "30px Arial"; 
+                canvas_Context.textAlign("center"); 
+                canvas_Context.fillText("Cannot Draw Backwards", canvas.width / 2, canvas.height / 2); 
+               
+                   
+                
             }
         
     } 
@@ -87,9 +103,6 @@ var mouseDraw = function (e)
 
     }
 }
-
-
-
 
 
 //draw on Touchscreens 
@@ -110,10 +123,16 @@ var touchDraw = function (e){
     } 
     else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft)
     {
+            //allert user they cant draw backwards
+            errorAlert();  
            //clear canvas
+        
             canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
             canvas_Context.beginPath();
+        
            
+        
+        
             //reset Xvalue array
             xVal.length = 1; 
             i = 0; 
@@ -131,6 +150,43 @@ var setCanvasSize = function() {
     
     
 }
+
+
+// alert for drawing backwards
+var errorAlert = function()
+{
+    
+    if(!hasBeenAlerted)
+        {
+    window.alert("Cannot draw backwards");
+    hasBeenAlerted = true; 
+        }
+
+  
+    
+}
+
+
+var cordGenerator = function(x,y)
+{
+    //current pixel values
+    var pX = x; 
+    var pY = y; 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 
 
 //event listeners for drawing with mouse
