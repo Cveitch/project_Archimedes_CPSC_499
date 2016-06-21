@@ -102,6 +102,55 @@ up and steps through all the functions in sequential order:
 
     this.player.body.loadPolygon("sprite_physics", "betty");
     <!--This loads up the physics properties given in the .json file for "betty"-->
+    
+9) getSpeed() pulls the latest speed present from a queue/array and then to be updated as the next speed for the sprite to have. The latest speed is saved as the nextSpeed object:
+	if(this.arrayMoment % 50 === 0)
+	{
+		//if(speedValues[this.arrayIndex] !== null)
+		if(this.arrayIndex < speedValues.length)
+		{
+			this.nextSpeed = speedValues[this.arrayIndex];
+		}
+		else
+		{
+			//sets the speed to the degault setting
+			this.nextSpeed = 0;
+		}
+		this.arrayIndex += 1;
+	}
+	<!--Block of code that needs some explaining-->
+
+    if(this.arrayMoment % 50 === 0){...}
+    <!--This condition passes whenever update() iterates
+    every 50 cycles and then allows the next speed should be removed from the data structure-->
+
+    if(this.arrayIndex < speedValues.length){...}
+    <!--This condition activates only when the arrayIndex is lower the length than the length of the data structure-->
+    
+    this.nextSpeed = speedValues[this.arrayIndex];
+    <!--When the arrayIndex is still smaller than the data structure's length, the nextSpeed is pulled from the d.s.-->
+
+    this.nextSpeed = 0;
+    <!--When the arrayIndex is larger or equal to the d.s.'s length, the nextSpeed is set to the default speed of 150-->
+
+10) movePlayer() is pretty self-explanatory: this is the function that will set the velocity taken by getSpeed() to the sprite:
+    //If the queue is empty OR if the velocity is 0
+	if(this.nextSpeed === 0)
+	{
+		//Sprite speed
+		this.player.body.velocity.x = 150;
+	}
+	else
+	{
+		this.player.body.velocity.x = this.nextSpeed;
+	}
+	<!--Core of how movePlayer() works-->
+	
+	if(this.nextSpeed === 0){...}
+	<!--This condition allows for the default velocity setting-->
+	
+	this.player.body.velocity.x = this.nextSpeed;
+	<!--If the default condition is not set as 0, then the player velocity is set as the value removed from the d.s.-->
 
 Credit where it's due:
 
