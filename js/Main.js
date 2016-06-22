@@ -10,7 +10,7 @@ Main.prototype = {
 		// Start the P2 Physics Engine
 		this.game.physics.startSystem(Phaser.Physics.P2JS);
 		// Set the gravity
-		this.game.physics.p2.gravity.y = 900;
+		this.game.physics.p2.gravity.y = 1400;
 		
 		// initialised tilemap with matching tileset
 		var mymap = this.game.add.tilemap('testmap');
@@ -27,38 +27,21 @@ Main.prototype = {
 		//we resize the world to the background as it will be covering the entire level
 	    layerbackground.resizeWorld();
 
-		//this sets both the block and detail layer's collision to true
-			//mymap.setCollisionByExclusion([0],true,'layerblocks');
-			//mymap.setCollisionBetween(1,20,true,'layerdetails');
-
-		//uses p2 to make multiple bodies in tile maps into solid single body
-		layerblocks_tiles 	= this.game.physics.p2.convertTilemap(mymap,layerblocks);
-		 layerdetails 	= this.game.physics.p2.convertTilemap(mymap, layerdetails);
-		//turns polylines solid
-		layerpolyline_tiles = this.game.physics.p2.convertCollisionObjects(mymap, "objects2");
-
-	    // Create the player
-	    //this.createPlayer();
-
-		// Add the player to the game
-		this.player = this.game.add.sprite(0, 0, "avatar");
-		this.game.physics.p2.enable(this.player);
-		//quality of life settings 
-		this.player.anchor.setTo(0.5,0.5);
-		this.game.camera.follow(this.player);
-		//gives player a circle hitbox (radius,offestx,offsety)
-		this.player.body.setCircle(22,0,0);
-		//wouldn't want the character tumbling over
-		this.player.body.fixedRotation=true;
 		
+		//turns polylines solid
+		layerpolyline_tiles = this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
+
+	    //Create the player
+	    this.createPlayer();
 		
 		// Add goal to the game
-		goal = this.game.add.sprite(520,400,"goal");
+		goal 	= this.game.add.sprite(520,400,"goal");
 		
 		//this allows for real time in game control with keyboard, thanks to the update function 
 		cursors = this.game.input.keyboard.createCursorKeys();
 	},
 
+	//not currently called
 	createBlock: function() {
 
 	    // Define a block using bitmap data rather than an image sprite
@@ -104,8 +87,16 @@ Main.prototype = {
 
 	createPlayer: function() {
 
-	   
-		
+		//places character in world
+		this.player = this.game.add.sprite(100, 100, "avatar");
+		this.game.physics.p2.enable(this.player);
+		//quality of life settings 
+		this.player.anchor.setTo(0.5,0.5);
+		this.game.camera.follow(this.player);
+		//gives player a circle hitbox (radius,offestx,offsety)
+		this.player.body.setCircle(44,0,0);
+		//wouldn't want the character tumbling over
+		this.player.body.fixedRotation=true;
 		
 	    // Enable physics, use "true" to enable debug drawing
 	    //this.game.physics.p2.enable([this.player], false);
@@ -141,17 +132,18 @@ Main.prototype = {
 		}
 		if(cursors.up.isDown)
 		{//jumps
-			this.player.body.velocity.y = -800;
+			this.player.body.velocity.y = -600;
 		}
 		
 	},
 	
-	//can set controls in update so (Riley) moved them their, this function not called
+	//can set controls in update so this function not called
 	jump: function() {
 		//preform jump
 		this.player.body.velocity.y = -350;
 	},
 
+	//currently not called
 	restartGame: function(){
 		// restart the game after death
 		this.game.state.start('main');

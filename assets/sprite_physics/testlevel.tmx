@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="32" tileheight="32" nextobjectid="15">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="32" tileheight="32" nextobjectid="17">
  <tileset firstgid="1" name="tset_world1" tilewidth="32" tileheight="32" tilecount="800" columns="20">
   <image source="../images/tset_world1.png" width="640" height="1280"/>
  </tileset>
@@ -79,15 +79,11 @@
 </data>
  </layer>
  <objectgroup name="objects1">
-  <object id="7" name="avatar1" type="avatar" gid="816" x="-2" y="385" width="128" height="128"/>
-  <object id="8" name="goal1" type="goal" gid="817" x="513" y="514" width="128" height="128"/>
- </objectgroup>
- <objectgroup name="objects2">
-  <object id="12" name="plateform1" type="ground" x="-13" y="414">
-   <polygon points="6,0 119,0 220,94 285,97 510,-138 647,-135 650,-31 529,-29 524,118 652,124 653,232 7,228"/>
+  <object id="15" x="-3" y="403">
+   <polyline points="7,-1 112,0 198,88 213,96 266,98 497,-127 638,-125 637,-29 513,-29 515,141 643,141 643,237 3,237 3,13"/>
   </object>
-  <object id="14" name="plateform2" type="ground" x="768" y="538">
-   <polygon points="0,0 260,-1 259,107 -2,106"/>
+  <object id="16" x="769" y="538">
+   <polyline points="0,0 255,6 255,102 -1,102 -1,6"/>
   </object>
  </objectgroup>
 </map>

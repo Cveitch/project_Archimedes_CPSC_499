@@ -39,127 +39,103 @@
          "name":"objects1",
          "objects":[
                 {
-                 "gid":816,
-                 "height":128,
-                 "id":7,
-                 "name":"avatar1",
-                 "rotation":0,
-                 "type":"avatar",
-                 "visible":true,
-                 "width":128,
-                 "x":-2,
-                 "y":385
-                }, 
-                {
-                 "gid":817,
-                 "height":128,
-                 "id":8,
-                 "name":"goal1",
-                 "rotation":0,
-                 "type":"goal",
-                 "visible":true,
-                 "width":128,
-                 "x":513,
-                 "y":514
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "width":32,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "height":20,
-         "name":"objects2",
-         "objects":[
-                {
                  "height":0,
-                 "id":12,
-                 "name":"plateform1",
-                 "polygon":[
+                 "id":15,
+                 "name":"",
+                 "polyline":[
                         {
-                         "x":6,
+                         "x":7,
+                         "y":-1
+                        }, 
+                        {
+                         "x":112,
                          "y":0
                         }, 
                         {
-                         "x":119,
-                         "y":0
+                         "x":198,
+                         "y":88
                         }, 
                         {
-                         "x":220,
-                         "y":94
+                         "x":213,
+                         "y":96
                         }, 
                         {
-                         "x":285,
-                         "y":97
+                         "x":266,
+                         "y":98
                         }, 
                         {
-                         "x":510,
-                         "y":-138
+                         "x":497,
+                         "y":-127
                         }, 
                         {
-                         "x":647,
-                         "y":-135
+                         "x":638,
+                         "y":-125
                         }, 
                         {
-                         "x":650,
-                         "y":-31
-                        }, 
-                        {
-                         "x":529,
+                         "x":637,
                          "y":-29
                         }, 
                         {
-                         "x":524,
-                         "y":118
+                         "x":513,
+                         "y":-29
                         }, 
                         {
-                         "x":652,
-                         "y":124
+                         "x":515,
+                         "y":141
                         }, 
                         {
-                         "x":653,
-                         "y":232
+                         "x":643,
+                         "y":141
                         }, 
                         {
-                         "x":7,
-                         "y":228
+                         "x":643,
+                         "y":237
+                        }, 
+                        {
+                         "x":3,
+                         "y":237
+                        }, 
+                        {
+                         "x":3,
+                         "y":13
                         }],
                  "rotation":0,
-                 "type":"ground",
+                 "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-13,
-                 "y":414
+                 "x":-3,
+                 "y":403
                 }, 
                 {
                  "height":0,
-                 "id":14,
-                 "name":"plateform2",
-                 "polygon":[
+                 "id":16,
+                 "name":"",
+                 "polyline":[
                         {
                          "x":0,
                          "y":0
                         }, 
                         {
-                         "x":260,
-                         "y":-1
+                         "x":255,
+                         "y":6
                         }, 
                         {
-                         "x":259,
-                         "y":107
+                         "x":255,
+                         "y":102
                         }, 
                         {
-                         "x":-2,
-                         "y":106
+                         "x":-1,
+                         "y":102
+                        }, 
+                        {
+                         "x":-1,
+                         "y":6
                         }],
                  "rotation":0,
-                 "type":"ground",
+                 "type":"",
                  "visible":true,
                  "width":0,
-                 "x":768,
+                 "x":769,
                  "y":538
                 }],
          "opacity":1,
@@ -169,7 +145,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":15,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
