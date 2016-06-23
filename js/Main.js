@@ -169,29 +169,29 @@ Main.prototype = {
 		}
 	},
 	
-	update: function() {
-		//updates the game if betty dies or exceeds boundaries
-		
-		//cursors is used for in game control as an example of physics capabilities
-		
-		this.player.body.velocity.x = 0;
-		
-		if 		(cursors.left.isDown)
-		{//move left, flip character left
-			this.player.scale.x = -1;
-			this.player.body.velocity.x = -300;
-		}
-		else if (cursors.right.isDown)
-		{//move right, flip right
-			this.player.scale.x = 1;
-			this.player.body.velocity.x = 300;
-		}
-		if(cursors.up.isDown)
-		{//jumps
-			this.player.body.velocity.y = -600;
-		}
-		
-	},
+	// update: function() {
+	// 	//updates the game if betty dies or exceeds boundaries
+	//
+	// 	//cursors is used for in game control as an example of physics capabilities
+	//
+	// 	this.player.body.velocity.x = 0;
+	//
+	// 	if 		(cursors.left.isDown)
+	// 	{//move left, flip character left
+	// 		this.player.scale.x = -1;
+	// 		this.player.body.velocity.x = -300;
+	// 	}
+	// 	else if (cursors.right.isDown)
+	// 	{//move right, flip right
+	// 		this.player.scale.x = 1;
+	// 		this.player.body.velocity.x = 300;
+	// 	}
+	// 	if(cursors.up.isDown)
+	// 	{//jumps
+	// 		this.player.body.velocity.y = -600;
+	// 	}
+	//
+	// },
 	
 	//can set controls in update so this function not called
 	jump: function() {
