@@ -9,8 +9,11 @@ Main.prototype = {
 	create: function()
 	{
 		//Sets a background (which can't seem to be tiled...)
-		var background = game.add.sprite(0,0,"background");
-		background.scale.setTo(2);
+		this.background = game.add.tileSprite(0, game.height - 700, game.width, 456, "background");
+		//this.background.scale.setTo();
+
+		//Temporary colour for the background, similar to cloud_1
+		this.game.stage.backgroundColor = "#5cc5f2";
 
 		//Index for the queue/array
 		this.arrayIndex = 0;
@@ -22,34 +25,37 @@ Main.prototype = {
 		this.nextSpeed = 0;
 
 		//Puts the index of the queue/array on display (TESTING)
-		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" });
+		//OR: a possible expansion to displaying the score on the screen!
+		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
 
-		//Allows getSpeed() to retrieve the next speed value that the sprite will move at
-		this.currentState = false;
+		//Start the P2 Physics Engine
+		this.game.physics.startSystem(Phaser.Physics.P2JS);
 
-		//Temporary colour for the background
-		this.game.stage.backgroundColor = "71c5cf";
-
-	    //Start the P2 Physics Engine
-	    this.game.physics.startSystem(Phaser.Physics.P2JS);
-
-	    //Set the gravity
-	    this.game.physics.p2.gravity.y = 1000;
+		//Set the gravity
+		this.game.physics.p2.gravity.y = 1000;
 
 		//Create the ceiling
-	    this.createBlock();
+		this.createBlock();
 
 		//Winning condition
 		this.winLevel();
 
-	    //Create the player
-	    this.createPlayer();
+		//Create the player
+		this.createPlayer();
 	},
 
 	update: function()
 	{
 		//Updates sprite speed
 		this.movePlayer(this.getSpeed());
+
+		//Some sort of restart logic wherein a restart button resets everything back to square one
+		/*
+		 if(button.press === value)
+		 {
+		 this.restart();
+		 }
+		 * */
 	},
 
 	createBlock: function()
@@ -59,7 +65,7 @@ Main.prototype = {
 
 		//Fill the block with black color
 		blockShape.ctx.rect(0, 0, this.game.world.width, 200);
-		blockShape.ctx.fillStyle = "000000";
+		blockShape.ctx.fillStyle = "#00cc00";
 		blockShape.ctx.fill();
 
 		//Create a new sprite using the bitmap data and place it at (x,y) location
@@ -72,44 +78,20 @@ Main.prototype = {
 
 	createPlayer: function()
 	{
-	    //Add the player to the game
-	    this.player = this.game.add.sprite(200, 400, "betty");
+		//Add the player to the game
+		this.player = this.game.add.sprite(200, 400, "betty");
 
-	    //Enable physics, use "true" to enable debug drawing
-	    //this.game.physics.p2.enable([this.player], false);
+		//Enable physics, use "true" to enable debug drawing
 		this.game.physics.p2.enable(this.player);
 
+		//Get rid of current bounding box
+		this.player.body.clearShapes();
 
-	    //Get rid of current bounding box
-	    this.player.body.clearShapes();
-
-	    //Add our PhysicsEditor bounding shape (causes betty to have NOT fly out of the page)
-	    this.player.body.loadPolygon("sprite_physics", "betty");
+		//Add our PhysicsEditor bounding shape (causes betty to have NOT fly out of the page)
+		this.player.body.loadPolygon("sprite_physics", "betty");
 
 		//Initializing player's boundary to generate a response with the block
 		var playerMaterial = this.game.physics.p2.createMaterial('playerMaterial', this.player.body);
-	},
-
-	movePlayer: function()
-	{
-		//Makes sprite jump (temporary measure)
-		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		spaceKey.onDown.add(this.jump, this);
-
-		//If player is in contact with a slope
-		//-->code
-
-		//If the queue is empty OR if the velocity is 0
-		if(this.nextSpeed === 0)
-		{
-			//Sprite speed
-			this.player.body.velocity.x = 150;
-		}
-		else
-		{
-			this.player.body.velocity.x = this.nextSpeed;
-			//var newSpeed = this.player.accerelate(speed);
-		}
 	},
 
 	winLevel: function()
@@ -130,28 +112,56 @@ Main.prototype = {
 		this.blockE.body.static = true;
 	},
 
-	jump: function()
+	movePlayer: function()
 	{
+		//Makes sprite jump (temporary measure)
+		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		spaceKey.onDown.add(this.jump, this);
+
+		//If player is in contact with a slope
+		//-->code
+
+		//If the queue is empty OR if the velocity is 0
+		if(this.nextSpeed === 0)
+		{
+			//Sprite speed
+			//this.player.body.velocity.x = 150;
+
+			//Can remove the speed allocation to enable the sprite to carry momentum!
+		}
+		else
+		{
+			this.player.body.velocity.x = this.nextSpeed;
+			//var newSpeed = this.player.accerelate(speed);
+		}
+	},
+
+	jump: function() {
 		//preform jump
 		this.player.body.velocity.y = -350;
+		if (this.arrayIndex)
+		{
+			//deletes ds
+			//delete localStorage.ds;
+		}
 	},
 
 	getSpeed: function()
 	{
 		//Retrieve queue/array of the speed values
-		var speedValues = [150, -150, 450, 450, 450];
+		this.speedValues = JSON.parse(localStorage.ds);
 
 		//Checks every 50 cycles to pull from queue/array
-		if(this.arrayMoment % 50 === 0)
+		if(this.arrayMoment % 100 === 0 && this.speedValues.length > 0)
 		{
 			//if(speedValues[this.arrayIndex] !== null)
-			if(this.arrayIndex < speedValues.length)
+			if(this.arrayIndex < this.speedValues.length)
 			{
-				this.nextSpeed = speedValues[this.arrayIndex];
+				this.nextSpeed = this.speedValues[this.arrayIndex];
 			}
 			else
 			{
-				//sets the speed to the degault setting
+				//sets the speed to the default setting
 				this.nextSpeed = 0;
 			}
 
@@ -162,12 +172,19 @@ Main.prototype = {
 		this.arrayMoment += 1;
 
 		//Display the current velocity
-		this.labelIndex.text =  "step..." + this.arrayIndex;
+		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
 	accelerate: function()
 	{
-		//Set new speed based on retrieved data from queue stored in local memory
-		//this.player.velocity.x = newSpeed;
+		//Potential to expand as a kinematics function of sorts
+	},
+
+	restart: function()
+	{
+		//Resets the character back to its original position without any ds values to have
+		//delete localStorage.ds;
+		//reset player
+		//reset level
 	},
 };

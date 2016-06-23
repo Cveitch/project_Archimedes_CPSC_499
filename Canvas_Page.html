@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width = device-width,initial-scale=1.0">
     <title>CANVAS</title>
-    <script type = "text/javascript" src="jsFiles/Phaser.js"></script>
-    <script type = "text/javascript" src="jsFiles/Buttons.js"></script>
-    <script type = "text/javascript" src="UserInfo.js"></script>
+    <script type = "text/javascript" src="js/Buttons.js"></script>
+    <script type = "text/javascript" src="js/UserInfo.js"></script>
 
     <!--Gives text and button aligning options-->
     <style>
@@ -17,6 +16,16 @@
             float: right;
         }
     </style>
+
+    <script>
+        function storeDS()
+        {
+            //stores d.s. generated from drawn graph
+            var ds = [150,-150,450];
+            localStorage.ds = JSON.stringify(ds);
+            window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
+        }
+    </script>
 </head>
 
 <body>
@@ -34,7 +43,7 @@
     --AD: the hash and the FALSE value allows the Sprite page to identify when not to recreate the physics again
     -->
     <p class = alignright>
-        <button type="button" onclick="window.location.href='Sprite_Page.html'+ '#' + 'FALSE';">
+        <button type="button" onclick="storeDS()">
             TO SPRITE
         </button>
     </p>
