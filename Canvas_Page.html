@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width,initial-scale=1.0">
     <title>CANVAS</title>
-    <script type = "text/javascript" src="phaser.js"></script>
-    <script type = "text/javascript" src="Buttons.js"></script>
+    <script type = "text/javascript" src="jsFiles/Phaser.js"></script>
+    <script type = "text/javascript" src="jsFiles/Buttons.js"></script>
+    <script type = "text/javascript" src="UserInfo.js"></script>
 
     <!--Gives text and button aligning options-->
     <style>
@@ -18,16 +20,32 @@
 </head>
 
 <body>
-    <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "CANVAS";</script>
-    <!--User name information on top left of screen, and button to go between pages on top right-->
-    <div id="TOP_SCREEN_INFO">
-        <p class="alignleft">USER_NAME</p>
-        <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
-    </div>
+<!--Gives a value to the page number, used in context switches-->
+<script>
+    var PAGE = "CANVAS";
+    setCompare();
+</script>
+<!--User name information on top left of screen, and button to go between pages on top right-->
+<div id="TOP_SCREEN_INFO">
+    <p class="alignleft" id="usernameLabel"></p>
 
-    <!--Clears float for align function-->
-    <div style="clear: both;"></div>
+    <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
+    do it this way...
+    --AD: the hash and the FALSE value allows the Sprite page to identify when not to recreate the physics again
+    -->
+    <p class = alignright>
+        <button type="button" onclick="window.location.href='Sprite_Page.html'+ '#' + 'FALSE';">
+            TO SPRITE
+        </button>
+    </p>
+</div>
+
+<!--Canvas to draw on-->
+<canvas onclick="change(event)" id="Canvas"  width="1000" height="750" style="border:1px solid #000000" > </canvas>
+<script type = "text/javascript" src="Drawing.js"></script>
+
+<!--Clears float for align function-->
+<div style="clear: both;"></div>
 </body>
 
 </html>

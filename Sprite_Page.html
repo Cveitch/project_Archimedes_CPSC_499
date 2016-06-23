@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>SPRITE</title>
-    <script type = "text/javascript" src="phaser.js"></script>
-    <script type = "text/javascript" src="Buttons.js"></script>
+
+    //making jump global to this entire page
+    <script type='text/javascript' >
+        var jump = true;
+    </script>
+
+    <script type = "text/javascript" src = "js/Phaser.js"></script>
+    <script type = "text/javascript" src = "js/Buttons.js"></script>
+    <script type = "text/javascript" src = "js/Boot.js"></script>
+    <script type = "text/javascript" src = "js/Preload.js"></script>
+    <script type = "text/javascript" src = "js/Main.js"></script>
+    <script type = "text/javascript" src="UserInfo.js"></script>
 
     <!--Gives text and button aligning options-->
     <style>
@@ -15,19 +25,72 @@
             float: right;
         }
     </style>
+
+    <script>
+
+        function initiate() {
+
+            //Allows the physics engine to NOT be re-acitvated again
+            //var jump = true;
+
+            //var innerWidth = 320;
+            //var innerHeight = 480;
+
+            //Create a new game that fills the screen
+            //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO);
+            game = new Phaser.Game(960 ,640, Phaser.CANVAS);
+            //game = new Phaser.Game(innerWidth, innerHeight, Phaser.AUTO);
+
+            //Add all states
+            game.state.add("Boot", Boot);
+            game.state.add("Preload", Preload);
+            game.state.add("Main", Main);
+
+            //Startup the physics
+            game.state.start("Boot");
+
+        }
+    </script>
 </head>
 
-<body>
+<body onload="getUsername('usernameLabel')">
     <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "SPRITE";</script>
+    <!--AD: Start the booting sequence-->
+    <script>
+        var PAGE = "SPRITE";
+        var text = window.location.hash.substring(1)
+        setCompare(text);
+
+        //Comparison to allow game to be booted once
+        if(getCompare() === true){
+            initiate();
+            //alert("It works");
+            jump = null;
+        }
+        else{
+            initiate();
+        }
+    </script>
+
     <!--User name information on top left of screen, and button to go between pages on top right-->
     <div id="TOP_SCREEN_INFO">
-        <p class="alignleft">USER_NAME</p>
-        <p class="alignright"><button type="button" onclick="CONTEXT_SWITCH(PAGE);">SWITCH CONTEXT</button></p>
+        <p class="alignleft">
+        <p class="alignleft" id="usernameLabel"></p>
+        </p>
+
+        <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
+        do it this way...
+        -->
+        <p class = alignright>
+            <button type="button" onclick="window.location.href='Canvas_Page.html';">
+                TO CANVAS
+            </button>
+        </p>
     </div>
 
     <!--Clears float for align function-->
     <div style="clear: both;"></div>
+</body>
 </body>
 
 </html>
