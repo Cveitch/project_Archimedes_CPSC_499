@@ -39,7 +39,7 @@ function signIn(buttonID)
     sessionStorage.setItem("Username",name);
 
     //Continue on to the next page
-    window.location.href = "Sprite_Page.html";
+    window.location.href = "../Sprite_Page.html";
 
 
 }
