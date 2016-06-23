@@ -28,20 +28,20 @@ Main.prototype = {
 		//OR: a possible expansion to displaying the score on the screen!
 		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
 
-	    //Start the P2 Physics Engine
-	    this.game.physics.startSystem(Phaser.Physics.P2JS);
+		//Start the P2 Physics Engine
+		this.game.physics.startSystem(Phaser.Physics.P2JS);
 
-	    //Set the gravity
-	    this.game.physics.p2.gravity.y = 1000;
+		//Set the gravity
+		this.game.physics.p2.gravity.y = 1000;
 
 		//Create the ceiling
-	    this.createBlock();
+		this.createBlock();
 
 		//Winning condition
 		this.winLevel();
 
-	    //Create the player
-	    this.createPlayer();
+		//Create the player
+		this.createPlayer();
 	},
 
 	update: function()
@@ -51,11 +51,11 @@ Main.prototype = {
 
 		//Some sort of restart logic wherein a restart button resets everything back to square one
 		/*
-		if(button.press === value)
+		 if(button.press === value)
 		 {
-		 	this.restart();
+		 this.restart();
 		 }
-		* */
+		 * */
 	},
 
 	createBlock: function()
@@ -78,17 +78,17 @@ Main.prototype = {
 
 	createPlayer: function()
 	{
-	    //Add the player to the game
-	    this.player = this.game.add.sprite(200, 400, "betty");
+		//Add the player to the game
+		this.player = this.game.add.sprite(200, 400, "betty");
 
-	    //Enable physics, use "true" to enable debug drawing
+		//Enable physics, use "true" to enable debug drawing
 		this.game.physics.p2.enable(this.player);
 
-	    //Get rid of current bounding box
-	    this.player.body.clearShapes();
+		//Get rid of current bounding box
+		this.player.body.clearShapes();
 
-	    //Add our PhysicsEditor bounding shape (causes betty to have NOT fly out of the page)
-	    this.player.body.loadPolygon("sprite_physics", "betty");
+		//Add our PhysicsEditor bounding shape (causes betty to have NOT fly out of the page)
+		this.player.body.loadPolygon("sprite_physics", "betty");
 
 		//Initializing player's boundary to generate a response with the block
 		var playerMaterial = this.game.physics.p2.createMaterial('playerMaterial', this.player.body);

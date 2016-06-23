@@ -6,9 +6,9 @@ Preload.prototype = {
 
 	preload: function()
 	{
-	    this.game.load.image("betty", "assets/images/betty.png");
+		this.game.load.image("betty", "assets/images/betty.png");
 		this.game.load.image("background", "assets/images/cloud_1.jpg");
-	    this.game.load.physics("sprite_physics", "assets/sprite_physics/sprite_physics.json");
+		this.game.load.physics("sprite_physics", "assets/sprite_physics/sprite_physics.json");
 	},
 
 	create: function()
