@@ -7,6 +7,8 @@ var xVal = [0];
 var i = 0; 
 var a = 1; 
 
+//Wiggle room for drawing, so that its not so strict. 
+var drawError = 330; 
 //Drawing tells if mouse button has been pressed. 
 var isDrawing; 
 
@@ -29,7 +31,7 @@ var Coords;
 
 
 
-//get rid of this
+//lines to help visualize grid. 
  
 
 /*
@@ -152,7 +154,8 @@ var mouseDraw = function (e)
             
                 canvas_Context.lineTo(e.pageX-this.offsetLeft, e.pageY-this.offsetTop); 
                 canvas_Context.stroke();
-
+                //make drawing great again 
+                i++; 
                 
                 /*
                 
@@ -184,7 +187,7 @@ var mouseDraw = function (e)
         if Xvalue is greater or equal to current X then it means the user is going backwards and thats trouble.
         So lets erase the line and make them start over. 
         */
-            else if(xVal[i] >= e.pageX-this.offsetLeft) 
+            else if(xVal[i] >= e.pageX-this.offsetLeft - drawError) 
             {
                  canvasClear(); 
             
@@ -226,7 +229,8 @@ var touchDraw = function (e){
             canvas_Context.stroke(); 
             i++; 
     } 
-    else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft)
+    //wiggle room
+    else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft - drawError)
     {
            canvasClear(); 
             
@@ -249,6 +253,7 @@ var setCanvasSize = function()
 // alert for drawing backwards
 var errorAlert = function()
 {
+    setDrawingFalse(); 
     
     if(!hasBeenAlerted)
         {
