@@ -6,6 +6,7 @@
     <title>CANVAS</title>
     <script type = "text/javascript" src="js/Buttons.js"></script>
     <script type = "text/javascript" src="js/UserInfo.js"></script>
+    <script type = "text/javascript" src="Drawing.js."></script>
 
     <!--Gives text and button aligning options-->
     <style>
@@ -17,15 +18,7 @@
         }
     </style>
 
-    <script>
-        function storeDS()
-        {
-            //stores d.s. generated from drawn graph
-            var ds = [150,-150,450];
-            localStorage.ds = JSON.stringify(ds);
-            window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
-        }
-    </script>
+   
 </head>
 
 <body>
@@ -52,7 +45,19 @@
 <!--Canvas to draw on-->
 <canvas onclick="change(event)" id="Canvas"  width="1000" height="750" style="border:1px solid #000000" > </canvas>
 <script type = "text/javascript" src="Drawing.js"></script>
-
+    
+ <script id = "storeDS">
+        function storeDS(array)
+        {
+            //stores d.s. generated from drawn graph
+            
+            var ds = array; 
+          // var ds = array; 
+            localStorage.ds = JSON.stringify(ds);
+            window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
+           
+        }
+    </script>
 <!--Clears float for align function-->
 <div style="clear: both;"></div>
 </body>

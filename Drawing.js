@@ -1,13 +1,14 @@
 //get canvas information
 var canvas = document.getElementById("Canvas"); 
 var canvas_Context = canvas.getContext("2d");
+//var script = document.getElementByID("storeDS"); 
 
 // array for x values
 var xVal = [0]; 
 var i = 0; 
 var a = 1; 
 
-//Wiggle room for drawing, so that its not so strict. 
+//Wiggle wiggle wiggle room for drawing, so that its not so strict. 
 var drawError = 330; 
 //Drawing tells if mouse button has been pressed. 
 var isDrawing; 
@@ -22,14 +23,16 @@ var startY = canvas.height / 2;
 var startLocation = false; 
 
 //distance between each segment
-var xSegmentLength = canvas.width / 50; 
-var ySegmentHeight = canvas.height / 50; 
+var xSegmentLength = (canvas.width - this.offsetLeft) / 50; 
 
 //array for coords
 var Coords;  
 
+//array for just y values test
+var yCoords = [0]; 
 
-
+//checks to see if drawing has been done, and can send cords to the engine. 
+var updateReady = false; 
 
 //lines to help visualize grid. 
  
@@ -104,7 +107,7 @@ var setTouchDrawingTrue = function (e)
 {
     
     //move cords to new start location. 
-    canvas_Context.moveTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop);
+    canvas_Context.moveTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY - this.offsetTop);
     //prevent scrolling
     event.preventDefault(); 
 
@@ -117,6 +120,7 @@ var setMouseDrawingTrue = function (e)
     
     
         isDrawing = true; 
+
         event.preventDefault(); 
 
 }
@@ -124,7 +128,10 @@ var setMouseDrawingTrue = function (e)
 //sets drawing to false
 var setDrawingFalse = function (e) 
 {
+        //send array 
+        storeDS(yCoords);   
         isDrawing = false; 
+
     
 }
 
@@ -154,31 +161,10 @@ var mouseDraw = function (e)
             
                 canvas_Context.lineTo(e.pageX-this.offsetLeft, e.pageY-this.offsetTop); 
                 canvas_Context.stroke();
-                //make drawing great again 
-                i++; 
-                
-                /*
                 
                 //if the current value, equals a bound, then add it to a list
-                if(xVal[i] = a * xSegmentLength )
-                   {
-                       
-                       if(e.pageY-this.offsetTop < )
-                       
-                       
-                   
-                       Coords[a] = [[a,e.pageY-this.offsetTop]]
-                       
-                       
-                       i++; 
-                       a++; 
-                   
-                   }
-                else
-                    {
-                        i++; 
-                    }
-                */
+                cordGenerator(e.pageY-this.offsetTop); 
+                
                 
                 
                 
@@ -208,7 +194,8 @@ var mouseDraw = function (e)
 
 
 //draw on Touchscreens 
-var touchDraw = function (e){
+var touchDraw = function (e)
+{
     
     //prevents scrolling
     event.preventDefault(); 
@@ -227,10 +214,14 @@ var touchDraw = function (e){
             //draw
             canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
             canvas_Context.stroke(); 
-            i++; 
+            //i++; 
+        
+        //if the current value, equals a bound, then add it to a list
+                cordGenerator(e.touches[0].clientY); 
+        
     } 
-    //wiggle room
-    else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft - drawError)
+    //if current value is less than or equal to old value than erase the canvas. 
+    else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft + drawError || xVal[i] < e.touches[0].clientX-this.offsetLeft - drawError )
     {
            canvasClear(); 
             
@@ -291,50 +282,44 @@ canvas_Context.strokeStyle='#000000'
 canvas_Context.lineTo(canvas.width,startY); 
 canvas_Context.stroke(); 
 canvas_Context.closePath(); 
-    
+    //yCoords.length = 0 ; 
     
 }
 
-
-
+//generates Cordanates. 
+var cordGenerator = function(yPixels)
+{
     
-    
-    
-    
-    
-    
-    
-    
-    
+    //if the current value, equals a bound, then add it to a list
+                if(xVal[i] === (a * xSegmentLength))
+                   {
+                       
+
+                       
+                       
+                    //Array Corrds contains (X, Y pixels). 
+                       //Might have to play around with pixel values not sure exactly how this will react. 
+
+                       yCoords.push(yPixels - startY);
+                       //yCoords = [-200,-300,-500]; 
+                       //send cords to physics here. or after the line is drawn. 
+                       
+                       
+                       
+                       i++; 
+                       a++; 
+                   
+                   }
+                else
+                    {
+                         
+                        yCoords.push(500,-500);                       
+                        i++; 
+                    }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Its updating before you draw anything. So you want to check after a line is drawn. 
 
 //event listeners for drawing with mouse
 canvas.addEventListener("mousemove",    mouseDraw,            false ); 
@@ -344,7 +329,7 @@ canvas.addEventListener("mouseleave",   setDrawingFalse,      false );
 
 //event listeners for drawing with finger on touch screen
 canvas.addEventListener('touchstart',   setTouchDrawingTrue,  false); 
-canvas.addEventListener("touchmove",    touchDraw,           false); 
+canvas.addEventListener("touchmove",    touchDraw,            false); 
 canvas.addEventListener("touchend",     setDrawingFalse,      false); 
 
 //checks to see if the window gets resized
