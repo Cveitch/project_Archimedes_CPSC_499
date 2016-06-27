@@ -1,8 +1,9 @@
 //get canvas information
 var canvas = document.getElementById("Canvas"); 
 var canvas_Context = canvas.getContext("2d");
-//var script = document.getElementByID("storeDS"); 
 
+canvas.height = window.screen.height;   //canvas.height * (canvas.clientWidth / canvas.clientHeight); 
+canvas.width = window.screen.width; 
 // array for x values
 var xVal = [0]; 
 var i = 0; 
@@ -23,7 +24,8 @@ var startY = canvas.height / 2;
 var startLocation = false; 
 
 //distance between each segment
-var xSegmentLength = (canvas.width - this.offsetLeft) / 50; 
+//var xSegmentLength = (canvas.width - this.offsetLeft) / 50;
+var xSegmentLength = canvas.width / 50;
 
 //array for coords
 var Coords;  
@@ -33,6 +35,16 @@ var yCoords = [0];
 
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
+
+
+
+
+
+
+
+
+
+
 
 //lines to help visualize grid. 
  
@@ -129,7 +141,7 @@ var setMouseDrawingTrue = function (e)
 var setDrawingFalse = function (e) 
 {
         //send array 
-        storeDS(yCoords);   
+        //storeDS(yCoords);   
         isDrawing = false; 
 
     
@@ -163,7 +175,8 @@ var mouseDraw = function (e)
                 canvas_Context.stroke();
                 
                 //if the current value, equals a bound, then add it to a list
-                cordGenerator(e.pageY-this.offsetTop); 
+                //cordGenerator(e.pageY-this.offsetTop); 
+                // cordGenerator(e.pageX-this.offsetTop); 
                 
                 
                 
@@ -234,8 +247,11 @@ var touchDraw = function (e)
 var setCanvasSize = function()
 {
     
-    canvas.height = window.outerHeight-150; 
-    canvas.width = window.outerWidth-30; 
+    //canvas.height = window.outerHeight-150; 
+    //canvas.width = window.outerWidth-30; 
+    
+    canvas.height = window.screen.height; 
+    canvas.width = window.screen.width; 
     
     
 }
@@ -291,7 +307,7 @@ var cordGenerator = function(yPixels)
 {
     
     //if the current value, equals a bound, then add it to a list
-                if(xVal[i] === (a * xSegmentLength))
+                if(xVal[i]  === a * xSegmentLength )
                    {
                        
 
@@ -313,7 +329,7 @@ var cordGenerator = function(yPixels)
                 else
                     {
                          
-                        yCoords.push(500,-500);                       
+                     
                         i++; 
                     }
 }
@@ -322,6 +338,7 @@ var cordGenerator = function(yPixels)
 //Its updating before you draw anything. So you want to check after a line is drawn. 
 
 //event listeners for drawing with mouse
+
 canvas.addEventListener("mousemove",    mouseDraw,            false ); 
 canvas.addEventListener("mousedown",    setMouseDrawingTrue,  false ); 
 canvas.addEventListener("mouseup",      setDrawingFalse,      false ); 

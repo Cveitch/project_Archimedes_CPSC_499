@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="fullscreen.css"> 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width = device-width,initial-scale=1.0">
+   
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;"/>
     <title>CANVAS</title>
     <script type = "text/javascript" src="js/Buttons.js"></script>
     <script type = "text/javascript" src="js/UserInfo.js"></script>
     <script type = "text/javascript" src="Drawing.js."></script>
-
+    <script>
+        //setCanvasSize(); 
+    </script>
+    
+    
     <!--Gives text and button aligning options-->
     <style>
         .alignleft {
@@ -43,7 +49,8 @@
 </div>
 
 <!--Canvas to draw on-->
-<canvas onclick="change(event)" id="Canvas"  width="1000" height="750" style="border:1px solid #000000" > </canvas>
+<canvas onclick="change(event)" id="Canvas" style="border:1px solid #000000" > </canvas>
+
 <script type = "text/javascript" src="Drawing.js"></script>
     
  <script id = "storeDS">
