@@ -141,7 +141,7 @@ var setMouseDrawingTrue = function (e)
 var setDrawingFalse = function (e) 
 {
         //send array 
-        //storeDS(yCoords);   
+        storeDS(yCoords);   
         isDrawing = false; 
 
     
@@ -307,7 +307,7 @@ var cordGenerator = function(yPixels)
 {
     
     //if the current value, equals a bound, then add it to a list
-                if(xVal[i]  === a * xSegmentLength )
+                if(xVal[i] % xSegmentLength ===0 )
                    {
                        
 
