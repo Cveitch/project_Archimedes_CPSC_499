@@ -36,83 +36,6 @@ var yCoords = [0];
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
 
-
-
-
-
-
-
-
-
-
-
-//lines to help visualize grid. 
- 
-
-/*
-
- var x = 0; //xSegmentLength; 
-     var y = 0; //ySegmentWidth; 
-    
-    //draw x lines
-    for(var i = 0; i<50; i++ )
-    {
-        canvas_Context.beginPath(); 
-        canvas_Context.moveTo(x, 0);
-        canvas_Context.lineTo(x, canvas.height); 
-        canvas_Context.strokeStyle = '#ff0000';
-        canvas_Context.stroke(); 
-        x = x + canvas.width / 50;
-        canvas_Context.closePath(); 
-        
-        
-    }
-//draw y lines
-    for(var i = 0; i<50; i++ )
-    {
-        canvas_Context.beginPath(); 
-        canvas_Context.moveTo(0, y);
-        canvas_Context.lineTo(canvas.width, y); 
-        canvas_Context.strokeStyle = '#219859'; 
-        canvas_Context.stroke(); 
-        y = y + canvas.height / 50; 
-        canvas_Context.closePath(); 
-        
-    }
-
-
-
-//stop
-*/
-
-
-
-
-
-
-
-
-
-
-
-//indication start location and X line
-canvas_Context.beginPath(); 
-canvas_Context.arc(startX, startY, 25, 0, 2*Math.PI); 
-canvas_Context.moveTo(startX,startY); 
-canvas_Context.stroke(); 
-canvas_Context.strokeStyle='#000000'
-canvas_Context.lineTo(canvas.width,startY); 
-canvas_Context.stroke(); 
-canvas_Context.closePath(); 
-    
-
-
-
- 
-
-
-
-
 //methods for drawing
 
 var setTouchDrawingTrue = function (e) 
@@ -130,10 +53,10 @@ var setTouchDrawingTrue = function (e)
 var setMouseDrawingTrue = function (e) 
 {
     
-    
+        event.preventDefault(); 
+
         isDrawing = true; 
 
-        event.preventDefault(); 
 
 }
 
@@ -165,7 +88,8 @@ var mouseDraw = function (e)
         
         //add X value to array 
         xVal.push(e.pageX - this.offsetLeft); 
-        
+
+
         
         //if    Xvalue is less than current X value, then draw
             if (xVal[i] < e.pageX - this.offsetLeft)
@@ -176,7 +100,7 @@ var mouseDraw = function (e)
                 
                 //if the current value, equals a bound, then add it to a list
                 //cordGenerator(e.pageY-this.offsetTop); 
-                // cordGenerator(e.pageX-this.offsetTop); 
+                cordGenerator(e.pageY-this.offsetTop); 
                 
                 
                 
@@ -213,7 +137,8 @@ var touchDraw = function (e)
     //prevents scrolling
     event.preventDefault(); 
     //add to array 
-    xVal.push(e.touches[0].clientX-this.offsetLeft); 
+    //xVal.push(e.touches[0].clientX-this.offsetLeft);
+    xVal.push(e.touches[0].clientX-this.offsetLeft);
     
     //check X value 
     if(xVal[i] < e.touches[0].clientX-this.offsetLeft)
@@ -226,7 +151,9 @@ var touchDraw = function (e)
         }
             //draw
             canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
+            canvas_Context.lineWidth=5;
             canvas_Context.stroke(); 
+           
             //i++; 
         
         //if the current value, equals a bound, then add it to a list
@@ -241,6 +168,60 @@ var touchDraw = function (e)
         
     }   
 }
+
+
+/*
+var touchDraw = function (e)
+{
+    
+    //prevents scrolling
+    event.preventDefault(); 
+    //add to array 
+    //xVal.push(e.touches[0].clientX-this.offsetLeft);
+    xVal.push(e.touches[0].clientX);
+    
+    //check X value 
+    if(xVal[i] < e.touches[0].clientX)
+    {
+        //start from 0,0
+        if(!startLocation)
+        {
+        canvas_Context.moveTo(startX,startY); 
+        startLocation = true; 
+        }
+            //draw
+            canvas_Context.lineTo(e.touches[0].clientX, e.touches[0].clientY); 
+            canvas_Context.stroke(); 
+            
+        
+        //if the current value, equals a bound, then add it to a list
+                cordGenerator(e.touches[0].clientY); 
+        
+    } 
+    //if current value is less than or equal to old value than erase the canvas. 
+    else if(xVal[i] >= e.touches[0].clientX + drawError || xVal[i] < e.touches[0].clientX - drawError )
+    {
+           canvasClear(); 
+            
+        
+    }   
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //dynamic canvas size
@@ -290,14 +271,7 @@ var canvasClear = function()
             xVal.length = 1; 
             i = 0; 
     //redraw start location bubble and X line
-canvas_Context.beginPath(); 
-canvas_Context.arc(startX, startY, 25, 0, 2*Math.PI); 
-canvas_Context.moveTo(startX,startY); 
-canvas_Context.stroke(); 
-canvas_Context.strokeStyle='#000000'
-canvas_Context.lineTo(canvas.width,startY); 
-canvas_Context.stroke(); 
-canvas_Context.closePath(); 
+drawCircle(startX, startY); 
     //yCoords.length = 0 ; 
     
 }
@@ -310,13 +284,11 @@ var cordGenerator = function(yPixels)
                 if(xVal[i] % xSegmentLength ===0 )
                    {
                        
-
-                       
-                       
-                    //Array Corrds contains (X, Y pixels). 
+ 
+                       //Array Corrds contains (X, Y pixels). 
                        //Might have to play around with pixel values not sure exactly how this will react. 
 
-                       yCoords.push(yPixels - startY);
+                       yCoords.push((yPixels - startY) * 1.5);
                        //yCoords = [-200,-300,-500]; 
                        //send cords to physics here. or after the line is drawn. 
                        
@@ -335,7 +307,25 @@ var cordGenerator = function(yPixels)
 }
 
 
-//Its updating before you draw anything. So you want to check after a line is drawn. 
+//draw a starting location on the canvas. 
+var draw_Circle = function(X,Y)
+{
+    
+canvas_Context.beginPath(); 
+canvas_Context.lineWidth=5;
+canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
+canvas_Context.moveTo(X,Y); 
+canvas_Context.stroke(); 
+canvas_Context.strokeStyle='#FF2E5A'
+canvas_Context.lineTo(canvas.width,Y); 
+canvas_Context.stroke(); 
+canvas_Context.closePath(); 
+    
+    
+}
+
+
+
 
 //event listeners for drawing with mouse
 
@@ -351,7 +341,7 @@ canvas.addEventListener("touchend",     setDrawingFalse,      false);
 
 //checks to see if the window gets resized
 window.addEventListener('resize',       setCanvasSize,        false);
-
+window.addEventListener('load', draw_Circle(startX, startY), false); 
 
 
 
