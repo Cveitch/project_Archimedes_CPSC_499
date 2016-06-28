@@ -25,8 +25,8 @@ var startLocation = false;
 
 //distance between each segment
 //var xSegmentLength = (canvas.width - this.offsetLeft) / 50;
-var xSegmentLength = canvas.width / 50;
-
+var xSegmentLength = canvas.width / 10;
+console.log("xsegmentlength = : "+xSegmentLength); 
 //array for coords
 var Coords;  
 
@@ -45,6 +45,7 @@ var setTouchDrawingTrue = function (e)
     canvas_Context.moveTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY - this.offsetTop);
     //prevent scrolling
     event.preventDefault(); 
+    isDrawing = true; 
 
  
 }
@@ -64,8 +65,9 @@ var setMouseDrawingTrue = function (e)
 var setDrawingFalse = function (e) 
 {
         //send array 
-        storeDS(yCoords);   
+           
         isDrawing = false; 
+    storeDS(yCoords);
 
     
 }
@@ -100,8 +102,8 @@ var mouseDraw = function (e)
                 
                 //if the current value, equals a bound, then add it to a list
                 //cordGenerator(e.pageY-this.offsetTop); 
-                cordGenerator(e.pageY-this.offsetTop); 
-                
+                //cordGenerator(e.pageY-this.offsetTop); 
+                i++;
                 
                 
                 
@@ -113,6 +115,7 @@ var mouseDraw = function (e)
             else if(xVal[i] >= e.pageX-this.offsetLeft - drawError) 
             {
                  canvasClear(); 
+                
             
                 
                 
@@ -149,15 +152,21 @@ var touchDraw = function (e)
         canvas_Context.moveTo(startX,startY); 
         startLocation = true; 
         }
-            //draw
+            
+        
+            
             canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
             canvas_Context.lineWidth=5;
-            canvas_Context.stroke(); 
-           
-            //i++; 
+            canvas_Context.stroke();
+        while(xVal[i] % xSegmentLength === 0 )
+            {
+            cordGenerator(e.touches[0].clientY); 
+            i++; 
+           }
+            i++;
+                
         
         //if the current value, equals a bound, then add it to a list
-                cordGenerator(e.touches[0].clientY); 
         
     } 
     //if current value is less than or equal to old value than erase the canvas. 
@@ -166,63 +175,9 @@ var touchDraw = function (e)
            canvasClear(); 
             
         
-    }   
+    }
+        
 }
-
-
-/*
-var touchDraw = function (e)
-{
-    
-    //prevents scrolling
-    event.preventDefault(); 
-    //add to array 
-    //xVal.push(e.touches[0].clientX-this.offsetLeft);
-    xVal.push(e.touches[0].clientX);
-    
-    //check X value 
-    if(xVal[i] < e.touches[0].clientX)
-    {
-        //start from 0,0
-        if(!startLocation)
-        {
-        canvas_Context.moveTo(startX,startY); 
-        startLocation = true; 
-        }
-            //draw
-            canvas_Context.lineTo(e.touches[0].clientX, e.touches[0].clientY); 
-            canvas_Context.stroke(); 
-            
-        
-        //if the current value, equals a bound, then add it to a list
-                cordGenerator(e.touches[0].clientY); 
-        
-    } 
-    //if current value is less than or equal to old value than erase the canvas. 
-    else if(xVal[i] >= e.touches[0].clientX + drawError || xVal[i] < e.touches[0].clientX - drawError )
-    {
-           canvasClear(); 
-            
-        
-    }   
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //dynamic canvas size
 var setCanvasSize = function()
@@ -264,6 +219,7 @@ var canvasClear = function()
             canvas_Context.beginPath();
             //reset start local
             startLocation = false; 
+            isDrawing = false; 
            
         
         
@@ -281,14 +237,15 @@ var cordGenerator = function(yPixels)
 {
     
     //if the current value, equals a bound, then add it to a list
-                if(xVal[i] % xSegmentLength ===0 )
+                if(xVal[i] % xSegmentLength === 0 )
                    {
                        
  
                        //Array Corrds contains (X, Y pixels). 
                        //Might have to play around with pixel values not sure exactly how this will react. 
 
-                       yCoords.push((yPixels - startY) * 1.5);
+                       yCoords.push((yPixels - startY) * (-1));
+                       console.log((yPixels-startY) *-1 );
                        //yCoords = [-200,-300,-500]; 
                        //send cords to physics here. or after the line is drawn. 
                        
@@ -298,12 +255,11 @@ var cordGenerator = function(yPixels)
                        a++; 
                    
                    }
-                else
-                    {
-                         
-                     
+                else{
+        
                         i++; 
                     }
+
 }
 
 
