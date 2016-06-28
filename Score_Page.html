@@ -3,29 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>SCORE</title>
-    <script type = "text/javascript" src="jsFiles/Phaser.js"></script>
-    <script type = "text/javascript" src="jsFiles/Buttons.js"></script>
+    <!--<script type = "text/javascript" src="jsFiles/Phaser.js"></script> -->
+    <!--<script type = "text/javascript" src="jsFiles/Buttons.js"></script> -->
     <script type = "text/javascript" src="UserInfo.js"></script>
+    <script type = "text/javascript" src="Score_Page.js"></script>
 
-    <!--Gives text and button aligning options-->
+    <!--Links this file to the css file containing formatting-->
+    <link rel="stylesheet" type="text/css" href="Formatting.css">
+    <!-- CSS for elemtns only found on this page. -->
     <style>
-        .alignleft {
-            float: left;
+
+        /* Format for unordered list. */
+        .list
+        {
+            list-style-type:    square;
+            margin-left:        20%;
         }
-        .alignright {
-            float: right;
+
+        /* Items in an unordered list. */
+        .listItem
+        {
+            font-size:      35px;
+            margin-bottom:  3%;
+        }
+
+        /* Un-clicked upon link. */
+        .link:link
+        {
+            color:#646464;
+        }
+
+        /* CSS for after a link has been clicked on. */
+        .link:visited
+        {
+            color: #646464;
+        }
+
+        /* A link when the user is clicking on it. */
+        .link:active
+        {
+            color: #FF7232;
         }
     </style>
 </head>
 
-<body onload="getUsername('usernameLabel')">
-<!--Gives a value to the page number, used in context switches-->
-<script>var PAGE = "SCORE";</script>
+<body onload="displayUsername('usernameLabel'); updatePageInfo()" class="pageBackground">
 
-<!--Username goes on the top left of the screen-->
-<div id="TOP_SCREEN_INFO">
-    <p class="alignleft" id="usernameLabel"></p>
-</div>
+    <!--Gives a value to the page number, used in context switches-->
+    <script>var PAGE = "SCORE";</script>
+
+    <div class="centerBoxHorizontal" align="center" >
+
+        <!--Username goes on the top left of the screen-->
+        <div id="topScreenInfo">
+            <p class="leftFormatAlign standardFormat" id="usernameLabel"></p>
+        </div>
+
+        <!--A line that separates the top info from main info.-->
+        <hr class="line" style="clear:both">
+
+        <!--main info section of the page-->
+        <div style="margin-bottom: 5%">
+            <h1 id="titleMessage" class="heading standardFormat" >Congratulations</h1>
+            <h2 id="attemptMessage" class="standardFormat" style="font-size: 30px"></h2>
+            <button onclick="replayLevel()" id="replayButton" class="standardButton standardFormat">Replay</button>
+            <button onclick="nextLevel()" id="nextLevelButton" class="standardButton standardFormat">Next Level</button>
+        </div>
+
+        <!--A line that separates the main info from level info.-->
+        <hr class="line" style="clear:both">
+
+        <!--Level info section of the page-->
+        <div>
+            <h2 class="subheading standardFormat">Level Information</h2>
+        </div>
+
+        <!--A line that separates the level info from link info.-->
+        <hr class="line" style="clear:both">
+
+        <!--Links to the wolfram alpha pages containing more information.-->
+        <div>
+            <h2 class="subheading standardFormat">Links</h2>
+            <ul align="left" class="list">
+                <li class="listItem standardFormat"><a class="link" href="https://www.wolframalpha.com/input/?i=velocity">Velocity</a></li>
+                <li class="listItem standardFormat"><a class="link" href="https://www.wolframalpha.com/input/?i=acceleration">Acceleration</a></li>
+                <li class="listItem standardFormat"><a class="link" href="https://www.wolframalpha.com/input/?i=gravity">Gravity</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
 </body>
 
 </html>
