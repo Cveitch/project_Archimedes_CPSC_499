@@ -154,6 +154,9 @@ Main.prototype = {
 		//If player is in contact with a slope
 		//-->code
 
+        //check win condition; 
+        this.gameWin(this.player,goal); 
+        
 		//If the queue is empty OR if the velocity is 0
 		if(this.nextSpeed === 0)
 		{
@@ -238,5 +241,26 @@ Main.prototype = {
 		// restart the game after death
 		this.game.state.start('main');
 	},
+    //Checks game state to see if player won. 
+    gameWin: function(PLAYER, GOAL) 
+    {
+    var error = 1; 
+    //get position of player. 
+    var playerX = Math.floor(PLAYER.x-35); 
+    var playerY = Math.floor(PLAYER.y-96); 
+        console.log("PX: "+ playerX +"PY: "+playerY ); 
+        
+    //get position of Goal. 
+    var goalX = Math.floor(GOAL.x); 
+    var goalY = Math.floor(GOAL.y); 
+    console.log("GX: "+ goalX + "GY: "+goalY); 
+    if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY){
+        window.location.href='Score_Page.html';
+    
+    //win
+    }
+    
 
+    }
+    
 };

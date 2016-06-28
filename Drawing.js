@@ -25,7 +25,7 @@ var startLocation = false;
 
 //distance between each segment
 //var xSegmentLength = (canvas.width - this.offsetLeft) / 50;
-var xSegmentLength = canvas.width / 10;
+var xSegmentLength = canvas.width / 50;
 console.log("xsegmentlength = : "+xSegmentLength); 
 //array for coords
 var Coords;  
@@ -35,7 +35,6 @@ var yCoords = [0];
 
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
-
 //methods for drawing
 
 var setTouchDrawingTrue = function (e) 
@@ -264,6 +263,7 @@ var cordGenerator = function(yPixels)
 
 
 //draw a starting location on the canvas. 
+
 var draw_Circle = function(X,Y)
 {
     
@@ -279,7 +279,6 @@ canvas_Context.closePath();
     
     
 }
-
 
 
 
