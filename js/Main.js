@@ -45,7 +45,7 @@ Main.prototype = {
 		//we resize the world to the background as it will be covering the entire level
 	    layerbackground.resizeWorld();
 		//Create the ceiling
-		this.createBlock();
+		//this.createBlock();
 
 		
 		//turns polylines solid

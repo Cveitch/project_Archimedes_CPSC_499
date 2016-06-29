@@ -1,6 +1,6 @@
 /*
 segment the canvas into chunks
-This is useless code. 
+
 */
 
 var canvas = document.getElementById("Canvas"); 
