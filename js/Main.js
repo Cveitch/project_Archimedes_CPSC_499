@@ -155,13 +155,16 @@ Main.prototype = {
 		if(this.nextSpeed === 0)
 		{
 			//Sprite speed
-			this.player.body.velocity.x = 10;
+			this.player.body.velocity.x = 20;
 
 			//Can remove the speed allocation to enable the sprite to carry momentum!
 		}
 		else
 		{
-			this.player.body.acceleration.x = this.nextSpeed;
+			this.player.body.velocity.x = this.nextSpeed;
+			//this.game.physics.p2.accelerationFromRotation(this.player.rotation, this.nextSpeed, this.player.body.acceleration);
+
+			//this.player.body.acceleration = this.nextSpeed;
 			//var newSpeed = this.player.accerelate(speed);
 		}
 	},
@@ -177,7 +180,7 @@ Main.prototype = {
 		//Retrieve queue/array of the speed values
 		this.speedValues = JSON.parse(localStorage.ds);
 
-		//Checks every 50 cycles to pull from queue/array
+		//Checks every 80 cycles to pull from queue/array
 		if(this.arrayMoment % 100 === 0 && this.speedValues.length > 0)
 		{
 			//if(speedValues[this.arrayIndex] !== null)
@@ -206,6 +209,10 @@ Main.prototype = {
 	{
 		//Set up local variable to hold current d.s. acceleration value
 		var acceleration = value;
+		var setSpeed = 0;
+        var time = 1.5;
+
+		//setSpeed = ;
 
 		//Set the acceleration to be used as the next speed
 		this.nextSpeed = acceleration;
