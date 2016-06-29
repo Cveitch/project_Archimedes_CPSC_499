@@ -44,10 +44,7 @@ Main.prototype = {
 	
 		//we resize the world to the background as it will be covering the entire level
 	    layerbackground.resizeWorld();
-		//Create the ceiling
-		this.createBlock();
 
-		
 		//turns polylines solid
 		layerpolyline_tiles = this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
 
@@ -158,40 +155,16 @@ Main.prototype = {
 		if(this.nextSpeed === 0)
 		{
 			//Sprite speed
-			//this.player.body.velocity.x = 150;
+			this.player.body.velocity.x = 10;
 
 			//Can remove the speed allocation to enable the sprite to carry momentum!
 		}
 		else
 		{
-			this.player.body.velocity.x = this.nextSpeed;
+			this.player.body.acceleration.x = this.nextSpeed;
 			//var newSpeed = this.player.accerelate(speed);
 		}
 	},
-	
-	// update: function() {
-	// 	//updates the game if betty dies or exceeds boundaries
-	//
-	// 	//cursors is used for in game control as an example of physics capabilities
-	//
-	// 	this.player.body.velocity.x = 0;
-	//
-	// 	if 		(cursors.left.isDown)
-	// 	{//move left, flip character left
-	// 		this.player.scale.x = -1;
-	// 		this.player.body.velocity.x = -300;
-	// 	}
-	// 	else if (cursors.right.isDown)
-	// 	{//move right, flip right
-	// 		this.player.scale.x = 1;
-	// 		this.player.body.velocity.x = 300;
-	// 	}
-	// 	if(cursors.up.isDown)
-	// 	{//jumps
-	// 		this.player.body.velocity.y = -600;
-	// 	}
-	//
-	// },
 	
 	//can set controls in update so this function not called
 	jump: function() {
@@ -210,7 +183,8 @@ Main.prototype = {
 			//if(speedValues[this.arrayIndex] !== null)
 			if(this.arrayIndex < this.speedValues.length)
 			{
-				this.nextSpeed = this.speedValues[this.arrayIndex];
+				//this.nextSpeed = this.speedValues[this.arrayIndex];
+				this.accelerate(this.speedValues[this.arrayIndex]);
 			}
 			else
 			{
@@ -228,9 +202,13 @@ Main.prototype = {
 		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
-	accelerate: function()
+	accelerate: function(value)
 	{
-		//Potential to expand as a kinematics function of sorts
+		//Set up local variable to hold current d.s. acceleration value
+		var acceleration = value;
+
+		//Set the acceleration to be used as the next speed
+		this.nextSpeed = acceleration;
 	},
 
 	//currently not called
