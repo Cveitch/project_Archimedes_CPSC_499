@@ -25,7 +25,7 @@ var startLocation = false;
 
 //distance between each segment
 //var xSegmentLength = (canvas.width - this.offsetLeft) / 50;
-var xSegmentLength = canvas.width / 10;
+var xSegmentLength = canvas.width / 50;
 console.log("xsegmentlength = : "+xSegmentLength); 
 //array for coords
 var Coords;  
@@ -67,7 +67,7 @@ var setDrawingFalse = function (e)
         //send array 
            
         isDrawing = false; 
-    storeDS(yCoords);
+    //storeDS(yCoords);
 
     
 }
@@ -158,7 +158,10 @@ var touchDraw = function (e)
             canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
             canvas_Context.lineWidth=5;
             canvas_Context.stroke();
-        while(xVal[i] % xSegmentLength === 0 )
+        //while
+            //debug
+        
+            if(xVal[i] % xSegmentLength ===0 )
             {
             cordGenerator(e.touches[0].clientY); 
             i++; 
@@ -237,15 +240,15 @@ var cordGenerator = function(yPixels)
 {
     
     //if the current value, equals a bound, then add it to a list
-                if(xVal[i] % xSegmentLength === 0 )
-                   {
+               // if(xVal[i] % xSegmentLength === 0 )
+                //   {
                        
  
                        //Array Corrds contains (X, Y pixels). 
                        //Might have to play around with pixel values not sure exactly how this will react. 
 
                        yCoords.push((yPixels - startY) * (-1));
-                       console.log((yPixels-startY) *-1 );
+                       console.log("X: "+xVal[i]+" Y: "+(yPixels-startY) *-1 );
                        //yCoords = [-200,-300,-500]; 
                        //send cords to physics here. or after the line is drawn. 
                        
@@ -254,11 +257,11 @@ var cordGenerator = function(yPixels)
                        i++; 
                        a++; 
                    
-                   }
-                else{
+                  // }
+             //   else{
         
-                        i++; 
-                    }
+               //         i++; 
+              //      }
 
 }
 
@@ -272,14 +275,18 @@ canvas_Context.lineWidth=5;
 canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
 canvas_Context.moveTo(X,Y); 
 canvas_Context.stroke(); 
-canvas_Context.strokeStyle='#FF2E5A'
+canvas_Context.strokeStyle='#e1903d'
 canvas_Context.lineTo(canvas.width,Y); 
 canvas_Context.stroke(); 
 canvas_Context.closePath(); 
     
     
 }
+var sendCoords = function(){
 
+   storeDS(yCoords); 
+    
+}
 
 
 
