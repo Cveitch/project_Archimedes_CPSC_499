@@ -90,30 +90,6 @@ Main.prototype = {
 		this.block.body.static = true;
 	},
 
-	/*
-
-	<!--The following is under development. Creating a slope of sorts should be made in a separate .js where the main focus
-	is to generate the landscape for the sprite to run on.-->
-
-	createSlope: function(){
-	// Define a block using bitmap data rather than an image sprite
-	var slopeShape = this.game.add.bitmapData(this.game.world.width, 200);
-
-	// Fill the block with black color
-	slopeShape.ctx.rect(0, 0, this.game.world.width, 100);
-	slopeShape.ctx.fillStyle = '255';
-	slopeShape.ctx.fill();
-
-	// Create a new sprite using the bitmap data
-	this.slope = this.game.add.sprite(0, 0, slopeShape);
-
-	// Enable P2 Physics and set the block not to move
-	this.game.physics.p2.enable(this.slope);
-	this.slope.body.static = false;
-	this.slope.anchor.setTo(0, 0);
-	},
-	* */
-
 	createPlayer: function() {
 
 		//places character in world
@@ -138,8 +114,6 @@ Main.prototype = {
 
 		//var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		//spaceKey.onDown.add(this.jump, this);
-		
-		
 	},
 
 	movePlayer: function()
@@ -155,7 +129,7 @@ Main.prototype = {
 		if(this.nextSpeed === 0)
 		{
 			//Sprite speed
-			this.player.body.velocity.x = 20;
+			this.player.body.acceleration.set(20);
 
 			//Can remove the speed allocation to enable the sprite to carry momentum!
 		}
@@ -187,7 +161,7 @@ Main.prototype = {
 			if(this.arrayIndex < this.speedValues.length)
 			{
 				//this.nextSpeed = this.speedValues[this.arrayIndex];
-				this.accelerate(this.speedValues[this.arrayIndex]);
+				this.acceleratePlayer(this.speedValues[this.arrayIndex]);
 			}
 			else
 			{
@@ -205,17 +179,17 @@ Main.prototype = {
 		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
-	accelerate: function(value)
+	acceleratePlayer: function(value)
 	{
 		//Set up local variable to hold current d.s. acceleration value
 		var acceleration = value;
-		var setSpeed = 0;
+		var setSpeed = 25;
         var time = 1.5;
 
-		//setSpeed = ;
+		setSpeed = (acceleration*time)-this.nextSpeed;
 
 		//Set the acceleration to be used as the next speed
-		this.nextSpeed = acceleration;
+		this.nextSpeed = setSpeed;
 	},
 
 	//currently not called

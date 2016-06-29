@@ -34,21 +34,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Canvas_Page.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Canvas_Page.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Canvas_Page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="60" column="38" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
+            <state relative-caret-position="419">
+              <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-82">
-              <caret line="183" column="33" selection-start-line="183" selection-start-column="33" selection-end-line="183" selection-end-column="33" />
+            <state relative-caret-position="323">
+              <caret line="137" column="38" selection-start-line="137" selection-start-column="38" selection-end-line="137" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -82,8 +82,8 @@
         <option value="$PROJECT_DIR$/Splash_Page.html" />
         <option value="$PROJECT_DIR$/Drawing.js" />
         <option value="$PROJECT_DIR$/Sprite_Page.html" />
-        <option value="$PROJECT_DIR$/js/Main.js" />
         <option value="$PROJECT_DIR$/Canvas_Page.html" />
+        <option value="$PROJECT_DIR$/js/Main.js" />
       </list>
     </option>
   </component>
@@ -258,7 +258,7 @@
       <workItem from="1465685776949" duration="7000" />
       <workItem from="1466239438197" duration="3532000" />
       <workItem from="1466712147658" duration="2204000" />
-      <workItem from="1467178890277" duration="3024000" />
+      <workItem from="1467178890277" duration="3847000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/DAVIS_1' into TIM_1&#10;&#10;# Conflicts:&#10;#&#9;Canvas_Page.html&#10;">
       <created>1466241127978</created>
@@ -292,7 +292,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20094000" />
+    <option name="totallyTimeSpent" value="20917000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -515,10 +515,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Main.js">
+    <entry file="file://$PROJECT_DIR$/Canvas_Page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-82">
-          <caret line="183" column="33" selection-start-line="183" selection-start-column="33" selection-end-line="183" selection-end-column="33" />
+        <state relative-caret-position="419">
+          <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -531,10 +531,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Canvas_Page.html">
+    <entry file="file://$PROJECT_DIR$/js/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="60" column="38" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
+        <state relative-caret-position="323">
+          <caret line="137" column="38" selection-start-line="137" selection-start-column="38" selection-end-line="137" selection-end-column="38" />
           <folding />
         </state>
       </provider>
