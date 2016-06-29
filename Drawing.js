@@ -7,10 +7,10 @@ canvas.width = window.screen.width;
 // array for x values
 var xVal = [0]; 
 var i = 0; 
-var a = 1; 
+
 
 //Wiggle wiggle wiggle room for drawing, so that its not so strict. 
-var drawError = 330; 
+var drawError = 30; 
 //Drawing tells if mouse button has been pressed. 
 var isDrawing; 
 
@@ -25,7 +25,7 @@ var startLocation = false;
 
 //distance between each segment
 //var xSegmentLength = (canvas.width - this.offsetLeft) / 50;
-var xSegmentLength = canvas.width / 50;
+var xSegmentLength = Math.floor(canvas.width / 50);
 console.log("xsegmentlength = : "+xSegmentLength); 
 //array for coords
 var Coords;  
@@ -35,6 +35,26 @@ var yCoords = [0];
 
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
+
+
+
+//draw a starting location on the canvas. 
+var draw_Circle = function(X,Y)
+{
+    
+canvas_Context.beginPath(); 
+canvas_Context.lineWidth=5;
+canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
+canvas_Context.moveTo(X,Y); 
+canvas_Context.stroke(); 
+canvas_Context.strokeStyle='#e1903d'
+canvas_Context.lineTo(canvas.width,Y); 
+canvas_Context.stroke(); 
+canvas_Context.closePath(); 
+    
+    
+}
+
 
 //methods for drawing
 
@@ -144,6 +164,7 @@ var touchDraw = function (e)
     xVal.push(e.touches[0].clientX-this.offsetLeft);
     
     //check X value 
+    
     if(xVal[i] < e.touches[0].clientX-this.offsetLeft)
     {
         //start from 0,0
@@ -154,20 +175,33 @@ var touchDraw = function (e)
         }
             
         
+        if(isDrawing){
             
+            console.log("I=:"+i); 
+            console.log("VAL[i]:"+xVal[i]); 
             canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
             canvas_Context.lineWidth=5;
             canvas_Context.stroke();
-        //while
+console.log("a"); 
             //debug
         
-            if(xVal[i] % xSegmentLength ===0 )
+        
+        if(xVal[i] % xSegmentLength == 0 )
             {
             cordGenerator(e.touches[0].clientY); 
-            i++; 
-           }
             i++;
-                
+                console.log("b"); 
+
+            }
+        else
+            {
+                console.log("C"); 
+            i++;
+
+            }
+            
+        }
+        
         
         //if the current value, equals a bound, then add it to a list
         
@@ -227,11 +261,13 @@ var canvasClear = function()
         
         
             //reset Xvalue array
-            xVal.length = 1; 
+            var xVal = [0];   
+            // reset Y array 
+            yCoords = [];
             i = 0; 
     //redraw start location bubble and X line
-drawCircle(startX, startY); 
-    //yCoords.length = 0 ; 
+    draw_Circle(startX, startY); 
+    
     
 }
 
@@ -239,9 +275,7 @@ drawCircle(startX, startY);
 var cordGenerator = function(yPixels)
 {
     
-    //if the current value, equals a bound, then add it to a list
-               // if(xVal[i] % xSegmentLength === 0 )
-                //   {
+    
                        
  
                        //Array Corrds contains (X, Y pixels). 
@@ -249,39 +283,19 @@ var cordGenerator = function(yPixels)
 
                        yCoords.push((yPixels - startY) * (-1));
                        console.log("X: "+xVal[i]+" Y: "+(yPixels-startY) *-1 );
-                       //yCoords = [-200,-300,-500]; 
+                       console.log("Ycoords Length: "+yCoords.length); 
                        //send cords to physics here. or after the line is drawn. 
                        
                        
                        
                        i++; 
-                       a++; 
+ 
                    
-                  // }
-             //   else{
-        
-               //         i++; 
-              //      }
-
+           
 }
 
 
-//draw a starting location on the canvas. 
-var draw_Circle = function(X,Y)
-{
-    
-canvas_Context.beginPath(); 
-canvas_Context.lineWidth=5;
-canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
-canvas_Context.moveTo(X,Y); 
-canvas_Context.stroke(); 
-canvas_Context.strokeStyle='#e1903d'
-canvas_Context.lineTo(canvas.width,Y); 
-canvas_Context.stroke(); 
-canvas_Context.closePath(); 
-    
-    
-}
+
 var sendCoords = function(){
 
    storeDS(yCoords); 
