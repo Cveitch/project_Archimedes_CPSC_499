@@ -62,6 +62,7 @@ Main.prototype = {
 	{
 		//Updates sprite speed
 		this.movePlayer(this.getSpeed());
+        //this.player.body.acceleration.set(40);
 
 		//Some sort of restart logic wherein a restart button resets everything back to square one
 		/*
@@ -95,25 +96,19 @@ Main.prototype = {
 		//places character in world
 		this.player = this.game.add.sprite(100, 100, "avatar");
 		this.game.physics.p2.enable(this.player);
+
 		//quality of life settings 
 		this.player.anchor.setTo(0.5,0.5);
 		this.game.camera.follow(this.player);
+
 		//gives player a circle hitbox (radius,offestx,offsety)
 		this.player.body.setCircle(44,0,0);
-		//wouldn't want the character tumbling over
+
+        //wouldn't want the character tumbling over
 		this.player.body.fixedRotation=true;
-		
-	    // Enable physics, use "true" to enable debug drawing
-	    //this.game.physics.p2.enable([this.player], false);
 
-	    // Get rid of current bounding box
-	    //this.player.body.clearShapes();
-
-	    // Add our PhysicsEditor bounding shape (causes betty to have NOT fly out of the page)
-	    //this.player.body.loadPolygon("sprite_physics", "betty");
-
-		//var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		//spaceKey.onDown.add(this.jump, this);
+        //Prevent sprite from reaching a certain speed
+        this.player.body.maxVelocity.x= 500;
 	},
 
 	movePlayer: function()
@@ -126,25 +121,25 @@ Main.prototype = {
 		//-->code
 
 		//If the queue is empty OR if the velocity is 0
-		if(this.nextSpeed === 0)
+		if(this.nextSpeed !== 0)
 		{
-			//Sprite speed
-			this.player.body.acceleration.set(20);
 
-			//Can remove the speed allocation to enable the sprite to carry momentum!
+            //Accelerating sprite
+            //this.player.body.thrust(this.nextSpeed);
+            this.player.body.thrust(400);
+            //this.player.body.velocity.x = this.nextSpeed;
 		}
 		else
 		{
-			this.player.body.velocity.x = this.nextSpeed;
-			//this.game.physics.p2.accelerationFromRotation(this.player.rotation, this.nextSpeed, this.player.body.acceleration);
-
-			//this.player.body.acceleration = this.nextSpeed;
-			//var newSpeed = this.player.accerelate(speed);
+            //alert("hey");
+            //Default sprite velocity
+            this.player.body.velocity.x = 30;
 		}
 	},
 	
 	//can set controls in update so this function not called
-	jump: function() {
+	jump: function()
+    {
 		//preform jump
 		this.player.body.velocity.y = -350;
 	},
@@ -161,7 +156,7 @@ Main.prototype = {
 			if(this.arrayIndex < this.speedValues.length)
 			{
 				//this.nextSpeed = this.speedValues[this.arrayIndex];
-				this.acceleratePlayer(this.speedValues[this.arrayIndex]);
+				this.nextSpeed = this.speedValues[this.arrayIndex];
 			}
 			else
 			{
@@ -186,10 +181,11 @@ Main.prototype = {
 		var setSpeed = 25;
         var time = 1.5;
 
-		setSpeed = (acceleration*time)-this.nextSpeed;
+		//setSpeed = (acceleration*time)-this.nextSpeed;
 
 		//Set the acceleration to be used as the next speed
-		this.nextSpeed = setSpeed;
+		//this.nextSpeed = setSpeed;
+        //this.player.body.thrust(acceleration);
 	},
 
 	//currently not called
