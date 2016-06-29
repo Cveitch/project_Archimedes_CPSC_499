@@ -295,11 +295,11 @@ Main.prototype = {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
         if (timer.running) 
         {
-            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#ff0");
+            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#d8c23f");
         }
         else 
         {
-            game.debug.text("Done!", 2, 14, "#0f0");
+            game.debug.text("Done!", 2, 14, "#6f6f6f");
         }
     },
     //Show Time Left

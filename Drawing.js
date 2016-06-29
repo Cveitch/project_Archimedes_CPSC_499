@@ -16,17 +16,19 @@ var isDrawing;
 
 // bool to tell if the user has been alerted to drawing backwards, so that it does not become annoying. 
 var hasBeenAlerted = false; 
-
-
+//how many parts the canvas is split into. 
+var xSegments = 50; 
+var xSegmentLength = canvas.width/xSegments; 
 //set 0,0 so that it fits on any screen. 
-var startX = canvas.width - canvas.width; 
+var startX = 0; 
 var startY = canvas.height / 2; 
 var startLocation = false; 
 
 //distance between each segment
 //var xSegmentLength = (canvas.width - this.offsetLeft) / 50;
-var xSegmentLength = canvas.width / 50;
+
 console.log("xsegmentlength = : "+xSegmentLength); 
+console.log("WIDTH: "+canvas.width+" HEIGHT: "+canvas.height); 
 //array for coords
 var Coords;  
 
@@ -36,6 +38,24 @@ var yCoords = [0];
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
 //methods for drawing
+
+//draw a starting location on the canvas. 
+
+var draw_Circle = function(X,Y)
+{
+    
+canvas_Context.beginPath(); 
+canvas_Context.lineWidth=5;
+canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
+canvas_Context.moveTo(X,Y); 
+canvas_Context.stroke(); 
+canvas_Context.strokeStyle='#e1903d'
+canvas_Context.lineTo(canvas.width,Y); 
+canvas_Context.stroke(); 
+canvas_Context.closePath(); 
+    
+    
+}
 
 var setTouchDrawingTrue = function (e) 
 {
@@ -180,15 +200,23 @@ var touchDraw = function (e)
 
 //dynamic canvas size
 var setCanvasSize = function()
-{
+{  
+    setCanvasHeight(window.screen.width); 
+    setCanvasWidth(window.screen.height); 
     
-    //canvas.height = window.outerHeight-150; 
-    //canvas.width = window.outerWidth-30; 
+    startY = canvas.height / 2;
+    xSegmentLength = canvas.width / xSegments; 
+    console.log("WIDTH: "+canvas.width+" HEIGHT: "+canvas.height); 
+    console.log("xsegmentlength = : "+xSegmentLength); 
+    draw_Circle(startX, startY); 
     
-    canvas.height = window.screen.height; 
-    canvas.width = window.screen.width; 
     
-    
+}
+var setCanvasWidth = function(X){
+    canvas.width = X; 
+}
+var setCanvasHeight = function(X){
+    canvas.height = X; 
 }
 
 
@@ -262,23 +290,7 @@ var cordGenerator = function(yPixels)
 }
 
 
-//draw a starting location on the canvas. 
 
-var draw_Circle = function(X,Y)
-{
-    
-canvas_Context.beginPath(); 
-canvas_Context.lineWidth=5;
-canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
-canvas_Context.moveTo(X,Y); 
-canvas_Context.stroke(); 
-canvas_Context.strokeStyle='#FF2E5A'
-canvas_Context.lineTo(canvas.width,Y); 
-canvas_Context.stroke(); 
-canvas_Context.closePath(); 
-    
-    
-}
 
 
 
@@ -297,7 +309,7 @@ canvas.addEventListener("touchend",     setDrawingFalse,      false);
 //checks to see if the window gets resized
 window.addEventListener('resize',       setCanvasSize,        false);
 window.addEventListener('load', draw_Circle(startX, startY), false); 
-
+document.addEventListener('orientationchange', setCanvasSize, false); 
 
 
 
