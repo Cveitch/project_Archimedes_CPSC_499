@@ -123,16 +123,13 @@ Main.prototype = {
 		if(this.nextSpeed !== 0)
 		{
 
-            //Accelerating sprite
-            //this.player.body.thrust(this.nextSpeed);
-            //this.player.body.thrust(400);
+            //Set current speed from DS
             this.player.body.velocity.x = this.nextSpeed;
 		}
 		else
 		{
-            //alert("hey");
             //Default sprite velocity
-            this.player.body.velocity.x = 30;
+            this.player.body.velocity.x = 150;
 		}
 	},
 	
@@ -154,7 +151,7 @@ Main.prototype = {
 			//if(speedValues[this.arrayIndex] !== null)
 			if(this.arrayIndex < this.speedValues.length)
 			{
-				//this.nextSpeed = this.speedValues[this.arrayIndex];
+				//Takes the pixel
 				this.nextSpeed = this.speedValues[this.arrayIndex];
 			}
 			else
@@ -171,20 +168,6 @@ Main.prototype = {
 
 		//Display the current velocity
 		this.labelIndex.text =  "step..."+this.arrayIndex;
-	},
-
-	acceleratePlayer: function(value)
-	{
-		//Set up local variable to hold current d.s. acceleration value
-		var acceleration = value;
-		var setSpeed = 25;
-        var time = 1.5;
-
-		//setSpeed = (acceleration*time)-this.nextSpeed;
-
-		//Set the acceleration to be used as the next speed
-		//this.nextSpeed = setSpeed;
-        //this.player.body.thrust(acceleration);
 	},
 
 	//currently not called
