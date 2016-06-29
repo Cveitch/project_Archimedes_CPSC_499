@@ -62,7 +62,6 @@ Main.prototype = {
 	{
 		//Updates sprite speed
 		this.movePlayer(this.getSpeed());
-        //this.player.body.acceleration.set(40);
 
 		//Some sort of restart logic wherein a restart button resets everything back to square one
 		/*
@@ -126,8 +125,8 @@ Main.prototype = {
 
             //Accelerating sprite
             //this.player.body.thrust(this.nextSpeed);
-            this.player.body.thrust(400);
-            //this.player.body.velocity.x = this.nextSpeed;
+            //this.player.body.thrust(400);
+            this.player.body.velocity.x = this.nextSpeed;
 		}
 		else
 		{
