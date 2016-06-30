@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     
     <meta charset="UTF-8">
     <title>SPRITE</title>
 
-    <!--making jump global to this entire page-->
+    //making jump global to this entire page
     <script type='text/javascript' >
         var jump = true;
     </script>
@@ -38,8 +37,8 @@
             //localStorage.ds = [150,-150,450];
 
             //Create a new game that fills the screen
-           // game = new Phaser.Game(window.screen.width, window.screen.height, Phaser.AUTO);
-            game = new Phaser.Game( 960,640, Phaser.CANVAS);
+            //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO);
+            game = new Phaser.Game(960 ,640, Phaser.CANVAS);
             //game = new Phaser.Game(innerWidth, innerHeight, Phaser.AUTO);
 
             //Add all states
