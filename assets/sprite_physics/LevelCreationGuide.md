@@ -33,7 +33,8 @@ Hello there, what a nice surprise to find someone working on project Archimedes.
 
   Implementing your level in the game should be quite simple. First go to Preload.js and load both the .json file you get
   from exporting your level and the tileset you used to make it. Next go to Main.js and set the var mymap to yourlevel.json
-  and add the tile set you used to mymap.
+  and add the tile set you used to mymap. To place assests like the player, goal, and anything else I manually placed them
+  by using code like "goal 	= this.game.add.sprite(520,400,"goal");" in create.js.
 
   3. If you have more questions I found everything I needed to know by using this tutorial and forum thread.
   http://www.html5gamedevs.com/topic/9809-creating-collision-polygons-on-tiles-in-tiled-mapeditor/
