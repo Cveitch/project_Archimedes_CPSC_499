@@ -157,15 +157,13 @@ Main.prototype = {
 		//If the queue is empty OR if the velocity is 0
 		if(this.nextSpeed === 0)
 		{
-			//Sprite speed
-			//this.player.body.velocity.x = 150;
-
-			//Can remove the speed allocation to enable the sprite to carry momentum!
+			//Set the default sprite speed
+			this.player.body.velocity.x = 150;
 		}
 		else
 		{
+            //Set the next velocity/speed from the DS
 			this.player.body.velocity.x = this.nextSpeed;
-			//var newSpeed = this.player.accerelate(speed);
 		}
 	},
 	
@@ -194,7 +192,8 @@ Main.prototype = {
 	// },
 	
 	//can set controls in update so this function not called
-	jump: function() {
+	jump: function() 
+    {
 		//preform jump
 		this.player.body.velocity.y = -350;
 	},
@@ -226,11 +225,6 @@ Main.prototype = {
 
 		//Display the current velocity
 		this.labelIndex.text =  "step..."+this.arrayIndex;
-	},
-
-	accelerate: function()
-	{
-		//Potential to expand as a kinematics function of sorts
 	},
 
 	//currently not called
