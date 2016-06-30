@@ -1,7 +1,7 @@
 /**
  * Created by Riley on 28/06/2016.
  */
-
+//This code is directly referencing John Davis Dalton and David Walsh's code at https://davidwalsh.name/convert-xml-json
 
 function xmlToJson(xml) 
 {
