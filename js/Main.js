@@ -3,6 +3,12 @@ var Main = function(game)
 {
 	//This function allows "Main" to be accessed by the game instance
 };
+//variables to keep track of time. 
+var timer;
+var timerEvent;
+//if out of time turn false
+var outOfTime; 
+
 
 Main.prototype = {
 	
@@ -33,6 +39,14 @@ Main.prototype = {
 		//Puts the index of the queue/array on display (TESTING)
 		//OR: a possible expansion to displaying the score on the screen!
 		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
+        
+        //start timer
+        timer = game.time.create(); 
+        //delayed event
+        timerEvent = timer. add(Phaser.Timer.SECOND * 5, this.endTimer, this);
+        //start timer
+        timer.start(); 
+        outOfTime = false; 
 
 		//temporary colour for the background
 		//this.game.stage.backgroundColor = "71c5cf";
@@ -154,6 +168,9 @@ Main.prototype = {
 		//If player is in contact with a slope
 		//-->code
 
+        //check win condition; 
+        this.gameWin(this.player,goal); 
+        
 		//If the queue is empty OR if the velocity is 0
 		if(this.nextSpeed === 0)
 		{
@@ -232,5 +249,60 @@ Main.prototype = {
 		// restart the game after death
 		this.game.state.start('main');
 	},
+    //Checks game state to see if player won. 
+    gameWin: function(PLAYER, GOAL) 
+    {
+    var error = 1; 
+    //get position of player. 
+    var playerX = Math.floor(PLAYER.x-35); 
+    var playerY = Math.floor(PLAYER.y-96); 
+        console.log("PX: "+ playerX +"PY: "+playerY ); 
+        
+    //get position of Goal. 
+    var goalX = Math.floor(GOAL.x); 
+    var goalY = Math.floor(GOAL.y); 
+    console.log("GX: "+ goalX + "GY: "+goalY); 
+        
+    //if time is more than 5 seconds you lose. 
+    if(!timer.running){
+        window.location.href = 'Canvas_Page.html'; 
+       //lose game 
+    }
+    
+        //if player is near goal, you win :D
+    if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY ){
+        window.location.href = 'Score_Page.html';
 
+    }
+    
+
+    },
+    
+    //stop timer; 
+    endTimer: function()
+    {
+    timer.stop(); 
+    outOfTime = true; 
+    },
+    render: function () 
+    {
+        // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
+        if (timer.running) 
+        {
+            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#d8c23f");
+        }
+        else 
+        {
+            game.debug.text("Done!", 2, 14, "#6f6f6f");
+        }
+    },
+    //Show Time Left
+     formatTime: function(s) 
+    {
+        // Convert seconds (s) to a nicely formatted and padded time string
+        var minutes = "0" + Math.floor(s / 60);
+        var seconds = "0" + (s - minutes * 60);
+        return ":" + seconds.substr(-2);   
+    }
+    
 };
