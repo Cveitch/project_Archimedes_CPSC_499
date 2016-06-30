@@ -1,0 +1,69 @@
+body,html
+{
+    width: 100%; 
+    height: 100%; 
+    margin: 0; 
+    padding: 0; 
+    overflow: hidden;
+    
+    
+    
+}
+#TOP_SCREEN_INFO .usernameLabel
+{
+    
+    z-index: 1; 
+    position: absolute; 
+    margin: 0; 
+    padding: 0; 
+    color: aqua; 
+    
+    
+    
+    
+}
+canvas
+{
+
+    
+    width: 100%; 
+    height: 100%; 
+    display: block; 
+    z-index: 0; 
+    position: absolute; 
+    background-color: #bf3a3a;  
+    
+}
+button 
+{
+    position: relative; 
+    z-index: 1; 
+}
+
+#goButton 
+{
+    background-color: aqua; 
+    height: 75px; 
+    width: 150px; 
+    border-radius: 90px 90px 0 0; 
+    -moz-border-radius: 90px 90px 0 0;
+    -webkit-border-radius: 90px 90px 0 0;
+    background:#d8c23f;
+    z-index: 1; 
+    position: absolute; 
+    bottom: -10%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+
+@viewport
+{
+    
+    width: device-width; 
+    height: device-height; 
+    
+    
+}
+

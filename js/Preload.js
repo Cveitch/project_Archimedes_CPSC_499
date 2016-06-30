@@ -5,9 +5,10 @@ var Preload = function(game){
 Preload.prototype = {
 
 	preload: function(){ 
-	    this.game.load.image("betty", "assets/images/betty.png");
-		this.game.load.image("background", "assets/images/betty.png");
-	    this.game.load.physics("sprite_physics", "assets/sprite_physics/sprite_physics.json");
+	    this.game.load.image	("avatar", "assets/images/spr_character.png");
+		this.game.load.image	("goal", "assets/images/spr_goal.png");
+	    this.game.load.tilemap	("testmap", "assets/sprite_physics/testlevel.json",null, Phaser.Tilemap.TILED_JSON);
+		this.game.load.image	("tset_world1", "assets/images/tset_world1.png")
 	},
 
 	create: function(){
