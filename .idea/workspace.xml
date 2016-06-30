@@ -24,7 +24,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Sprite_Page.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Sprite_Page.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1890">
-              <caret line="126" column="56" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+            <state relative-caret-position="-1042">
+              <caret line="63" column="41" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -250,7 +250,7 @@
       <workItem from="1466712147658" duration="2204000" />
       <workItem from="1467178890277" duration="5813000" />
       <workItem from="1467235489906" duration="356000" />
-      <workItem from="1467243160405" duration="58000" />
+      <workItem from="1467243160405" duration="221000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/DAVIS_1' into TIM_1&#10;&#10;# Conflicts:&#10;#&#9;Canvas_Page.html&#10;">
       <created>1466241127978</created>
@@ -284,7 +284,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23297000" />
+    <option name="totallyTimeSpent" value="23460000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -556,18 +556,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
+    <entry file="file://$PROJECT_DIR$/js/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+        <state relative-caret-position="-1042">
+          <caret line="63" column="41" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Main.js">
+    <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="126" column="56" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+        <state relative-caret-position="540">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
           <folding />
         </state>
       </provider>

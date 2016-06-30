@@ -62,14 +62,6 @@ Main.prototype = {
 	{
 		//Updates sprite speed
 		this.movePlayer(this.getSpeed());
-
-		//Some sort of restart logic wherein a restart button resets everything back to square one
-		/*
-		 if(button.press === value)
-		 {
-		 this.restart();
-		 }
-		 * */
 	},
 
 	createBlock: function()
