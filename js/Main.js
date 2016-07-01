@@ -9,6 +9,9 @@ var timerEvent;
 //if out of time turn false
 var outOfTime; 
 
+//Var for how much time you have to clear the level. 
+var timeAllowed = 60; 
+
 
 Main.prototype = {
 	
@@ -43,7 +46,7 @@ Main.prototype = {
         //start timer
         timer = game.time.create(); 
         //delayed event
-        timerEvent = timer. add(Phaser.Timer.SECOND * 5, this.endTimer, this);
+        timerEvent = timer. add(Phaser.Timer.SECOND * timeAllowed, this.endTimer, this);
         //start timer
         timer.start(); 
         outOfTime = false; 
