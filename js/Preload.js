@@ -7,8 +7,10 @@ Preload.prototype = {
 	preload: function(){ 
 	    this.game.load.image	("avatar", "assets/images/spr_character.png");
 		this.game.load.image	("goal", "assets/images/spr_goal.png");
-	    this.game.load.tilemap	("testmap", "assets/sprite_physics/testlevel.json",null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.tilemap	("Level1", "assets/sprite_physics/Level-1-Easy.json",null, Phaser.Tilemap.TILED_JSON);
 		this.game.load.image	("tset_world1", "assets/images/tset_world1.png")
+        
+
 	},
 
 	create: function(){

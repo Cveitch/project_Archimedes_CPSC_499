@@ -24,7 +24,7 @@ Main.prototype = {
 		this.game.physics.p2.gravity.y = 1400;
 
 		// initialised tilemap with matching tileset
-		var mymap = this.game.add.tilemap('testmap');
+		var mymap = this.game.add.tilemap('Level1');
 		mymap.addTilesetImage('tset_world1');
 
 		//Temporary colour for the background, similar to cloud_1
@@ -72,7 +72,7 @@ Main.prototype = {
 	    this.createPlayer();
 		
 		// Add goal to the game
-		goal 	= this.game.add.sprite(520,400,"goal");
+		goal 	= this.game.add.sprite(this.game.world.width-100,400,"goal");
 		
 		//this allows for real time in game control with keyboard, thanks to the update function 
 		cursors = this.game.input.keyboard.createCursorKeys();
@@ -255,16 +255,17 @@ Main.prototype = {
     //Checks game state to see if player won. 
     gameWin: function(PLAYER, GOAL) 
     {
-    var error = 1; 
+    var error = 3; 
     //get position of player. 
     var playerX = Math.floor(PLAYER.x-35); 
     var playerY = Math.floor(PLAYER.y-96); 
-        console.log("PX: "+ playerX +"PY: "+playerY ); 
+    console.log("PX: "+ playerX +"PY: "+playerY ); 
+
         
     //get position of Goal. 
     var goalX = Math.floor(GOAL.x); 
     var goalY = Math.floor(GOAL.y); 
-    console.log("GX: "+ goalX + "GY: "+goalY); 
+console.log("GX: "+ goalX + "GY: "+goalY);
         
     //if time is more than 5 seconds you lose. 
     if(!timer.running){
@@ -273,7 +274,7 @@ Main.prototype = {
     }
     
         //if player is near goal, you win :D
-    if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY ){
+    if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
         window.location.href = 'Score_Page.html';
 
     }
