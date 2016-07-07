@@ -94,7 +94,7 @@ Main.prototype = {
 	createBackground: function()
 	{
 		// initialised tilemap with matching tileset
-		var mymap = this.game.add.tilemap('testmap');
+		var mymap = this.game.add.tilemap('Level1');
 		mymap.addTilesetImage('tset_world1');
 
 		//Temporary colour for the background, similar to cloud_1
