@@ -106,7 +106,8 @@ var mouseDraw = function (e)
 
 
 //draw on Touchscreens 
-var touchDraw = function (e){
+var touchDraw = function (e)
+{
     
     //prevents scrolling
     event.preventDefault(); 
@@ -143,7 +144,8 @@ var touchDraw = function (e){
 
 
 //dynamic canvas size
-var setCanvasSize = function() {
+var setCanvasSize = function() 
+{
     
     canvas.height = window.outerHeight-150; 
     canvas.width = window.outerWidth-30; 
@@ -165,29 +167,6 @@ var errorAlert = function()
   
     
 }
-
-
-var cordGenerator = function(x,y)
-{
-    //current pixel values
-    var pX = x; 
-    var pY = y; 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
-
-
-
 
 //event listeners for drawing with mouse
 canvas.addEventListener("mousemove",    mouseDraw,            false ); 
