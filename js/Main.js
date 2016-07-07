@@ -10,7 +10,7 @@ var timerEvent;
 var outOfTime; 
 
 //Var for how much time you have to clear the level. 
-var timeAllowed = 60; 
+var timeAllowed = 30; 
 
 
 Main.prototype = {
@@ -72,7 +72,7 @@ Main.prototype = {
 	    this.createPlayer();
 		
 		// Add goal to the game
-		goal 	= this.game.add.sprite(this.game.world.width-100,400,"goal");
+		goal 	= this.game.add.sprite(0,400,"goal");
 		
 		//this allows for real time in game control with keyboard, thanks to the update function 
 		cursors = this.game.input.keyboard.createCursorKeys();
@@ -137,7 +137,7 @@ Main.prototype = {
 	createPlayer: function() {
 
 		//places character in world
-		this.player = this.game.add.sprite(100, 100, "avatar");
+		this.player = this.game.add.sprite(200, 210, "avatar");
 		this.game.physics.p2.enable(this.player);
 		//quality of life settings 
 		this.player.anchor.setTo(0.5,0.5);
