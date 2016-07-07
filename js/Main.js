@@ -17,19 +17,6 @@ Main.prototype = {
 	
 	create: function()
 	{
-		// Start the P2 Physics Engine
-		this.game.physics.startSystem(Phaser.Physics.P2JS);
-		
-		// Set the gravity
-		this.game.physics.p2.gravity.y = 1400;
-
-		// initialised tilemap with matching tileset
-		var mymap = this.game.add.tilemap('testmap');
-		mymap.addTilesetImage('tset_world1');
-
-		//Temporary colour for the background, similar to cloud_1
-		this.game.stage.backgroundColor = "#5cc5f2";
-
 		//Index for the queue/array
 		this.arrayIndex = 0;
 
@@ -39,9 +26,18 @@ Main.prototype = {
 		//Current speed for the sprite
 		this.nextSpeed = 0;
 
+		//String value to allow sprite action based on button pressing IF it is "GO"
+		this.confirmGoSprite = "STOP";
+
 		//Puts the index of the queue/array on display (TESTING)
 		//OR: a possible expansion to displaying the score on the screen!
 		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
+
+		//Initialize the buttons needed (BROKEN)
+        this.buttonGo = game.add.button(game.world.centerX - 95, 400, "button_goSprite", this.setButtonLogic, this);
+
+        //Place button on the screen at X and Y coordinates
+        this.buttonGo.anchor.setTo(0.5,0.5);
         
         //start timer
         timer = game.time.create(); 
@@ -49,30 +45,19 @@ Main.prototype = {
         timerEvent = timer. add(Phaser.Timer.SECOND * timeAllowed, this.endTimer, this);
         //start timer
         timer.start(); 
-        outOfTime = false; 
+        outOfTime = false;
 
-		//temporary colour for the background
-		//this.game.stage.backgroundColor = "71c5cf";
-		
-		//creates layers matching the .json testlevel 
-	    layerbackground = mymap.createLayer('background');
-		layerblocks 	= mymap.createLayer('block1');
-		layerdetails 	= mymap.createLayer('detail1');
-	
-		//we resize the world to the background as it will be covering the entire level
-	    layerbackground.resizeWorld();
-		//Create the ceiling
-		//this.createBlock();
+        //Enable the physics to start
+        this.createPhysics();
 
-		
-		//turns polylines solid
-		layerpolyline_tiles = this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
+        //Create the background for the game
+        this.createBackground();
 
 	    //Create the player
 	    this.createPlayer();
 		
 		// Add goal to the game
-		goal 	= this.game.add.sprite(520,400,"goal");
+		goal 	= this.game.add.sprite(this.game.world.width-100,400,"goal");
 		
 		//this allows for real time in game control with keyboard, thanks to the update function 
 		cursors = this.game.input.keyboard.createCursorKeys();
@@ -80,16 +65,52 @@ Main.prototype = {
 
 	update: function()
 	{
-		//Updates sprite speed
-		this.movePlayer(this.getSpeed());
+		if(this.confirmGoSprite === "GO")
+		{
+			//Updates sprite speed
+			this.movePlayer(this.getSpeed());
+		}
+		else if(this.confirmGoSprite === "STOP")
+		{
+			//Gives the sprite an initial velocity of 0 pixels/s
+			this.movePlayer();
+		}
+		else
+		{
+			//Gives the sprite an initial velocity of 20 pixels/s
+			this.movePlayer();
+		}
+	},
 
-		//Some sort of restart logic wherein a restart button resets everything back to square one
-		/*
-		 if(button.press === value)
-		 {
-		 this.restart();
-		 }
-		 * */
+	createPhysics: function()
+	{
+        // Start the P2 Physics Engine
+        this.game.physics.startSystem(Phaser.Physics.P2JS);
+
+        // Set the gravity
+        this.game.physics.p2.gravity.y = 1400;
+	},
+
+	createBackground: function()
+	{
+		// initialised tilemap with matching tileset
+		var mymap = this.game.add.tilemap('testmap');
+		mymap.addTilesetImage('tset_world1');
+
+		//Temporary colour for the background, similar to cloud_1
+		this.game.stage.backgroundColor = "#5cc5f2";
+
+		//creates layers matching the .json testlevel
+		layerbackground = mymap.createLayer('background');
+		layerblocks 	= mymap.createLayer('block1');
+		layerdetails 	= mymap.createLayer('detail1');
+
+		//we resize the world to the background as it will be covering the entire level
+		layerbackground.resizeWorld();
+
+		//turns polylines solid
+		//var layerpolyline_tiles = this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
+		this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
 	},
 
 	createBlock: function()
@@ -110,30 +131,6 @@ Main.prototype = {
 		this.block.body.static = true;
 	},
 
-	/*
-
-	<!--The following is under development. Creating a slope of sorts should be made in a separate .js where the main focus
-	is to generate the landscape for the sprite to run on.-->
-
-	createSlope: function(){
-	// Define a block using bitmap data rather than an image sprite
-	var slopeShape = this.game.add.bitmapData(this.game.world.width, 200);
-
-	// Fill the block with black color
-	slopeShape.ctx.rect(0, 0, this.game.world.width, 100);
-	slopeShape.ctx.fillStyle = '255';
-	slopeShape.ctx.fill();
-
-	// Create a new sprite using the bitmap data
-	this.slope = this.game.add.sprite(0, 0, slopeShape);
-
-	// Enable P2 Physics and set the block not to move
-	this.game.physics.p2.enable(this.slope);
-	this.slope.body.static = false;
-	this.slope.anchor.setTo(0, 0);
-	},
-	* */
-
 	createPlayer: function() {
 
 		//places character in world
@@ -146,20 +143,6 @@ Main.prototype = {
 		this.player.body.setCircle(44,0,0);
 		//wouldn't want the character tumbling over
 		this.player.body.fixedRotation=true;
-		
-	    // Enable physics, use "true" to enable debug drawing
-	    //this.game.physics.p2.enable([this.player], false);
-
-	    // Get rid of current bounding box
-	    //this.player.body.clearShapes();
-
-	    // Add our PhysicsEditor bounding shape (causes betty to have NOT fly out of the page)
-	    //this.player.body.loadPolygon("sprite_physics", "betty");
-
-		//var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		//spaceKey.onDown.add(this.jump, this);
-		
-		
 	},
 
 	movePlayer: function()
@@ -168,48 +151,24 @@ Main.prototype = {
 		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		spaceKey.onDown.add(this.jump, this);
 
-		//If player is in contact with a slope
-		//-->code
-
         //check win condition; 
-        this.gameWin(this.player,goal); 
-        
-		//If the queue is empty OR if the velocity is 0
-		if(this.nextSpeed === 0)
+        this.gameWin(this.player,goal);
+
+		switch(this.confirmGoSprite)
 		{
-			//Set the default sprite speed
-			this.player.body.velocity.x = 150;
-		}
-		else
-		{
-            //Set the next velocity/speed from the DS
-			this.player.body.velocity.x = this.nextSpeed;
+			case "STOP":
+				//Give the sprite zero velocity
+				this.player.body.velocity.x = 0;
+				break;
+			case "GO":
+				//Give the sprite zero velocity
+				this.player.body.velocity.x = 0;
+				break;
+			default:
+				//Set the next velocity/speed from the DS
+				this.player.body.velocity.x = this.nextSpeed;
 		}
 	},
-	
-	// update: function() {
-	// 	//updates the game if betty dies or exceeds boundaries
-	//
-	// 	//cursors is used for in game control as an example of physics capabilities
-	//
-	// 	this.player.body.velocity.x = 0;
-	//
-	// 	if 		(cursors.left.isDown)
-	// 	{//move left, flip character left
-	// 		this.player.scale.x = -1;
-	// 		this.player.body.velocity.x = -300;
-	// 	}
-	// 	else if (cursors.right.isDown)
-	// 	{//move right, flip right
-	// 		this.player.scale.x = 1;
-	// 		this.player.body.velocity.x = 300;
-	// 	}
-	// 	if(cursors.up.isDown)
-	// 	{//jumps
-	// 		this.player.body.velocity.y = -600;
-	// 	}
-	//
-	// },
 	
 	//can set controls in update so this function not called
 	jump: function() 
@@ -255,16 +214,17 @@ Main.prototype = {
     //Checks game state to see if player won. 
     gameWin: function(PLAYER, GOAL) 
     {
-    var error = 1; 
+    var error = 3; 
     //get position of player. 
     var playerX = Math.floor(PLAYER.x-35); 
     var playerY = Math.floor(PLAYER.y-96); 
-        console.log("PX: "+ playerX +"PY: "+playerY ); 
+    console.log("PX: "+ playerX +"PY: "+playerY ); 
+
         
     //get position of Goal. 
     var goalX = Math.floor(GOAL.x); 
     var goalY = Math.floor(GOAL.y); 
-    console.log("GX: "+ goalX + "GY: "+goalY); 
+console.log("GX: "+ goalX + "GY: "+goalY);
         
     //if time is more than 5 seconds you lose. 
     if(!timer.running){
@@ -273,7 +233,7 @@ Main.prototype = {
     }
     
         //if player is near goal, you win :D
-    if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY ){
+    if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
         window.location.href = 'Score_Page.html';
 
     }
@@ -299,13 +259,22 @@ Main.prototype = {
             game.debug.text("Done!", 2, 14, "#6f6f6f");
         }
     },
+
     //Show Time Left
-     formatTime: function(s) 
+    formatTime: function(s)
     {
         // Convert seconds (s) to a nicely formatted and padded time string
         var minutes = "0" + Math.floor(s / 60);
         var seconds = "0" + (s - minutes * 60);
         return ":" + seconds.substr(-2);   
-    }
-    
+    },
+
+    setButtonLogic: function()
+    {
+		//Allow the sprite to go through its movement
+		this.confirmGoSprite = "GO";
+
+		//Greys out the start button
+		this.buttonGo =! this.buttonGo.visible;
+    },
 };
