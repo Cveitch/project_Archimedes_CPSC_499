@@ -10,7 +10,7 @@ var timerEvent;
 var outOfTime; 
 
 //Var for how much time you have to clear the level. 
-var timeAllowed = 30; 
+var timeAllowed = 15; 
 
 
 Main.prototype = {

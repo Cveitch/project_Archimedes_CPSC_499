@@ -31,7 +31,8 @@ canvas
     display: block; 
     z-index: 0; 
     position: absolute; 
-    background-color: #bf3a3a;  
+    background-color: #bf3a3a; 
+    background-image: url(assets/images/cloud_1.jpg); 
     
 }
 button 
