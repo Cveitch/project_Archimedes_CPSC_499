@@ -57,8 +57,7 @@ Main.prototype = {
 	    this.createPlayer();
 		
 		// Add goal to the game
-		goal 	= this.game.add.sprite(0,400,"goal");
-		
+		goal 	= this.game.add.sprite(this.game.world.width-114,116,"goal");
 		//this allows for real time in game control with keyboard, thanks to the update function 
 		cursors = this.game.input.keyboard.createCursorKeys();
 	},
@@ -94,7 +93,7 @@ Main.prototype = {
 	createBackground: function()
 	{
 		// initialised tilemap with matching tileset
-		var mymap = this.game.add.tilemap('Level1');
+		var mymap = this.game.add.tilemap('Level2');
 		mymap.addTilesetImage('tset_world1');
 
 		//Temporary colour for the background, similar to cloud_1
@@ -134,7 +133,7 @@ Main.prototype = {
 	createPlayer: function() {
 
 		//places character in world
-		this.player = this.game.add.sprite(200, 210, "avatar");
+		this.player = this.game.add.sprite(500, 160, "avatar");
 		this.game.physics.p2.enable(this.player);
 		//quality of life settings 
 		this.player.anchor.setTo(0.5,0.5);
@@ -218,13 +217,13 @@ Main.prototype = {
     //get position of player. 
     var playerX = Math.floor(PLAYER.x-35); 
     var playerY = Math.floor(PLAYER.y-96); 
-    console.log("PX: "+ playerX +"PY: "+playerY ); 
+
 
         
     //get position of Goal. 
     var goalX = Math.floor(GOAL.x); 
     var goalY = Math.floor(GOAL.y); 
-console.log("GX: "+ goalX + "GY: "+goalY);
+
         
     //if time is more than 5 seconds you lose. 
     if(!timer.running){
