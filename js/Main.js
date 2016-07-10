@@ -3,18 +3,18 @@ var Main = function(game)
 {
 	//This function allows "Main" to be accessed by the game instance
 };
-//variables to keep track of time. 
+//variables to keep track of time.
 var timer;
 var timerEvent;
 //if out of time turn false
-var outOfTime; 
+var outOfTime;
 
-//Var for how much time you have to clear the level. 
-var timeAllowed = 30; 
+//Var for how much time you have to clear the level.
+var timeAllowed = 30;
 
 
 Main.prototype = {
-	
+
 	create: function()
 	{
 		//Index for the queue/array
@@ -33,18 +33,12 @@ Main.prototype = {
 		//OR: a possible expansion to displaying the score on the screen!
 		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
 
-		//Initialize the buttons needed (BROKEN)
-        this.buttonGo = game.add.button(game.world.centerX - 95, 400, "button_goSprite", this.setButtonLogic, this);
-
-        //Place button on the screen at X and Y coordinates
-        this.buttonGo.anchor.setTo(0.5,0.5);
-        
         //start timer
-        timer = game.time.create(); 
+        timer = game.time.create();
         //delayed event
         timerEvent = timer. add(Phaser.Timer.SECOND * timeAllowed, this.endTimer, this);
         //start timer
-        timer.start(); 
+        timer.start();
         outOfTime = false;
 
         //Enable the physics to start
@@ -55,11 +49,14 @@ Main.prototype = {
 
 	    //Create the player
 	    this.createPlayer();
+
+		//Create Sprite page buttons
+		this.createButtons();
 		
 		// Add goal to the game
 		goal 	= this.game.add.sprite(0,400,"goal");
-		
-		//this allows for real time in game control with keyboard, thanks to the update function 
+
+		//this allows for real time in game control with keyboard, thanks to the update function
 		cursors = this.game.input.keyboard.createCursorKeys();
 	},
 
@@ -82,6 +79,17 @@ Main.prototype = {
 		}
 	},
 
+	createButtons: function()
+	{
+		//Initialize the buttons needed (BROKEN)
+		this.buttonGo = game.add.button(game.world.centerX - 95, 400, "button_goSprite", this.setButtonLogic, this);
+
+        //Will load other buttons for sprite here
+
+		//Place button on the screen at X and Y coordinates
+		this.buttonGo.anchor.setTo(0,-2.5);
+	},
+
 	createPhysics: function()
 	{
         // Start the P2 Physics Engine
@@ -98,7 +106,7 @@ Main.prototype = {
 		mymap.addTilesetImage('tset_world1');
 
 		//Temporary colour for the background, similar to cloud_1
-		this.game.stage.backgroundColor = "#5cc5f2";
+		//this.game.stage.backgroundColor = "#5cc5f2";
 
 		//creates layers matching the .json testlevel
 		layerbackground = mymap.createLayer('background');
@@ -136,7 +144,7 @@ Main.prototype = {
 		//places character in world
 		this.player = this.game.add.sprite(200, 210, "avatar");
 		this.game.physics.p2.enable(this.player);
-		//quality of life settings 
+		//quality of life settings
 		this.player.anchor.setTo(0.5,0.5);
 		this.game.camera.follow(this.player);
 		//gives player a circle hitbox (radius,offestx,offsety)
@@ -151,7 +159,7 @@ Main.prototype = {
 		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		spaceKey.onDown.add(this.jump, this);
 
-        //check win condition; 
+        //check win condition;
         this.gameWin(this.player,goal);
 
 		switch(this.confirmGoSprite)
@@ -162,16 +170,17 @@ Main.prototype = {
 				break;
 			case "GO":
 				//Give the sprite zero velocity
-				this.player.body.velocity.x = 0;
+				this.player.body.velocity.x = this.nextSpeed;
 				break;
 			default:
-				//Set the next velocity/speed from the DS
-				this.player.body.velocity.x = this.nextSpeed;
+				//Give the sprite a pathetic speed of 20 pixels/sec
+				this.player.body.velocity.x = 20;
+                break;
 		}
 	},
-	
+
 	//can set controls in update so this function not called
-	jump: function() 
+	jump: function()
     {
 		//preform jump
 		this.player.body.velocity.y = -350;
@@ -207,54 +216,59 @@ Main.prototype = {
 	},
 
 	//currently not called
-	restartGame: function(){
+	restartGame: function()
+    {
 		// restart the game after death
 		this.game.state.start('main');
 	},
-    //Checks game state to see if player won. 
-    gameWin: function(PLAYER, GOAL) 
+
+    //Checks game state to see if player won.
+    gameWin: function(PLAYER, GOAL)
     {
-    var error = 3; 
-    //get position of player. 
-    var playerX = Math.floor(PLAYER.x-35); 
-    var playerY = Math.floor(PLAYER.y-96); 
-    console.log("PX: "+ playerX +"PY: "+playerY ); 
+        var error = 3;
+        //get position of player.
+        var playerX = Math.floor(PLAYER.x-35);
+        var playerY = Math.floor(PLAYER.y-96);
+        console.log("PX: "+ playerX +"PY: "+playerY );
 
-        
-    //get position of Goal. 
-    var goalX = Math.floor(GOAL.x); 
-    var goalY = Math.floor(GOAL.y); 
-console.log("GX: "+ goalX + "GY: "+goalY);
-        
-    //if time is more than 5 seconds you lose. 
-    if(!timer.running){
-        window.location.href = 'Canvas_Page.html'; 
-       //lose game 
-    }
-    
-        //if player is near goal, you win :D
-    if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
-        window.location.href = 'Score_Page.html';
 
-    }
-    
+        //get position of Goal.
+        var goalX = Math.floor(GOAL.x);
+        var goalY = Math.floor(GOAL.y);
+        console.log("GX: "+ goalX + "GY: "+goalY);
 
+        //if time is more than 5 seconds you lose.
+        if(!timer.running)
+        {
+            window.location.href = 'Canvas_Page.html';
+           //lose game
+        }
+
+            //if player is near goal, you win :D
+        if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
+            window.location.href = 'Score_Page.html';
+
+        }
     },
-    
-    //stop timer; 
+
+    //stop timer;
     endTimer: function()
     {
-    timer.stop(); 
-    outOfTime = true; 
+        timer.stop();
+        outOfTime = true;
+
+        //Set sprite to no longer have a velocity when she has run out of time
+        this.confirmGoSprite = "STOP";
     },
-    render: function () 
+
+    render: function ()
     {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
-        if (timer.running) 
+        if (timer.running)
         {
             game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#d8c23f");
         }
-        else 
+        else
         {
             game.debug.text("Done!", 2, 14, "#6f6f6f");
         }
@@ -266,7 +280,7 @@ console.log("GX: "+ goalX + "GY: "+goalY);
         // Convert seconds (s) to a nicely formatted and padded time string
         var minutes = "0" + Math.floor(s / 60);
         var seconds = "0" + (s - minutes * 60);
-        return ":" + seconds.substr(-2);   
+        return ":" + seconds.substr(-2);
     },
 
     setButtonLogic: function()
@@ -275,6 +289,8 @@ console.log("GX: "+ goalX + "GY: "+goalY);
 		this.confirmGoSprite = "GO";
 
 		//Greys out the start button
-		this.buttonGo =! this.buttonGo.visible;
+		//this.buttonGo.visible =! this.buttonGo.visible;
+		this.buttonGo.tint = "#CCCCCC";
+        //this.buttonGo.setFrames(4,3,5);
     },
 };
