@@ -299,8 +299,9 @@ var cordGenerator = function(yPixels)
 
 
 var sendCoords = function(){
-
-   storeDS(yCoords); 
+   
+    
+    storeDS(yCoords); 
     
 }
 

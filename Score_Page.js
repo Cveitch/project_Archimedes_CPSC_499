@@ -30,7 +30,8 @@ function updatePageInfo()
  */
 function replayLevel()
 {
-
+    resetLevelAttempts();
+    window.location.href = "Sprite_Page.html";
 }
 
 /**
@@ -38,5 +39,7 @@ function replayLevel()
  */
 function nextLevel()
 {
-
+    resetLevelAttempts();
+    increaseLevel();
+    window.location.href = "Sprite_Page.html";
 }
