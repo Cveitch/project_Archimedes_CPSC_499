@@ -1,5 +1,3 @@
-//new
-
 //get canvas information
 var canvas = document.getElementById("Canvas"); 
 var canvas_Context = canvas.getContext("2d");
@@ -57,7 +55,6 @@ var setDrawingFalse = function (e)
 {          
     isDrawing = false; 
 }
-
 //draw on Touchscreens 
 var touchDraw = function (e)
 {
@@ -74,8 +71,6 @@ var touchDraw = function (e)
         canvas_Context.moveTo(startX,startY); 
         startLocation = true; 
         }
-            
-        
         if(isDrawing)
         {
             canvas_Context.lineTo(e.touches[0].clientX-this.offsetLeft, e.touches[0].clientY-this.offsetTop); 
@@ -85,14 +80,11 @@ var touchDraw = function (e)
             {
                 cordGenerator(e.touches[0].clientY); 
                 i++;
-
             }
             else
             { 
                 i++;
-
             }
-            
         }
     } 
     //if current value is less than or equal to old value than erase the canvas. 
@@ -170,8 +162,18 @@ var arrayReset = function()
     //reset start location
     startLocation = false; 
     setDrawingFalse(); 
+}
+//save canvas drawing as image to display. 
+var saveCanvas = function()
+{
+    canvas_Context.save(); 
     
-
+}
+//redraw the canvas with the image. 
+var loadCanvas = function()
+{
+    canvas_Context.restore(); 
+    
 }
 
 //event listeners for drawing with finger on touch screen
