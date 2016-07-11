@@ -30,12 +30,6 @@
 
         function initiate()
         {
-            //Allows the physics engine to NOT be re-acitvated again
-            //var jump = true;
-
-            //Testing: Storing ds for Main.js use
-            //localStorage.ds = [150,-150,450];
-
             //Create a new game that fills the screen
             //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO);
             game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS);
@@ -53,47 +47,31 @@
 </head>
 
 <body onload="getUsername('usernameLabel')">
-<!--Gives a value to the page number, used in context switches-->
-<!--AD: Start the booting sequence-->
-<script>
-    var PAGE = "SPRITE";
-    var text = window.location.hash.substring(1);
-    var ds = [];
-    setCompare(text);
+    <!--Gives a value to the page number, used in context switches-->
+    <!--AD: Start the booting sequence-->
+    <script>
+        var PAGE = "SPRITE";
+        var text = window.location.hash.substring(1);
+        var ds = [];
+        setCompare(text);
 
-    //Comparison to allow game to be booted once
-    if(getCompare() === true)
-    {
-        //Creating the local storage object to hold the data structure created from the canvas page
-        localStorage.ds = JSON.stringify(ds);
+        //Comparison to allow game to be booted once
+        if(getCompare() === true)
+        {
+            //Creating the local storage object to hold the data structure created from the canvas page
+            localStorage.ds = JSON.stringify(ds);
 
-        //Start the game
-        initiate();
-    }
-    else
-    {
-        //Start the game
-        initiate();
-    }
-</script>
+            //Start the game
+            initiate();
+        }
+        else
+        {
+            //Start the game
+            initiate();
+        }
+    </script>
 
-<!--User name information on top left of screen, and button to go between pages on top right-->
-<div id="TOP_SCREEN_INFO">
-    <p class="alignleft">
-    <p class="alignleft" id="usernameLabel"></p>
-    </p>
-
-    <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
-    do it this way...
-    -->
-    <p class = alignright>
-        <button type="button" onclick="window.location.href='Canvas_Page.html';">
-            TO CANVAS
-        </button>
-    </p>
-</div>
-
-<!--Clears float for align function-->
-<div style="clear: both;"></div>
+    <!--Clears float for align function-->
+    <div style="clear: both;"></div>
 </body>
 </html>
