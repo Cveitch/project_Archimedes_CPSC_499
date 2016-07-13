@@ -92,7 +92,7 @@ Main.prototype = {
 	createButtons: function()
 	{
 		//Initialize the buttons needed (BROKEN)
-		this.buttonGo = game.add.button(game.world.centerX - 95, 400, "button_goSprite", this.setButtonLogic, this);
+		this.buttonGo = game.add.button(200, 200, "button_goSprite", this.setButtonLogic, this);
 
 		//Will load other buttons for sprite here
 
