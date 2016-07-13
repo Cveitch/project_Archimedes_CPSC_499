@@ -40,21 +40,50 @@ button
     z-index: 1; 
 }
 
-#goButton 
+#resetButton
 {
     background-color: aqua; 
     height: 75px; 
-    width: 150px; 
-    border-radius: 90px 90px 0 0; 
+    width: 150px;
+    border-radius: 90px 90px 0 0;
     -moz-border-radius: 90px 90px 0 0;
     -webkit-border-radius: 90px 90px 0 0;
     background:#d8c23f;
     z-index: 1; 
     position: absolute; 
-    bottom: -10%;
-    left: 50%;
+    top: 93%;
+    left: 45%;
     margin-right: -50%;
-    transform: translate(-50%, -50%)
+}
+
+#goButton
+{
+    background-color: aqua;
+    height: 75px;
+    width: 150px;
+    -moz-border-radius: 90px 90px 0 0;
+    -webkit-border-radius: 90px 90px 0 0;
+    background:#d8c23f;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    margin-right: -50%;
+}
+
+#canvasButton
+{
+    background-color: aqua;
+    height: 75px;
+    width: 150px;
+    -moz-border-radius: 90px 90px 0 0;
+    -webkit-border-radius: 90px 90px 0 0;
+    background:#d8c23f;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    margin-right: -50%;
 }
 
 

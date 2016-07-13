@@ -24,7 +24,7 @@
         }
     </style>
 
-   
+
 </head>
 
 <body onload="getUsername('usernameLabel')">
@@ -37,15 +37,15 @@
 <div id="TOP_SCREEN_INFO">
     <p class="alignleft" id="usernameLabel"></p>
 
-    <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
-    do it this way...
-    --AD: the hash and the FALSE value allows the Sprite page to identify when not to recreate the physics again
-    -->
     <p class = alignright>
+        <!--
         <button type="button" onclick="window.location.href='Sprite_Page.html'">
             TO SPRITE
         </button>
+        -->
     </p>
+    <button type = "button" id="resetButton" onclick="canvasClear()"> RE-DRAW!</button>
+    <button type = "button" id="canvasButton" onclick="getOut()"> WORLD</button>
     <button type = "button" id="goButton" onclick="sendCoords()"> GO!</button>
 </div>
 
@@ -53,19 +53,23 @@
 <canvas onclick="change(event)" id="Canvas" style="border:1px solid #000000" > </canvas>
 
 <script type = "text/javascript" src="Drawing.js"></script>
-    
- <script id = "storeDS">
-        function storeDS(array)
-        {
-            //stores d.s. generated from drawn graph
-            
-            var ds = array; 
-          // var ds = array; 
-            localStorage.ds = JSON.stringify(ds);
-            window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
-           
-        }
-    </script>
+
+<script id = "storeDS">
+    function storeDS(array)
+    {
+        //stores d.s. generated from drawn graph
+        var ds = array;
+        //ds = [50,50,150];
+        localStorage.ds = JSON.stringify(ds);
+        window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
+    }
+    function goToWorld()
+    {
+        //Go back to sprite page without causing sprite to activate with d.s.
+        window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
+    }
+</script>
+
 <!--Clears float for align function-->
 <div style="clear: both;"></div>
 </body>

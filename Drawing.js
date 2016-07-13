@@ -296,12 +296,14 @@ var cordGenerator = function(yPixels)
            
 }
 
+var getOut = function()
+{
+    goToWorld();
+}
 
-
-var sendCoords = function(){
-
-   storeDS(yCoords); 
-    
+var sendCoords = function()
+{
+   storeDS(yCoords);
 }
 
 
