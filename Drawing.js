@@ -3,6 +3,7 @@ var canvas = document.getElementById("Canvas");
 var canvas_Context = canvas.getContext("2d");
 canvas.height = window.screen.height;   
 canvas.width = window.screen.width; 
+var button1 = document.getElementById("goButton"); 
 // array for x values
 var xVal = [0]; 
 var i = 0; 
@@ -53,11 +54,15 @@ var setTouchDrawingTrue = function (e)
 //sets drawing to false
 var setDrawingFalse = function (e) 
 {          
-    isDrawing = false; 
+    isDrawing = false;
+    //show buttons
+    button1.style.visibility = "visible";
 }
 //draw on Touchscreens 
 var touchDraw = function (e)
 {
+    //hide buttons
+    button1.style.visibility = "hidden";
     //prevents scrolling
     event.preventDefault(); 
     //add to array 
@@ -65,6 +70,7 @@ var touchDraw = function (e)
     //check X value 
     if(xVal[i] < e.touches[0].clientX-this.offsetLeft)
     {
+       
         //start from 0,0
         if(!startLocation)
         {
@@ -86,12 +92,14 @@ var touchDraw = function (e)
                 i++;
             }
         }
+        
     } 
     //if current value is less than or equal to old value than erase the canvas. 
     else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft + drawError || xVal[i] < e.touches[0].clientX-this.offsetLeft - drawError )
     {
         canvasClear();     
     }
+   
 }
 //dynamic canvas size
 var setCanvasSize = function()
@@ -105,19 +113,16 @@ var errorAlert = function()
 {
     setDrawingFalse(); 
     
+    
     if(!hasBeenAlerted)
     {
     window.alert("Cannot draw backwards");
     hasBeenAlerted = true; 
     }  
 }
-
-//clear canvas and redraw circle
-var canvasClear = function()
+var canvasRedraw = function()
 {
-    //alert user they cant draw backwards
-    errorAlert();  
-    //clear canvas
+ //clear canvas
     canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
     canvas_Context.beginPath();
     //reset start local
@@ -126,7 +131,18 @@ var canvasClear = function()
     arrayReset(); 
     //redraw start location bubble and X line
     draw_Circle(startX, startY); 
+
+
 }
+//clear canvas and redraw circle
+var canvasClear = function()
+{
+    //alert user they cant draw backwards
+    errorAlert();  
+    canvasRedraw(); 
+}
+//Clear the canvas without popup
+
 
 //generates Cordanates. 
 var cordGenerator = function(yPixels)
