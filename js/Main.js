@@ -1,4 +1,3 @@
-
 var Main = function(game)
 {
 	//This function allows "Main" to be accessed by the game instance
@@ -12,25 +11,26 @@ var outOfTime;
 //Var for how much time you have to clear the level.
 var timeAllowed = 10;
 
+
 Main.prototype = {
 
 	create: function()
 	{
-		//Index for the queue/array
-		this.arrayIndex = 0;
+        //Index for the queue/array
+        this.arrayIndex = 0;
 
-		//Time interval value to determine when to pull from queue/array
-		this.arrayMoment = 0;
+        //Time interval value to determine when to pull from queue/array
+        this.arrayMoment = 0;
 
-		//Current speed for the sprite
-		this.nextSpeed = 0;
+        //Current speed for the sprite
+        this.nextSpeed = 0;
 
-		//String value to allow sprite action based on button pressing IF it is "GO"
-		this.confirmGoSprite = "STOP";
+        //String value to allow sprite action based on button pressing IF it is "GO"
+        this.confirmGoSprite = "STOP";
 
-		//Puts the index of the queue/array on display (TESTING)
-		//OR: a possible expansion to displaying the score on the screen!
-		this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
+        //Puts the index of the queue/array on display (TESTING)
+        //OR: a possible expansion to displaying the score on the screen!
+        this.labelIndex = game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#000000" });
 
         //start timer
         timer = game.time.create();
@@ -46,24 +46,21 @@ Main.prototype = {
         //Create the background for the game
         this.createBackground();
 
-	    //Create the player
-	    this.createPlayer();
+        //Create the player
+        this.createPlayer();
 
-		//Create Sprite page buttons
-		this.createButtons();
-		
-		// Add goal to the game
-		this.goal 	= this.game.add.sprite(this.game.world.centerX+350,400,"goal");
+        //Create Sprite page buttons
+        this.createButtons();
 
-		//this allows for real time in game control with keyboard, thanks to the update function
-		cursors = this.game.input.keyboard.createCursorKeys();
+        // Add goal to the game
+        goal 	= this.game.add.sprite(this.game.world.centerX+350,400,"goal");
+
+        //this allows for real time in game control with keyboard, thanks to the update function
+        cursors = this.game.input.keyboard.createCursorKeys();
 	},
 
 	update: function()
 	{
-        //check win condition;
-        this.gameWin(this.player,this.goal);
-
 		if(this.confirmGoSprite === "GO")
 		{
 			//Updates sprite speed
@@ -83,19 +80,19 @@ Main.prototype = {
 
 	createButtons: function()
 	{
-		//Initialize the buttons needed on screen locations based on X and Y coordinates
-		this.buttonSprite = this.game.add.button(this.game.world.centerX-50,  this.game.world.centerY+240, "button_goSprite", this.setSpriteToGo, this);
-		this.buttonCanvas = this.game.add.button(this.game.world.centerX+375, this.game.world.centerY-300, "button_goCanvas", this.goToCanvas, this);
-        this.buttonScore  = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore",  this.goToScore, this);
-	},
+		//Initialize the buttons needed (BROKEN)
+		this.buttonSprite = this.game.add.button(this.game.world.centerX-50, this.game.world.centerY+240, "button_goSprite", this.setSpriteToGo, this);
+        this.buttonCanvas = this.game.add.button(this.game.world.centerX+375, this.game.world.centerY-300, "button_goCanvas", this.goToCanvas, this);
+        this.buttonScore = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore", this.goToScore, this);
+    },
 
 	createPhysics: function()
 	{
-        // Start the P2 Physics Engine
-        this.game.physics.startSystem(Phaser.Physics.P2JS);
+		// Start the P2 Physics Engine
+		this.game.physics.startSystem(Phaser.Physics.P2JS);
 
-        // Set the gravity
-        this.game.physics.p2.gravity.y = 1400;
+		// Set the gravity
+		this.game.physics.p2.gravity.y = 1400;
 	},
 
 	createBackground: function()
@@ -103,6 +100,9 @@ Main.prototype = {
 		// initialised tilemap with matching tileset
 		var mymap = this.game.add.tilemap('Level1');
 		mymap.addTilesetImage('tset_world1');
+
+		//Temporary colour for the background, similar to cloud_1
+		//this.game.stage.backgroundColor = "#5cc5f2";
 
 		//creates layers matching the .json testlevel
 		layerbackground = mymap.createLayer('background');
@@ -137,6 +137,9 @@ Main.prototype = {
 		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		spaceKey.onDown.add(this.jump, this);
 
+		//check win condition;
+		this.gameWin(this.player,goal);
+
 		switch(this.confirmGoSprite)
 		{
 			case "STOP":
@@ -145,19 +148,18 @@ Main.prototype = {
 				break;
 			case "GO":
 				//Give the sprite zero velocity
-				//this.player.body.velocity.x = this.nextSpeed;
-                this.player.body.velocity.x = 100;
-                break;
+				this.player.body.velocity.x = 100;
+				break;
 			default:
 				//Give the sprite a pathetic speed of 20 pixels/sec
 				this.player.body.velocity.x = 20;
-                break;
+				break;
 		}
 	},
 
 	//can set controls in update so this function not called
 	jump: function()
-    {
+	{
 		//preform jump
 		this.player.body.velocity.y = -350;
 	},
@@ -165,7 +167,7 @@ Main.prototype = {
 	getSpeed: function()
 	{
 		//Retrieve queue/array of the speed values
-		this.speedValues = JSON.parse(sessionStorage.ds);
+		this.speedValues = JSON.parse(localStorage.ds);
 
 		//Checks every 50 cycles to pull from queue/array
 		if(this.arrayMoment % 100 === 0 && this.speedValues.length > 0)
@@ -191,36 +193,41 @@ Main.prototype = {
 		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
-    //Checks game state to see if player won.
-    gameWin: function()
-    {
-        var error = 30;
-        //get position of player.
-        var playerX = Math.floor(this.player.x-35);
-        var playerY = Math.floor(this.player.y-96);
-        console.log("PX: "+ playerX +"PY: "+playerY );
+	//currently not called
+	restartGame: function()
+	{
+		// restart the game after death
+		this.game.state.start('main');
+	},
 
-        //get position of Goal.
-        var goalX = Math.floor(this.goal.x);
-        var goalY = Math.floor(this.goal.y);
-        console.log("GX: "+ goalX + "GY: "+goalY);
+	//Checks game state to see if player won.
+	gameWin: function(PLAYER, GOAL)
+	{
+		var error = 30;
+		//get position of player.
+		var playerX = Math.floor(PLAYER.x-35);
+		var playerY = Math.floor(PLAYER.y-96);
+		console.log("PX: "+ playerX +"PY: "+playerY );
 
-        //if time is more than 5 seconds you lose.
-        if(!timer.running)
-        {
-            var new_value = parseInt(localStorage.attempt) + 1;
-            localStorage.attempt = new_value;
-			sessionStorage.win = false;
-            window.location.href = 'Score_Page.html';
-        }
 
-        //if player is near goal, you win :D
-        if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY )
-        {
-            sessionStorage.win = true;
-            window.location.href = 'Score_Page.html';
-        }
-    },
+		//get position of Goal.
+		var goalX = Math.floor(GOAL.x);
+		var goalY = Math.floor(GOAL.y);
+		console.log("GX: "+ goalX + "GY: "+goalY);
+
+		//if time is more than 5 seconds you lose.
+		if(!timer.running)
+		{
+			window.location.href = 'Canvas_Page.html';
+			//lose game
+		}
+
+		//if player is near goal, you win :D
+		if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
+			window.location.href = 'Score_Page.html';
+
+		}
+	},
 
     //stop timer;
     endTimer: function()
@@ -245,42 +252,42 @@ Main.prototype = {
         }
     },
 
-    //Show Time Left
-    formatTime: function(s)
-    {
-        // Convert seconds (s) to a nicely formatted and padded time string
-        var minutes = "0" + Math.floor(s / 60);
-        var seconds = "0" + (s - minutes * 60);
-        return ":" + seconds.substr(-2);
-    },
+	//Show Time Left
+	formatTime: function(s)
+	{
+		// Convert seconds (s) to a nicely formatted and padded time string
+		var minutes = "0" + Math.floor(s / 60);
+		var seconds = "0" + (s - minutes * 60);
+		return ":" + seconds.substr(-2);
+	},
 
 	setSpriteToGo: function()
-    {
+	{
 		//Allow the sprite to go through its movement
 		this.confirmGoSprite = "GO";
 
 		//Greys out the start button
 		//this.buttonGo.visible =! this.buttonGo.visible;
 		this.buttonSprite.tint = "#CCCCCC";
-    },
+	},
 
 	goToCanvas: function()
 	{
 		//Greys out the start button
 		//this.buttonGo.visible =! this.buttonGo.visible;
 		this.buttonCanvas.tint = "#CCCCCC";
-		
+
 		//Go to Canvas page to permit drawing
-        window.location.href = 'Canvas_Page.html';
+		window.location.href = 'Canvas_Page.html';
 	},
 
-    goToScore: function()
-    {
-        //Greys out the start button
-        //this.buttonGo.visible =! this.buttonGo.visible;
-        this.buttonScore.tint = "#CCCCCC";
+	goToScore: function()
+	{
+		//Greys out the start button
+		//this.buttonGo.visible =! this.buttonGo.visible;
+		this.buttonScore.tint = "#CCCCCC";
 
-        //Go to Canvas page to permit drawing
-        window.location.href = 'Score_Page.html';
-    }
+		//Go to Canvas page to permit drawing
+		window.location.href = 'Score_Page.html';
+	},
 };
