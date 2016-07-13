@@ -10,8 +10,7 @@ var timerEvent;
 var outOfTime;
 
 //Var for how much time you have to clear the level.
-var timeAllowed = 30;
-
+var timeAllowed = 10;
 
 Main.prototype = {
 
@@ -54,7 +53,7 @@ Main.prototype = {
 		this.createButtons();
 		
 		// Add goal to the game
-		goal 	= this.game.add.sprite(0,400,"goal");
+		this.goal 	= this.game.add.sprite(this.game.world.centerX+350,400,"goal");
 
 		//this allows for real time in game control with keyboard, thanks to the update function
 		cursors = this.game.input.keyboard.createCursorKeys();
@@ -62,6 +61,9 @@ Main.prototype = {
 
 	update: function()
 	{
+        //check win condition;
+        this.gameWin(this.player,this.goal);
+
 		if(this.confirmGoSprite === "GO")
 		{
 			//Updates sprite speed
@@ -81,13 +83,10 @@ Main.prototype = {
 
 	createButtons: function()
 	{
-		//Initialize the buttons needed (BROKEN)
-		this.buttonGo = game.add.button(game.world.centerX - 95, 400, "button_goSprite", this.setButtonLogic, this);
-
-        //Will load other buttons for sprite here
-
-		//Place button on the screen at X and Y coordinates
-		this.buttonGo.anchor.setTo(0,-2.5);
+		//Initialize the buttons needed on screen locations based on X and Y coordinates
+		this.buttonSprite = this.game.add.button(this.game.world.centerX-50,  this.game.world.centerY+240, "button_goSprite", this.setSpriteToGo, this);
+		this.buttonCanvas = this.game.add.button(this.game.world.centerX+375, this.game.world.centerY-300, "button_goCanvas", this.goToCanvas, this);
+        this.buttonScore  = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore",  this.goToScore, this);
 	},
 
 	createPhysics: function()
@@ -105,9 +104,6 @@ Main.prototype = {
 		var mymap = this.game.add.tilemap('Level1');
 		mymap.addTilesetImage('tset_world1');
 
-		//Temporary colour for the background, similar to cloud_1
-		//this.game.stage.backgroundColor = "#5cc5f2";
-
 		//creates layers matching the .json testlevel
 		layerbackground = mymap.createLayer('background');
 		layerblocks 	= mymap.createLayer('block1');
@@ -119,24 +115,6 @@ Main.prototype = {
 		//turns polylines solid
 		//var layerpolyline_tiles = this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
 		this.game.physics.p2.convertCollisionObjects(mymap, "objects1");
-	},
-
-	createBlock: function()
-	{
-		//Define a block using bitmap data rather than an image sprite
-		var blockShape = this.game.add.bitmapData(this.game.world.width, 200);
-
-		//Fill the block with black color
-		blockShape.ctx.rect(0, 0, this.game.world.width, 200);
-		blockShape.ctx.fillStyle = "#00cc00";
-		blockShape.ctx.fill();
-
-		//Create a new sprite using the bitmap data and place it at (x,y) location
-		this.block = this.game.add.sprite(this.game.world.width/2,this.game.world.height, blockShape);
-
-		//Enable P2 Physics and set the block not to move
-		this.game.physics.p2.enable(this.block);
-		this.block.body.static = true;
 	},
 
 	createPlayer: function() {
@@ -159,9 +137,6 @@ Main.prototype = {
 		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		spaceKey.onDown.add(this.jump, this);
 
-        //check win condition;
-        this.gameWin(this.player,goal);
-
 		switch(this.confirmGoSprite)
 		{
 			case "STOP":
@@ -170,8 +145,9 @@ Main.prototype = {
 				break;
 			case "GO":
 				//Give the sprite zero velocity
-				this.player.body.velocity.x = this.nextSpeed;
-				break;
+				//this.player.body.velocity.x = this.nextSpeed;
+                this.player.body.velocity.x = 100;
+                break;
 			default:
 				//Give the sprite a pathetic speed of 20 pixels/sec
 				this.player.body.velocity.x = 20;
@@ -189,7 +165,7 @@ Main.prototype = {
 	getSpeed: function()
 	{
 		//Retrieve queue/array of the speed values
-		this.speedValues = JSON.parse(localStorage.ds);
+		this.speedValues = JSON.parse(sessionStorage.ds);
 
 		//Checks every 50 cycles to pull from queue/array
 		if(this.arrayMoment % 100 === 0 && this.speedValues.length > 0)
@@ -215,39 +191,34 @@ Main.prototype = {
 		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
-	//currently not called
-	restartGame: function()
-    {
-		// restart the game after death
-		this.game.state.start('main');
-	},
-
     //Checks game state to see if player won.
-    gameWin: function(PLAYER, GOAL)
+    gameWin: function()
     {
-        var error = 3;
+        var error = 30;
         //get position of player.
-        var playerX = Math.floor(PLAYER.x-35);
-        var playerY = Math.floor(PLAYER.y-96);
+        var playerX = Math.floor(this.player.x-35);
+        var playerY = Math.floor(this.player.y-96);
         console.log("PX: "+ playerX +"PY: "+playerY );
 
-
         //get position of Goal.
-        var goalX = Math.floor(GOAL.x);
-        var goalY = Math.floor(GOAL.y);
+        var goalX = Math.floor(this.goal.x);
+        var goalY = Math.floor(this.goal.y);
         console.log("GX: "+ goalX + "GY: "+goalY);
 
         //if time is more than 5 seconds you lose.
         if(!timer.running)
         {
-            window.location.href = 'Canvas_Page.html';
-           //lose game
+            var new_value = parseInt(localStorage.attempt) + 1;
+            localStorage.attempt = new_value;
+			sessionStorage.win = false;
+            window.location.href = 'Score_Page.html';
         }
 
-            //if player is near goal, you win :D
-        if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
+        //if player is near goal, you win :D
+        if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY )
+        {
+            sessionStorage.win = true;
             window.location.href = 'Score_Page.html';
-
         }
     },
 
@@ -266,7 +237,7 @@ Main.prototype = {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
         if (timer.running)
         {
-            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#d8c23f");
+            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), this.game.world.width/2, 30, "#d8c23f");
         }
         else
         {
@@ -283,14 +254,33 @@ Main.prototype = {
         return ":" + seconds.substr(-2);
     },
 
-    setButtonLogic: function()
+	setSpriteToGo: function()
     {
 		//Allow the sprite to go through its movement
 		this.confirmGoSprite = "GO";
 
 		//Greys out the start button
 		//this.buttonGo.visible =! this.buttonGo.visible;
-		this.buttonGo.tint = "#CCCCCC";
-        //this.buttonGo.setFrames(4,3,5);
+		this.buttonSprite.tint = "#CCCCCC";
     },
+
+	goToCanvas: function()
+	{
+		//Greys out the start button
+		//this.buttonGo.visible =! this.buttonGo.visible;
+		this.buttonCanvas.tint = "#CCCCCC";
+		
+		//Go to Canvas page to permit drawing
+        window.location.href = 'Canvas_Page.html';
+	},
+
+    goToScore: function()
+    {
+        //Greys out the start button
+        //this.buttonGo.visible =! this.buttonGo.visible;
+        this.buttonScore.tint = "#CCCCCC";
+
+        //Go to Canvas page to permit drawing
+        window.location.href = 'Score_Page.html';
+    }
 };
