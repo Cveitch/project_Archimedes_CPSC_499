@@ -49,7 +49,7 @@ canvas_Context.lineWidth=5;
 canvas_Context.arc(X, Y, 25, 0, 2*Math.PI); 
 canvas_Context.moveTo(X,Y); 
 canvas_Context.stroke(); 
-canvas_Context.strokeStyle='#e1903d'
+canvas_Context.strokeStyle='#e1903d';
 canvas_Context.lineTo(canvas.width,Y); 
 canvas_Context.stroke(); 
 canvas_Context.closePath(); 
@@ -228,7 +228,11 @@ var setCanvasSize = function()
     canvas.height = window.screen.height; 
     canvas.width = window.screen.width; 
     
+    //Resize buttons
+    // Or this for HREF data-role buttons
     
+    //height: 75px;
+    //width: 100px;
 }
 
 
@@ -323,7 +327,6 @@ canvas.addEventListener("touchend",     setDrawingFalse,      false);
 //checks to see if the window gets resized
 window.addEventListener('resize',       setCanvasSize,        false);
 window.addEventListener('load', draw_Circle(startX, startY), false); 
-
 
 
 
