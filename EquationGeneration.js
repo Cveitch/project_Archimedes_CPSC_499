@@ -19,6 +19,7 @@ function loadInterpolation(containerID)
 {
     //arrayValues contains 2 arrays, the first holding x values, the second y values.
     var arrayValues = getDataPoints();
+    console.log(arrayValues[0].toString()+" "+arrayValues[1].toString());
     formatAndDisplay(containerID,interpolate(arrayValues[0],arrayValues[1]));
 }
 
@@ -152,7 +153,7 @@ function interpolate(xValues, yValues)
     equationCoefficientArray = finalPolynomialCoefficients.slice(0);
     velocityString = equationToString(finalPolynomialCoefficients);
 
-    console.log(velocityString);
+    //console.log(velocityString);
     return velocityString;
 }
 
@@ -177,7 +178,7 @@ function integrate()
     }
 
     var distanceString = equationToString(integralCoefficients);
-    console.log(distanceString);
+    //console.log(distanceString);
     return distanceString;
 }
 
@@ -202,7 +203,7 @@ function differentiate()
     }
     var accelerationString = equationToString(derivativeCoefficients);
 
-    console.log(accelerationString);
+    //console.log(accelerationString);
     return accelerationString;
 }
 
@@ -246,22 +247,54 @@ function equationToString(coefficients)
 {
     var equation = "";
     //Iterate through the coefficients constructing a string from it.
-    for(var i=coefficients.length-1; i>0; i--)
+    for(var i=coefficients.length-1; i>=0; i--)
     {
+        //If the coefficient is 0, then skip that term.
         if(coefficients[i] !== 0)
         {
-            var fractionString = decimalToFraction(coefficients[i]);
-            equation = equation.concat(fractionString + "x^" + i);
-            if(i !== 1)
+            var fraction = decimalToFraction(coefficients[i]);
+            //Add the sign to the equation.
+            if(fraction.isPositive())
             {
-                equation = equation.concat(" + ")
+                equation = equation.concat("+");
+            }
+            else
+            {
+                equation = equation.concat("-");
+            }
+            //How to format if coefficient is fraction.
+            if(fraction.denominator !== 1)
+            {
+                //Add the numerator. Surround the numerator and x value in brackets for format reasons.
+                equation = equation.concat("("+Math.abs(fraction.numerator));
+                //Add the x except on the x^0 term
+                if(i !== 0)
+                {
+                    equation = equation.concat("x");
+                    //Add the exponent to x except on x^1 since it is just x.
+                    if(i !== 1)
+                    {
+                        equation = equation.concat("^"+i);
+                    }
+                }
+                equation = equation.concat(")/"+Math.abs(fraction.denominator));
+            }
+            //How to format if coefficient is whole number.
+            else
+            {
+                equation = equation.concat(Math.abs(fraction.numerator));
+                //Add the x except on the x^0 term
+                if(i !== 0)
+                {
+                    equation = equation.concat("x");
+                    //Add the exponent to x except on x^1 since it is just x.
+                    if(i !== 1)
+                    {
+                        equation = equation.concat("^"+i);
+                    }
+                }
             }
         }
-    }
-    //Add the last term to the polynomial.
-    if(coefficients[i] !== 0)
-    {
-        equation = equation.concat(" + "+decimalToFraction(coefficients[0]));
     }
     return equation;
 }
@@ -308,7 +341,7 @@ function product(array)
  * Takes a decimal and returns a String containing a fraction in the form "(x/y)",
  * or if y is a whole number, then just it by itself.
  * @param {number} decimal
- * @return {String} equation
+ * @return {Fraction} equation
  */
 function decimalToFraction(decimal)
 {
@@ -370,12 +403,12 @@ function decimalToFraction(decimal)
         //Calculates the greatest common divisor.
         var divisor = gcd(numerator,denominator);
         //Creates a string with the fraction in it with the smallest denominator that can be calculated.
-        return ("(" + (numerator/divisor).toString() + "/" + (denominator/divisor).toString() + ")");
+        return new Fraction(numerator/divisor,denominator/divisor);
     }
     else
     {
         //If the number is not a decimal, then just return it.
-        return decimal.toString();
+        return new Fraction(decimal,1);
     }
 }
 
@@ -437,3 +470,30 @@ function continuedFraction(aValues,currentNumber)
     return aValues;
 }
 
+/**
+ * Creates a constructor which defines a fraction.
+ * @param numerator
+ * @param denominator
+ * @constructor
+ */
+function Fraction(numerator, denominator)
+{
+    this.numerator = numerator;
+    this.denominator = denominator;
+
+    /**
+     * Checks whether the fraction is positive or negative.
+     * @returns {boolean} isPositive
+     */
+    this.isPositive = function()
+    {
+        if(numerator > 0 && denominator > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    };
+}
