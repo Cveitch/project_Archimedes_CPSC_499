@@ -218,15 +218,18 @@ Main.prototype = {
 		//if time is more than 5 seconds you lose.
 		if(!timer.running)
 		{
-			window.location.href = 'Canvas_Page.html';
-			//lose game
+            var new_value = parseInt(localStorage.attempt) + 1;
+            localStorage.attempt = new_value;
+            sessionStorage.win = false;
+            window.location.href = 'Score_Page.html';
 		}
 
-		//if player is near goal, you win :D
-		if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
-			window.location.href = 'Score_Page.html';
-
-		}
+        //if player is near goal, you win :D
+        if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY )
+        {
+            sessionStorage.win = true;
+            window.location.href = 'Score_Page.html';
+        }
 	},
 
     //stop timer;
