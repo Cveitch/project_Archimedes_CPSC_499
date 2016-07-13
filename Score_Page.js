@@ -9,7 +9,6 @@
 function loadScorePage()
 {
     window.location.href = "Score_Page.html";
-
 }
 
 /**
@@ -18,10 +17,20 @@ function loadScorePage()
 function updatePageInfo()
 {
     var attemptString = "Attempts: " + getLevelAttempts();
+    //var attemptString = "Attempts: " + localStorage.attempt;
     var levelString = "Level " + getCurrentLevel() + " complete!";
 
     document.getElementById("attemptMessage").innerHTML = attemptString;
     document.getElementById("levelMessage").innerHTML = levelString;
+}
+
+function getLevelAttempts()
+{
+    var levelAttempts = parseInt(sessionStorage.attempt);
+
+    
+
+    return localStorage.attempt;
 }
 
 
@@ -30,7 +39,10 @@ function updatePageInfo()
  */
 function replayLevel()
 {
+    //Go back to the Sprite page
+    window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
 
+    //Should also have some sort of secondary value to indicate which level was loaded previously
 }
 
 /**
@@ -38,5 +50,5 @@ function replayLevel()
  */
 function nextLevel()
 {
-
+    window.location.href = 'Sprite_Page.html'
 }

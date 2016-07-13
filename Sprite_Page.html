@@ -61,12 +61,15 @@
             //Creating the local storage object to hold the data structure created from the canvas page
             localStorage.ds = JSON.stringify(ds);
 
+            //Set a counter for the amount of times player replays the level
+            localStorage.attempt = 0;
+
             //Start the game
             initiate();
         }
         else
         {
-            //Start the game
+            //Allows the same level to be replayed
             initiate();
         }
     </script>
