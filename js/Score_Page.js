@@ -7,7 +7,7 @@
  */
 function updatePageInfo()
 {
-    var attemptString = "Attempts: " + getLevelAttempts();
+    var attemptString = "Attempts: " + localStorage.attempt;
 
     //Display level message based on completion of level
     if(localStorage.win === "false")
@@ -34,6 +34,7 @@ function replayLevel()
 {
     //Resets the variables used to generate the equations.
     resetVariables();
+    localStorage.attempt++;
     //Go back to the Sprite page
     window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
 }
@@ -47,6 +48,7 @@ function nextLevel()
     resetVariables();
     resetLevelAttempts();
     increaseLevel();
+    localStorage.attempt++;
     window.location.href = 'Sprite_Page.html';
 }
 
