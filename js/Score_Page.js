@@ -223,7 +223,7 @@ function getDefinitions(buttonValue)
         case 'displace':
         {
             //add equation as a string to the end of var for innerHTML
-            newWindow.document.getElementById(buttonValue).innerHTML = derivDef + getIntegral();
+            newWindow.document.getElementById(buttonValue).innerHTML = displaceDef + getIntegral();
             break;
         }
         case 'veloc':
