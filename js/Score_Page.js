@@ -86,9 +86,6 @@ function stageMenu()
     newWindow.document.write("<h1 class='heading standardFormat' >Stage Info</h1>");
 
     //each of these buttons has a hidden page divide that will be filled and revealed when pressed
-    newWindow.document.write("<button value ='graph' onclick='getDefinitions(this.value)' class='standardButton standardFormat'>Graph</button>");
-    newWindow.document.write('<div id="graph"  style="display:none;" class="answer_list" ></div>');
-
     newWindow.document.write("<button value ='displace' onclick='getDefinitions(this.value)'   class='standardButton standardFormat'>Displacement Func.</button>");
     newWindow.document.write('<div id="displace"  style="display:none;" class="answer_list" ></div>');
 
@@ -158,8 +155,6 @@ function formalDefMenu()
 function getDefinitions(buttonValue)
 {
     //these are the formal definitions that will appear after clicking the button
-    var graphDef = "This is the equation of graph you made this stage:";
-
     var displaceDef = "This is the equation of the displacement you made this stage:";
 
     var velocDef = "This is the equation of your velocity this stage:";
@@ -225,12 +220,6 @@ function getDefinitions(buttonValue)
 
     switch (buttonValue)
     {
-        case 'graph':
-        {
-            //add equation as a string to the end of var for innerHTML
-            newWindow.document.getElementById(buttonValue).innerHTML = graphDef;
-            break;
-        }
         case 'displace':
         {
             //add equation as a string to the end of var for innerHTML
