@@ -1,6 +1,7 @@
 
 var velocityString = "";
 var equationCoefficientArray = [];
+var maxFractionIteration = 0;
 /**
  * After the user leaves the score_page, reset the variables so that if they
  * come back with a different canvas curve, the new equations will be calculated.
@@ -362,6 +363,7 @@ function decimalToFraction(decimal)
 
         //This array holds the a values using in continued fractions
         var aValues = continuedFraction([],decimal);
+        maxFractionIteration = 0;
         //Start with the value 1/(last_a_Value)
         var numerator = 1;
         var denominator = aValues.pop();
@@ -440,6 +442,7 @@ function continuedFraction(aValues,currentNumber)
     //Finds the integer and fraction parts of the number.
     var integerPart = Math.floor(currentNumber);
     var fractionPart = currentNumber - integerPart;
+    maxFractionIteration++;
 
     //Finds the distance the fraction has to go to reach either 1 or 0
     var ceilingDifference = Math.ceil(fractionPart) - fractionPart;
@@ -451,7 +454,7 @@ function continuedFraction(aValues,currentNumber)
      * If the distance is greater then that, then call this function again passing in the
      * reciprocal of the fraction part of the number.
      */
-    if(ceilingDifference < 0.001 || floorDifference < 0.001)
+    if(ceilingDifference < 0.001 || floorDifference < 0.001 || maxFractionIteration > 12)
     {
         aValues.push(Math.round(currentNumber));
     }
