@@ -1,41 +1,30 @@
 //get canvas information
 var canvas = document.getElementById("Canvas"); 
 var canvas_Context = canvas.getContext("2d");
-
-canvas.height = window.screen.height;   //canvas.height * (canvas.clientWidth / canvas.clientHeight); 
+canvas.height = window.screen.height;   
 canvas.width = window.screen.width; 
+var button1 = document.getElementById("goButton"); 
 // array for x values
 var xVal = [0]; 
 var i = 0; 
-
-
 //Wiggle wiggle wiggle room for drawing, so that its not so strict. 
 var drawError = 30; 
 //Drawing tells if mouse button has been pressed. 
 var isDrawing; 
-
 // bool to tell if the user has been alerted to drawing backwards, so that it does not become annoying. 
 var hasBeenAlerted = false; 
-
-
 //set 0,0 so that it fits on any screen. 
 var startX = canvas.width - canvas.width; 
 var startY = canvas.height / 2; 
 var startLocation = false; 
-
 //distance between each segment
 var xSegmentLength = Math.floor(canvas.width / 50);
 //array for coords
 var Coords;  
-
 //array for just y values test
 var yCoords = [0]; 
-
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
-
-
-
 //draw a starting location on the canvas. 
 var draw_Circle = function(X,Y)
 {
@@ -64,18 +53,19 @@ var setTouchDrawingTrue = function (e)
 }
 //sets drawing to false
 var setDrawingFalse = function (e) 
-{
-    //send array
-    isDrawing = false; 
-    //storeDS(yCoords);
+{          
+    isDrawing = false;
+    //show buttons
+    button1.style.visibility = "visible";
 }
 //draw on Touchscreens 
 var touchDraw = function (e)
 {
+    //hide buttons
+    button1.style.visibility = "hidden";
     //prevents scrolling
     event.preventDefault(); 
     //add to array 
-    //xVal.push(e.touches[0].clientX-this.offsetLeft);
     xVal.push(e.touches[0].clientX-this.offsetLeft);
     //check X value 
     if(xVal[i] < e.touches[0].clientX-this.offsetLeft)
@@ -118,8 +108,7 @@ var setCanvasSize = function()
 // alert for drawing backwards
 var errorAlert = function()
 {
-    setDrawingFalse(); 
-    
+    setDrawingFalse();
     if(!hasBeenAlerted)
     {
         window.alert("Cannot draw backwards");
@@ -142,6 +131,15 @@ var canvasClear = function()
     //redraw start location bubble and X line
     draw_Circle(startX, startY); 
 }
+//clear canvas and redraw circle
+var canvasClear = function()
+{
+    //alert user they cant draw backwards
+    errorAlert();  
+    canvasRedraw(); 
+}
+//Clear the canvas without popup
+
 
 //generates Coordinates. 
 var cordGenerator = function(yPixels)
@@ -183,18 +181,19 @@ var arrayReset = function()
     startLocation = false;
     setDrawingFalse();
 }
+
 //save canvas drawing as image to display. 
 var saveCanvas = function()
 {
     canvas_Context.save();
-
 }
+
 //redraw the canvas with the image. 
 var loadCanvas = function()
 {
     canvas_Context.restore();
-
 }
+
 //event listeners for drawing with finger on touch screen
 canvas.addEventListener('touchstart',   setTouchDrawingTrue,  false ); 
 canvas.addEventListener("touchmove",    touchDraw,            false ); 
