@@ -23,12 +23,11 @@ function updatePageInfo()
     document.getElementById("levelMessage").innerHTML = levelString;
 }
 
+//Get the current attempts for the current level
 function getLevelAttempts()
 {
     var levelAttempts = parseInt(sessionStorage.attempt);
-
     
-
     return localStorage.attempt;
 }
 
@@ -43,7 +42,6 @@ function replayLevel()
     resetLevelAttempts();
     //Go back to the Sprite page
     window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
-    
 }
 
 /**
@@ -57,20 +55,21 @@ function nextLevel()
     increaseLevel();
     window.location.href = "../Sprite_Page.html";
 }
+
 //this brings up the popup menu for the players data
 function stageMenu()
 {
-
     //this opens a popup window
     newWindow = window.open(encodeURI("Score_Page.html"), '_blank', "height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
 
     //this works in conjunction with the closeWindow function to be able to close the popup window in phonegap
-    newWindow.addEventListener('loadstop', function(event) {
-        if (event.url.match("Score_Page.html")) {
+    newWindow.addEventListener('loadstop', function(event) 
+    {
+        if (event.url.match("Score_Page.html")) 
+        {
             newWindow.close();
         }
     });
-
     //allows js to function on popup
     newWindow.document.write('<script type = "text/javascript" src="Score_Page.js"></script>');
    //this gives it the css style we've been using
@@ -95,29 +94,28 @@ function stageMenu()
 
     newWindow.document.write("<button value ='accel' onclick='getDefinitions(this.value)' class='standardButton standardFormat'>Acceleration Func.</button>");
     newWindow.document.write('<div id="accel"  style="display:none;" class="answer_list" ></div>');
+    
     //this button closes the page on mobile device and goes to the score page on the web
     newWindow.document.write("<button onclick='closeBrowser()' class='standardButton standardFormat'>Back</button>");
-
     newWindow.document.write("</div>");
     newWindow.document.write("</div>");
     newWindow.document.write("</body>")
-
 }
 
 //this brings up the popup menu for the formal definitions, basically a copy of stageMenu()
 function formalDefMenu()
 {
-
     //this opens a popup window
     newWindow = window.open(encodeURI("Score_Page.html"), '_blank', "height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
 
     //this works in conjunction with the closeWindow function to be able to close the popup window in phonegap
-    newWindow.addEventListener('loadstop', function(event) {
-        if (event.url.match("Score_Page.html")) {
+    newWindow.addEventListener('loadstop', function(event) 
+    {
+        if (event.url.match("Score_Page.html")) 
+        {
             newWindow.close();
         }
     });
-
 
     newWindow.document.write('<script type = "text/javascript" src="Score_Page.js"></script>');
     //this gives it the css style we've been using
@@ -156,9 +154,7 @@ function formalDefMenu()
 //this function is used to get the value of the button pressed and give its corresponding div a defintion and maybe a equation
 function getDefinitions(buttonValue)
 {
-
     //these are the formal definitions that will appear after clicking the button
-
     var graphDef = "This is the equation of graph you made this stage:";
 
     var derivDef = "This is the equation of the derivative you made this stage:";
@@ -227,7 +223,6 @@ function getDefinitions(buttonValue)
 
     switch (buttonValue)
     {
-
         case 'graph':
         {
             //add equation as a string to the end of var for innerHTML
@@ -289,20 +284,18 @@ function getDefinitions(buttonValue)
     }
 
     //this allows for the user to make the text appear and disappear
-    if(newWindow.document.getElementById(buttonValue).style.display == "none"){
+    if(newWindow.document.getElementById(buttonValue).style.display == "none")
+    {
         newWindow.document.getElementById(buttonValue).style.display = "block";
-    } else
+    } 
+    else
     {
         newWindow.document.getElementById(buttonValue).style.display = "none";
     }
 }
 
 //this is used to exit out of the popup menu by trying to go to Score_Page.html but this triggers the loadstop function in menu functions
-function closeBrowser(){
-
+function closeBrowser()
+{
     window.location.href = '../Score_Page.html';
-}
-
-    //Resets the variables used to generate the equations.
-    resetVariables()
 }
