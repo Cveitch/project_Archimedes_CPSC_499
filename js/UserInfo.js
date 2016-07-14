@@ -129,6 +129,6 @@ function increaseLevelAttempts()
  */
 function resetLevelAttempts()
 {
-    localStorage.attempt = 1;
+    localStorage.attempt = 0;
     sessionStorage.setItem("levelAttempts", localStorage.attempt);
 }
