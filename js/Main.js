@@ -9,7 +9,7 @@ var timerEvent;
 //if out of time turn false
 var outOfTime;
 //Var for how much time you have to clear the level.
-var timeAllowed = 5;
+var timeAllowed = 25;
 
 Main.prototype = {
 
@@ -90,9 +90,9 @@ Main.prototype = {
 	createButtons: function()
 	{
 		//Initialize the buttons needed (BROKEN)
-		this.buttonSprite = this.game.add.button(this.game.world.centerX-50, this.game.world.centerY+240, "button_goSprite", this.setSpriteToGo, this);
-        this.buttonCanvas = this.game.add.button(this.game.world.centerX+375, this.game.world.centerY-300, "button_goCanvas", this.goToCanvas, this);
-        this.buttonScore  = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore", this.goToScore, this);
+		this.buttonSprite = this.game.add.button(this.player.x-175, this.player.y-30, "button_goSprite", this.setSpriteToGo, this);
+        this.buttonCanvas = this.game.add.button(this.player.x-175, this.player.y+40, "button_goCanvas", this.goToCanvas, this);
+        this.buttonScore  = this.game.add.button(this.player.x-175, this.player.y-100, "button_goScore", this.goToScore, this);
     },
 
 	createPhysics: function()
