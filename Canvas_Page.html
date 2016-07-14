@@ -9,7 +9,6 @@
     <script type = "text/javascript" src="UserInfo.js"></script>
     <script type = "text/javascript" src="js/Buttons.js"></script>
     <script type = "text/javascript" src="js/UserInfo.js"></script>
-    <script type = "text/javascript" src="UserInfo.js"></script>
     
     <script>
         //setCanvasSize(); 
@@ -25,7 +24,7 @@
             float: right;
         }
         //Overlays the username onto the canvas
-        .overlayName 
+        .overlayName
         {
             z-index:        2;
             position:       relative;
@@ -34,7 +33,7 @@
         }
     </style>
 
-   
+
 </head>
 
 <body onload="displayUsername('usernameLabel')">
@@ -46,16 +45,8 @@
 <!--User name information on top left of screen, and button to go between pages on top right-->
 <div id="TOP_SCREEN_INFO">
     <p class="alignleft overlayName" id="usernameLabel"></p>
-
-    <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
-    do it this way...
-    --AD: the hash and the FALSE value allows the Sprite page to identify when not to recreate the physics again
-    -->
-    <p class = alignright>
-        <button type="button" onclick="window.location.href='Sprite_Page.html'">
-            TO SPRITE
-        </button>
-    </p>
+    <button type = "button" id="resetButton" onclick="canvasClear()"> RE-DRAW!</button>
+    <button type = "button" id="canvasButton" onclick="getOut()"> WORLD</button>
     <button type = "button" id="goButton" onclick="sendCoords()"> GO!</button>
 </div>
 
@@ -65,19 +56,22 @@
 <script type = "text/javascript" src="Drawing.js"></script>
     
  <script id = "storeDS">
-        //increases level attempts by 1 everytime the button is pressed
-        increaseLevelAttempts();
-
-        function storeDS(array)
+     //increases level attempts by 1 everytime the button is pressed
+     increaseLevelAttempts();
+     function storeDS(array)
         {
             //stores d.s. generated from drawn graph
-
             var ds = array; 
-          // var ds = array; 
+            // var ds = array;
             localStorage.ds = JSON.stringify(ds);
             window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
-
+           
         }
+     function goToWorld()
+     {
+         //Go back to sprite page without causing sprite to activate with d.s.
+         window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
+     }
     </script>
 <!--Clears float for align function-->
 <div style="clear: both;"></div>

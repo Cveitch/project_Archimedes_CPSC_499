@@ -10,30 +10,7 @@ Preload.prototype = {
         this.game.load.tilemap	("Level1", "assets/sprite_physics/Level-1-Easy.json",null, Phaser.Tilemap.TILED_JSON);
 		this.game.load.tilemap	("Level2", "assets/sprite_physics/Level-2-Medium.json",null, Phaser.Tilemap.TILED_JSON);
 		this.game.load.tilemap	("Level3", "assets/sprite_physics/Level-3-Hard.json",null, Phaser.Tilemap.TILED_JSON);
-
-		//Preload the current level
-        if(localStorage.level === "1")
-        {
-            //this.game.load.tilemap	("Level1", "assets/sprite_physics/Level-1-Easy.json",null, Phaser.Tilemap.TILED_JSON);
-        }
-        
-        switch(localStorage.level)
-        {
-            case "1":
-                //this.game.load.tilemap	("Level1", "assets/sprite_physics/Level-1-Easy.json",null, Phaser.Tilemap.TILED_JSON);
-                this.game.load.image	("tset_world1", "assets/images/tset_world1.png");
-                break;
-            case "2":
-
-                break;
-            case "3":
-
-                break;
-            default:
-                //Load test level
-                this.game.load.image	("tset_world1", "assets/images/tset_world1.png");
-                break;
-        }
+		this.game.load.image	("tset_world1", "assets/images/tset_world1.png")
 
 		//This is the button used to start the sprite on its adventure down the world in the Sprite page
 		this.game.load.image	("button_goSprite", "assets/images/spr_button.png");

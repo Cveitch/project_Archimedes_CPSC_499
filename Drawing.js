@@ -151,10 +151,13 @@ var cordGenerator = function(yPixels)
     i++;           
 }
 
+var getOut = function()
+{
+    goToWorld();
+}
 
-//send coords to storage. 
-var sendCoords = function(){
-
+var sendCoords = function()
+{
    storeDS(yCoords);
 }
 
@@ -167,31 +170,31 @@ var resize = function()
     startY = canvas.height / 2;
     draw_Circle(startX, startY);
 }
+
 //reset arrays
 var arrayReset = function()
 {
     //reset Xvalue array
-    xVal = [0];   
+    xVal = [0];
     // reset Y array 
-    yCoords = [0];  
-    i = 0; 
+    yCoords = [0];
+    i = 0;
     //reset start location
-    startLocation = false; 
-    setDrawingFalse(); 
+    startLocation = false;
+    setDrawingFalse();
 }
 //save canvas drawing as image to display. 
 var saveCanvas = function()
 {
-    canvas_Context.save(); 
-    
+    canvas_Context.save();
+
 }
 //redraw the canvas with the image. 
 var loadCanvas = function()
 {
-    canvas_Context.restore(); 
-    
-}
+    canvas_Context.restore();
 
+}
 //event listeners for drawing with finger on touch screen
 canvas.addEventListener('touchstart',   setTouchDrawingTrue,  false ); 
 canvas.addEventListener("touchmove",    touchDraw,            false ); 

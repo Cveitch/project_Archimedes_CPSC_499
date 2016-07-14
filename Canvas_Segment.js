@@ -6,8 +6,6 @@ segment the canvas into chunks
 var canvas = document.getElementById("Canvas"); 
 var canvas_Context = canvas.getContext("2d");
 
-
-
 //Take canvas size and split it up evenly
 var canvasSegment = function(CanvasLength, CanvasWidth)
 {
@@ -34,13 +32,4 @@ var canvasSegment = function(CanvasLength, CanvasWidth)
         canvas_Context.stroke(); 
         x += xSegmentLength; 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

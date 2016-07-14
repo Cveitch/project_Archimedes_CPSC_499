@@ -9,7 +9,6 @@
 function loadScorePage()
 {
     window.location.href = "Score_Page.html";
-
 }
 
 /**
@@ -24,6 +23,15 @@ function updatePageInfo()
     document.getElementById("levelMessage").innerHTML = levelString;
 }
 
+function getLevelAttempts()
+{
+    var levelAttempts = parseInt(sessionStorage.attempt);
+
+    
+
+    return localStorage.attempt;
+}
+
 
 /**
  * Reloads the previous level.
@@ -33,7 +41,8 @@ function replayLevel()
     //Resets the variables used to generate the equations.
     resetVariables()
     resetLevelAttempts();
-    window.location.href = "Sprite_Page.html";
+    //Go back to the Sprite page
+    window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
     
 }
 
