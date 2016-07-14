@@ -4,29 +4,27 @@
     <meta charset="UTF-8">
     <title>SPRITE</title>
 
-
     <script type='text/javascript' >
         var jump = true;
-
         //Set the first level
         localStorage.level = 1;
     </script>
 
     <script type = "text/javascript" src = "js/Phaser.js"></script>
-    <script type = "text/javascript" src = "js/Buttons.js"></script>
     <script type = "text/javascript" src = "js/Boot.js"></script>
     <script type = "text/javascript" src = "js/Preload.js"></script>
     <script type = "text/javascript" src = "js/UserInfo.js"></script>
     <script type = "text/javascript" src = "UserInfo.js"></script>
     <script type = "text/javascript" src = "js/Main.js"></script>
 
-
     <!--Gives text and button aligning options-->
     <style>
-        .alignleft {
+        .alignleft 
+        {
             float: left;
         }
-        .alignright {
+        .alignright 
+        {
             float: right;
         }
     </style>
@@ -38,12 +36,10 @@
             //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO);
             game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS);
             //game = new Phaser.Game(innerWidth, innerHeight, Phaser.AUTO);
-
             //Add all states
             game.state.add("Boot", Boot);
             game.state.add("Preload", Preload);
             game.state.add("Main", Main);
-
             //Startup the physics
             game.state.start("Boot");
         }
@@ -58,7 +54,6 @@
         var text = window.location.hash.substring(1);
         var ds = [];
         setCompare(text);
-
         //Comparison to allow game to be booted once
         if(getCompare() === true)
         {
@@ -74,7 +69,6 @@
             initiate();
         }
     </script>
-
     <!--Clears float for align function-->
     <div style="clear: both;"></div>
 </body>
