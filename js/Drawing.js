@@ -128,21 +128,6 @@ var canvasClear = function()
 {
     //alert user they cant draw backwards
     errorAlert();  
-    //clear canvas
-    canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
-    canvas_Context.beginPath();
-    //reset start local
-    startLocation = false; 
-    setDrawingFalse();  
-    arrayReset(); 
-    //redraw start location bubble and X line
-    draw_Circle(startX, startY); 
-}
-//clear canvas and redraw circle
-var canvasClear = function()
-{
-    //alert user they cant draw backwards
-    errorAlert();  
     canvasRedraw(); 
 }
 //Clear the canvas without popup
