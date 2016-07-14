@@ -156,8 +156,8 @@ Main.prototype = {
 		this.game.physics.p2.enable(this.player);
 
 		//Follow player
-		this.player.anchor.setTo(0.5,0.5);
-		this.game.camera.follow(this.player);
+		//this.player.anchor.setTo(0.5,0.5);
+		//this.game.camera.follow(this.player);
 
 		//gives player a circle hitbox (radius,offestx,offsety)
 		this.player.body.setCircle(44,0,0);
