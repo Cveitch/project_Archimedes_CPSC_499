@@ -71,7 +71,7 @@ function stageMenu()
         }
     });
     //allows js to function on popup
-    newWindow.document.write('<script type = "text/javascript" src="Score_Page.js"></script>');
+    newWindow.document.write('<script type = "text/javascript" src="js/Score_Page.js"></script>');
    //this gives it the css style we've been using
     newWindow.document.write("<link rel='stylesheet' type='text/css' href='../Formatting.css'>");
 
@@ -117,7 +117,7 @@ function formalDefMenu()
         }
     });
 
-    newWindow.document.write('<script type = "text/javascript" src="Score_Page.js"></script>');
+    newWindow.document.write('<script type = "text/javascript" src=js/Score_Page.js"></script>');
     //this gives it the css style we've been using
     newWindow.document.write("<link rel='stylesheet' type='text/css' href='../Formatting.css'>");
 
@@ -176,7 +176,7 @@ function getDefinitions(buttonValue)
         " his final position is aligned with the starting line (their difference " +
         "is zero) and yours is around 400 meters away from the starting line.";
 
-    var fVelocDef = "Both SPEED and VELOCITY allude to the same concept" ;
+    var fVelocDef = "Both SPEED and VELOCITY allude to the same concept" +
        " of motion of ravel over a period of time. Speed tells how fast something" +
        " is going whereas velocity tells how fast something is going in a certain" +
        " direction. ";
