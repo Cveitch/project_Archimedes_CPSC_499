@@ -21,7 +21,7 @@ function getInterpolation()
     //arrayValues contains 2 arrays, the first holding x values, the second y values.
     var arrayValues = getDataPoints();
     //console.log(arrayValues[0].toString()+" "+arrayValues[1].toString());
-    return ("`"+interpolate(arrayValues[0],arrayValues[1])+"`");
+    return (interpolate(arrayValues[0],arrayValues[1]));
 }
 
 /**
@@ -30,7 +30,7 @@ function getInterpolation()
  */
 function getIntegral()
 {
-    return ("`"+integrate()+"`");
+    return (integrate());
 }
 
 /**
@@ -39,7 +39,7 @@ function getIntegral()
  */
 function getDerivative()
 {
-    return ("`"+differentiate()+"`");
+    return (differentiate());
 }
 
 /**
