@@ -288,5 +288,5 @@ function getDefinitions(buttonValue)
 //this is used to exit out of the popup menu by trying to go to Score_Page.html but this triggers the loadstop function in menu functions
 function closeBrowser()
 {
-    window.location.href = '../Score_Page.html';
+    window.location.href = 'Score_Page.html';
 }
