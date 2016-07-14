@@ -2,15 +2,14 @@ var Main = function(game)
 {
 	//This function allows "Main" to be accessed by the game instance
 };
+
 //variables to keep track of time.
 var timer;
 var timerEvent;
 //if out of time turn false
 var outOfTime;
-
 //Var for how much time you have to clear the level.
 var timeAllowed = 15;
-
 
 Main.prototype = {
 
@@ -34,9 +33,11 @@ Main.prototype = {
 
         //start timer
         timer = game.time.create();
-        //delayed event
+
+		//delayed event
         timerEvent = timer. add(Phaser.Timer.SECOND * timeAllowed, this.endTimer, this);
-        //start timer
+
+		//start timer
         timer.start();
         outOfTime = false;
 
@@ -51,6 +52,7 @@ Main.prototype = {
 
 	    //Create the player
 	    this.createPlayer();
+
 		//Create Sprite page buttons
 		this.createButtons();
 	},
@@ -74,11 +76,13 @@ Main.prototype = {
 		}
 
 		if 	(this.player.body.velocity.x < 0)
-		{// flip character left
+		{
+			// flip character left
 			this.player.scale.x = -1;
 		}
 		else if (this.player.body.velocity.x > 0)
-		{// flip right
+		{
+			// flip right
 			this.player.scale.x = 1;
 		}
 	},
@@ -108,6 +112,7 @@ Main.prototype = {
 		// initialised tilemap with matching tileset
 		var mymap = this.game.add.tilemap(levelName);
 		mymap.addTilesetImage('tset_world1');
+
 		//creates layers matching the .json testlevel
 		layerbackground = mymap.createLayer('background');
 		layerblocks 	= mymap.createLayer('block1');
@@ -123,7 +128,6 @@ Main.prototype = {
 	
 	objectLocations: function()
 	{
-
 		switch(getCurrentLevel())
 		{
 			case "1":
@@ -222,24 +226,27 @@ Main.prototype = {
         var playerX = Math.floor(PLAYER.x-35);
         var playerY = Math.floor(PLAYER.y-96);
         console.log("PX: "+ playerX +"PY: "+playerY );
-
         
-    //get position of Goal. 
-    var goalX = Math.floor(GOAL.x); 
-    var goalY = Math.floor(GOAL.y); 
-	console.log("GX: "+ goalX + "GY: "+goalY);
-    //if time is more than 5 seconds you lose. 
-    if(!timer.running){
-		var new_value = parseInt(localStorage.attempt) + 1;
-		localStorage.attempt = new_value;
-		localStorage.win = false;
-		window.location.href = 'Score_Page.html';
-    }
+    	//get position of Goal.
+    	var goalX = Math.floor(GOAL.x);
+    	var goalY = Math.floor(GOAL.y);
+		console.log("GX: "+ goalX + "GY: "+goalY);
+		
+    	//if time is more than 5 seconds you lose.
+    	if(!timer.running)
+		{
+			var new_value = parseInt(localStorage.attempt) + 1;
+			localStorage.attempt = new_value;
+			localStorage.win = false;
+			window.location.href = 'Score_Page.html';
+		}
+		
         //if player is near goal, you win :D
-    if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
-		localStorage.win = true;
-		window.location.href = 'Score_Page.html';
-        }
+		if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) )
+		{
+			localStorage.win = true;
+			window.location.href = 'Score_Page.html';
+		}
     },
 
     //stop timer;
