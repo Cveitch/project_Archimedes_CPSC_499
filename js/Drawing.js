@@ -123,27 +123,35 @@ var errorAlert = function()
     }  
 }
 
+//Clear the canvas without popup
+var canvasRedraw = function()
+{
+    //clear canvas
+    arrayReset(); 
+    //reset start local
+    startLocation = false; 
+    canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas_Context.beginPath();
+    setDrawingFalse();  
+    //redraw start location bubble and X line
+    draw_Circle(startX, startY); 
+ 
+}
+
 //clear canvas and redraw circle
 var canvasClear = function()
 {
     //alert user they cant draw backwards
     errorAlert();  
-    canvasRedraw(); 
-}
-//Clear the canvas without popup
-var canvasRedraw = function()
-{
- //clear canvas
-    canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
-    canvas_Context.beginPath();
+     //clear canvas
+    arrayReset(); 
     //reset start local
     startLocation = false; 
+    canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas_Context.beginPath();
     setDrawingFalse();  
-    arrayReset(); 
     //redraw start location bubble and X line
-    draw_Circle(startX, startY); 
-
-
+    draw_Circle(startX, startY);
 }
 
 //generates Coordinates. 
