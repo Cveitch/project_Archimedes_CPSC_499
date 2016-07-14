@@ -245,6 +245,7 @@ Main.prototype = {
         //if player is near goal, you win :D
 		if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) )
 		{
+			localStorage.attempt =  parseInt(localStorage.attempt) + 1;
 			localStorage.win = true;
 			window.location.href = 'Score_Page.html';
 		}

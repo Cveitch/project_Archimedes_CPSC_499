@@ -24,11 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Sprite_Page.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sprite_Page.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="675">
               <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/Main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="668">
+              <caret line="247" column="71" selection-start-line="247" selection-start-column="71" selection-end-line="247" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -89,9 +99,9 @@
         <option value="$PROJECT_DIR$/canvasStyle.css" />
         <option value="$PROJECT_DIR$/Score_Page.html" />
         <option value="$PROJECT_DIR$/js/Score_Page.js" />
-        <option value="$PROJECT_DIR$/js/Main.js" />
         <option value="$PROJECT_DIR$/js/Buttons.js" />
         <option value="$PROJECT_DIR$/Sprite_Page.html" />
+        <option value="$PROJECT_DIR$/js/Main.js" />
       </list>
     </option>
   </component>
@@ -270,7 +280,7 @@
       <workItem from="1468468628512" duration="876000" />
       <workItem from="1468469548762" duration="170000" />
       <workItem from="1468469727024" duration="1099000" />
-      <workItem from="1468524129703" duration="2530000" />
+      <workItem from="1468524129703" duration="2714000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/DAVIS_1' into TIM_1&#10;&#10;# Conflicts:&#10;#&#9;Canvas_Page.html&#10;">
       <created>1466241127978</created>
@@ -304,7 +314,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22820000" />
+    <option name="totallyTimeSpent" value="23004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -378,8 +388,8 @@
         <state relative-caret-position="960">
           <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1468524083000" expanded="true" signature="2986:2990" ph="{...}" />
+            <element signature="n#!!doc" expanded="false" />
+            <marker date="1468526698000" expanded="true" signature="2986:2990" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -413,8 +423,8 @@
         <state relative-caret-position="930">
           <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1468524083000" expanded="true" signature="2986:2990" ph="{...}" />
+            <element signature="n#!!doc" expanded="false" />
+            <marker date="1468526698000" expanded="true" signature="2986:2990" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -448,8 +458,8 @@
         <state relative-caret-position="960">
           <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1468524083000" expanded="true" signature="2986:2990" ph="{...}" />
+            <element signature="n#!!doc" expanded="false" />
+            <marker date="1468526698000" expanded="true" signature="2986:2990" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -560,8 +570,8 @@
         <state relative-caret-position="1950">
           <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1468524083000" expanded="true" signature="2986:2990" ph="{...}" />
+            <element signature="n#!!doc" expanded="false" />
+            <marker date="1468526698000" expanded="true" signature="2986:2990" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -635,14 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4200">
-          <caret line="280" column="47" selection-start-line="280" selection-start-column="47" selection-end-line="280" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/Boot.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -663,6 +665,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
           <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="247" column="71" selection-start-line="247" selection-start-column="71" selection-end-line="247" selection-end-column="71" />
           <folding />
         </state>
       </provider>
