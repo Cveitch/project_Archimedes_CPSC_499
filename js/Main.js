@@ -9,7 +9,7 @@ var timerEvent;
 var outOfTime;
 
 //Var for how much time you have to clear the level.
-var timeAllowed = 10;
+var timeAllowed = 15;
 
 
 Main.prototype = {
@@ -53,7 +53,7 @@ Main.prototype = {
         this.createButtons();
 
         // Add goal to the game
-        goal 	= this.game.add.sprite(this.game.world.centerX+350,400,"goal");
+        this.goal 	= this.game.add.sprite(this.game.world.centerX+350,400,"goal");
 
         //this allows for real time in game control with keyboard, thanks to the update function
         cursors = this.game.input.keyboard.createCursorKeys();
@@ -61,6 +61,9 @@ Main.prototype = {
 
 	update: function()
 	{
+        //Check win condition;
+        this.gameWin();
+        
 		if(this.confirmGoSprite === "GO")
 		{
 			//Updates sprite speed
@@ -83,7 +86,7 @@ Main.prototype = {
 		//Initialize the buttons needed (BROKEN)
 		this.buttonSprite = this.game.add.button(this.game.world.centerX-50, this.game.world.centerY+240, "button_goSprite", this.setSpriteToGo, this);
         this.buttonCanvas = this.game.add.button(this.game.world.centerX+375, this.game.world.centerY-300, "button_goCanvas", this.goToCanvas, this);
-        this.buttonScore = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore", this.goToScore, this);
+        this.buttonScore  = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore", this.goToScore, this);
     },
 
 	createPhysics: function()
@@ -97,12 +100,26 @@ Main.prototype = {
 
 	createBackground: function()
 	{
-		// initialised tilemap with matching tileset
-		var mymap = this.game.add.tilemap('Level1');
-		mymap.addTilesetImage('tset_world1');
+        switch(localStorage.level)
+        {
+            case "1":
+                // initialised tilemap with matching tileset
+                var mymap = this.game.add.tilemap('Level1');
+                mymap.addTilesetImage('tset_world1');
+                break;
+            case "2":
 
-		//Temporary colour for the background, similar to cloud_1
-		//this.game.stage.backgroundColor = "#5cc5f2";
+                break;
+            case "3":
+
+                break;
+            default:
+                //Load test level
+                // initialised tilemap with matching tileset
+                var mymap = this.game.add.tilemap('Level1');
+                mymap.addTilesetImage('tset_world1');
+                break;
+        }
 
 		//creates layers matching the .json testlevel
 		layerbackground = mymap.createLayer('background');
@@ -136,9 +153,6 @@ Main.prototype = {
 		//Makes sprite jump (temporary measure)
 		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		spaceKey.onDown.add(this.jump, this);
-
-		//check win condition;
-		this.gameWin(this.player,goal);
 
 		switch(this.confirmGoSprite)
 		{
@@ -201,18 +215,18 @@ Main.prototype = {
 	},
 
 	//Checks game state to see if player won.
-	gameWin: function(PLAYER, GOAL)
+	gameWin: function()
 	{
 		var error = 30;
 		//get position of player.
-		var playerX = Math.floor(PLAYER.x-35);
-		var playerY = Math.floor(PLAYER.y-96);
+		var playerX = Math.floor(this.player.x-35);
+		var playerY = Math.floor(this.player.y-96);
 		console.log("PX: "+ playerX +"PY: "+playerY );
 
 
 		//get position of Goal.
-		var goalX = Math.floor(GOAL.x);
-		var goalY = Math.floor(GOAL.y);
+		var goalX = Math.floor(this.goal.x);
+		var goalY = Math.floor(this.goal.y);
 		console.log("GX: "+ goalX + "GY: "+goalY);
 
 		//if time is more than 5 seconds you lose.
@@ -220,14 +234,14 @@ Main.prototype = {
 		{
             var new_value = parseInt(localStorage.attempt) + 1;
             localStorage.attempt = new_value;
-            sessionStorage.win = false;
+            localStorage.win = false;
             window.location.href = 'Score_Page.html';
 		}
 
         //if player is near goal, you win :D
         if((playerX <= goalX+error && playerX >= goalX-error ) && playerY === goalY )
         {
-            sessionStorage.win = true;
+            localStorage.win = true;
             window.location.href = 'Score_Page.html';
         }
 	},
@@ -289,6 +303,9 @@ Main.prototype = {
 		//Greys out the start button
 		//this.buttonGo.visible =! this.buttonGo.visible;
 		this.buttonScore.tint = "#CCCCCC";
+
+        //Set winnings to neutral
+        localStorage.win = null;
 
 		//Go to Canvas page to permit drawing
 		window.location.href = 'Score_Page.html';
