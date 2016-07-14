@@ -24,16 +24,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1868">
-              <caret line="204" column="68" selection-start-line="204" selection-start-column="68" selection-end-line="204" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Score_Page.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/Score_Page.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,24 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserInfo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/UserInfo.js">
+      <file leaf-file-name="Score_Page.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Score_Page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1950">
-              <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1468524083000" expanded="true" signature="2986:2990" ph="{...}" />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="51" column="76" selection-start-line="51" selection-start-column="76" selection-end-line="51" selection-end-column="76" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Preload.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/Preload.js">
+      <file leaf-file-name="Splash_Page.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Splash_Page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="81" selection-start-line="13" selection-start-column="81" selection-end-line="13" selection-end-column="81" />
+            <state relative-caret-position="75">
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -106,7 +93,6 @@
         <option value="$PROJECT_DIR$/Splash.html" />
         <option value="$PROJECT_DIR$/Buttons.js" />
         <option value="$PROJECT_DIR$/Text_Architecture.js" />
-        <option value="$PROJECT_DIR$/Score_Page.html" />
         <option value="$PROJECT_DIR$/Splash_Page.html" />
         <option value="$PROJECT_DIR$/Drawing.js" />
         <option value="$PROJECT_DIR$/Canvas_Page.html" />
@@ -116,6 +102,7 @@
         <option value="$PROJECT_DIR$/js/UserInfo.js" />
         <option value="$PROJECT_DIR$/canvasStyle.css" />
         <option value="$PROJECT_DIR$/js/Main.js" />
+        <option value="$PROJECT_DIR$/Score_Page.html" />
       </list>
     </option>
   </component>
@@ -294,7 +281,7 @@
       <workItem from="1468468628512" duration="876000" />
       <workItem from="1468469548762" duration="170000" />
       <workItem from="1468469727024" duration="1099000" />
-      <workItem from="1468524129703" duration="1537000" />
+      <workItem from="1468524129703" duration="1828000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/DAVIS_1' into TIM_1&#10;&#10;# Conflicts:&#10;#&#9;Canvas_Page.html&#10;">
       <created>1466241127978</created>
@@ -328,7 +315,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21827000" />
+    <option name="totallyTimeSpent" value="22118000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -578,13 +565,6 @@
     <entry file="file://$PROJECT_DIR$/phaser.js" />
     <entry file="file://$PROJECT_DIR$/Drawing.js" />
     <entry file="file://$PROJECT_DIR$/Buttons.js" />
-    <entry file="file://$PROJECT_DIR$/Splash_Page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UserInfo.js" />
     <entry file="file://$PROJECT_DIR$/js/Boot.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -621,18 +601,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Score_Page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/canvasStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Canvas_Page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1868">
+          <caret line="204" column="68" selection-start-line="204" selection-start-column="68" selection-end-line="204" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -658,26 +654,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Canvas_Page.html">
+    <entry file="file://$PROJECT_DIR$/Splash_Page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        <state relative-caret-position="75">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
+    <entry file="file://$PROJECT_DIR$/Score_Page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1868">
-          <caret line="204" column="68" selection-start-line="204" selection-start-column="68" selection-end-line="204" selection-end-column="68" />
+        <state relative-caret-position="240">
+          <caret line="51" column="76" selection-start-line="51" selection-start-column="76" selection-end-line="51" selection-end-column="76" />
           <folding />
         </state>
       </provider>
