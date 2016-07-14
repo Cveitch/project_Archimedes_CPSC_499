@@ -237,7 +237,6 @@ Main.prototype = {
     	//if time is more than 5 seconds you lose.
     	if(!timer.running)
 		{
-			localStorage.attempt =  parseInt(localStorage.attempt) + 1;
 			localStorage.win = false;
 			window.location.href = 'Score_Page.html';
 		}
@@ -245,7 +244,6 @@ Main.prototype = {
         //if player is near goal, you win :D
 		if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) )
 		{
-			localStorage.attempt =  parseInt(localStorage.attempt) + 1;
 			localStorage.win = true;
 			window.location.href = 'Score_Page.html';
 		}
@@ -286,6 +284,7 @@ Main.prototype = {
     //Button to make the sprite move
 	setSpriteToGo: function()
 	{
+		localStorage.attempt++;
 		//turns the button invisible
 		this.buttonSprite.visible =! this.buttonSprite.visible;
 		//Allow the sprite to go through its movement
