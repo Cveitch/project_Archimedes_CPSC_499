@@ -3,15 +3,6 @@
  */
 
 /**
- * Loads the score page.
- * @param {integer} levelAttempts
- */
-function loadScorePage()
-{
-    window.location.href = "../Score_Page.html";
-}
-
-/**
  * When the score page loads, this function is called to set any variables onto the page.
  */
 function updatePageInfo()

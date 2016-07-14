@@ -287,19 +287,11 @@ Main.prototype = {
 	{
 		//Allow the sprite to go through its movement
 		this.confirmGoSprite = "GO";
-
-		//Greys out the start button
-		//this.buttonGo.visible =! this.buttonGo.visible;
-		this.buttonSprite.tint = "#CCCCCC";
 	},
 
     //Button to go to the canvas page to draw out velocity graph
 	goToCanvas: function()
 	{
-		//Greys out the start button
-		//this.buttonGo.visible =! this.buttonGo.visible;
-		this.buttonCanvas.tint = "#CCCCCC";
-
 		//Go to Canvas page to permit drawing
 		window.location.href = 'Canvas_Page.html';
 	},
@@ -307,10 +299,6 @@ Main.prototype = {
     //Button to go to the score screen to view progress
 	goToScore: function()
 	{
-		//Greys out the start button
-		//this.buttonGo.visible =! this.buttonGo.visible;
-		this.buttonScore.tint = "#CCCCCC";
-
         //Set winnings to neutral
         localStorage.win = null;
 
