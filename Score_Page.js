@@ -30,7 +30,8 @@ function updatePageInfo()
  */
 function replayLevel()
 {
-
+    //Resets the variables used to generate the equations.
+    resetVariables()
 }
 
 /**
@@ -38,5 +39,6 @@ function replayLevel()
  */
 function nextLevel()
 {
-
+    //Resets the variables used to generate the equations.
+    resetVariables()
 }

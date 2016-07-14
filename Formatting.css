@@ -4,7 +4,7 @@
 .leftFormatAlign
 {
     float:          left;
-    font-size:      40px;
+    font-size:      20px;
     padding-left:   5px;
     padding-right:  5px;
     margin-bottom:  0px;
@@ -21,9 +21,9 @@
 /* Formatting for headings. */
 .heading
 {
-    padding-left:   30px;
-    padding-right:  30px;
-    font-size:      75px;
+    padding-left:   15px;
+    padding-right:  15px;
+    font-size:      35px;
 }
 
 /* Formatting for subheadings. */
@@ -31,7 +31,7 @@
 {
     padding-left:   30px;
     padding-right:  30px;
-    font-size:      50px;
+    font-size:      25px;
 }
 
 /* Container to be centered horizontally on the page. */
@@ -59,7 +59,7 @@
     color:              white;
     width:              80%;
     border:             none;
-    font-size:          40px;
+    font-size:          20px;
     margin:             10px;
 }
 

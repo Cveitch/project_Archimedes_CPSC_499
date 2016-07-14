@@ -8,6 +8,7 @@
     <title>CANVAS</title>
     <script type = "text/javascript" src="js/Buttons.js"></script>
     <script type = "text/javascript" src="js/UserInfo.js"></script>
+    <script type = "text/javascript" src="UserInfo.js"></script>
     
     <script>
         //setCanvasSize(); 
@@ -22,12 +23,20 @@
         .alignright {
             float: right;
         }
+        //Overlays the username onto the canvas
+        .overlayName 
+        {
+            z-index:        2;
+            position:       relative;
+            margin-left:    3%;
+            font-family:    Verdana,Geneva,sans-serif;
+        }
     </style>
 
    
 </head>
 
-<body onload="getUsername('usernameLabel')">
+<body onload="displayUsername('usernameLabel')">
 <!--Gives a value to the page number, used in context switches-->
 <script>
     var PAGE = "CANVAS";
@@ -35,7 +44,7 @@
 </script>
 <!--User name information on top left of screen, and button to go between pages on top right-->
 <div id="TOP_SCREEN_INFO">
-    <p class="alignleft" id="usernameLabel"></p>
+    <p class="alignleft overlayName" id="usernameLabel"></p>
 
     <!--AD: Error 404 occurs whenever I try to use the buttons in Buttons.js to access the pages, but not when I
     do it this way...
