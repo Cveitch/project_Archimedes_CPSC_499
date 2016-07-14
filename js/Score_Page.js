@@ -42,7 +42,7 @@ function updatePageInfo()
 function replayLevel()
 {
     //Resets the variables used to generate the equations.
-    resetVariables()
+    resetVariables();
     //Go back to the Sprite page
     window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
 }
@@ -53,7 +53,7 @@ function replayLevel()
 function nextLevel()
 {
     //Resets the variables used to generate the equations.
-    resetVariables()
+    resetVariables();
     resetLevelAttempts();
     increaseLevel();
     window.location.href = 'Sprite_Page.html';
@@ -76,7 +76,7 @@ function stageMenu()
     //allows js to function on popup
     newWindow.document.write('<script type = "text/javascript" src="js/Score_Page.js"></script>');
    //this gives it the css style we've been using
-    newWindow.document.write("<link rel='stylesheet' type='text/css' href='../Formatting.css'>");
+    newWindow.document.write("<link rel='stylesheet' type='text/css' href='Formatting.css'>");
 
 
     //this is basically html code making the page
@@ -89,8 +89,8 @@ function stageMenu()
     newWindow.document.write("<button value ='graph' onclick='getDefinitions(this.value)' class='standardButton standardFormat'>Graph</button>");
     newWindow.document.write('<div id="graph"  style="display:none;" class="answer_list" ></div>');
 
-    newWindow.document.write("<button value ='deriv' onclick='getDefinitions(this.value)'   class='standardButton standardFormat'>Derivative Func.</button>");
-    newWindow.document.write('<div id="deriv"  style="display:none;" class="answer_list" ></div>');
+    newWindow.document.write("<button value ='displace' onclick='getDefinitions(this.value)'   class='standardButton standardFormat'>Displacement Func.</button>");
+    newWindow.document.write('<div id="displace"  style="display:none;" class="answer_list" ></div>');
 
     newWindow.document.write("<button value ='veloc' onclick='getDefinitions(this.value)' class='standardButton standardFormat'>Velocity Func.</button>");
     newWindow.document.write('<div id="veloc"  style="display:none;" class="answer_list" ></div>');
@@ -122,7 +122,7 @@ function formalDefMenu()
 
     newWindow.document.write('<script type = "text/javascript" src=js/Score_Page.js"></script>');
     //this gives it the css style we've been using
-    newWindow.document.write("<link rel='stylesheet' type='text/css' href='../Formatting.css'>");
+    newWindow.document.write("<link rel='stylesheet' type='text/css' href='Formatting.css'>");
 
     //this is basically html code making the page
     newWindow.document.write("<body class='pageBackground'>");
@@ -160,7 +160,7 @@ function getDefinitions(buttonValue)
     //these are the formal definitions that will appear after clicking the button
     var graphDef = "This is the equation of graph you made this stage:";
 
-    var derivDef = "This is the equation of the derivative you made this stage:";
+    var displaceDef = "This is the equation of the displacement you made this stage:";
 
     var velocDef = "This is the equation of your velocity this stage:";
 
@@ -231,22 +231,22 @@ function getDefinitions(buttonValue)
             newWindow.document.getElementById(buttonValue).innerHTML = graphDef;
             break;
         }
-        case 'deriv':
+        case 'displace':
         {
             //add equation as a string to the end of var for innerHTML
-            newWindow.document.getElementById(buttonValue).innerHTML = derivDef;
+            newWindow.document.getElementById(buttonValue).innerHTML = derivDef + getIntegral();
             break;
         }
         case 'veloc':
         {
             //add equation as a string to the end of var for innerHTML
-            newWindow.document.getElementById(buttonValue).innerHTML = velocDef;
+            newWindow.document.getElementById(buttonValue).innerHTML = velocDef + getInterpolation();
             break;
         }
         case 'accel':
         {
             //add equation as a string to the end of var for innerHTML
-            newWindow.document.getElementById(buttonValue).innerHTML = accelDef;
+            newWindow.document.getElementById(buttonValue).innerHTML = accelDef + getDerivative();
             break;
         }
         case 'fdista':
