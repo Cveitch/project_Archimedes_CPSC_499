@@ -6,6 +6,7 @@
    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>CANVAS</title>
+    <script type = "text/javascript" src="UserInfo.js"></script>
     <script type = "text/javascript" src="js/Buttons.js"></script>
     <script type = "text/javascript" src="js/UserInfo.js"></script>
     <script type = "text/javascript" src="UserInfo.js"></script>
@@ -64,15 +65,18 @@
 <script type = "text/javascript" src="Drawing.js"></script>
     
  <script id = "storeDS">
+        //increases level attempts by 1 everytime the button is pressed
+        increaseLevelAttempts();
+
         function storeDS(array)
         {
             //stores d.s. generated from drawn graph
-            
+
             var ds = array; 
           // var ds = array; 
             localStorage.ds = JSON.stringify(ds);
             window.location.href = 'Sprite_Page.html'+ '#' + 'FALSE';
-           
+
         }
     </script>
 <!--Clears float for align function-->

@@ -44,20 +44,16 @@ Main.prototype = {
         //Enable the physics to start
         this.createPhysics();
 
-        //Create the background for the game
+		//Create the background for the game
         this.createBackground();
+
+		//Sets the Character and Goals location
+		this.objectLocations();
 
 	    //Create the player
 	    this.createPlayer();
-
 		//Create Sprite page buttons
 		this.createButtons();
-		
-		// Add goal to the game
-		goal 	= this.game.add.sprite(this.game.world.width-114,116,"goal");
-
-		//this allows for real time in game control with keyboard, thanks to the update function
-		cursors = this.game.input.keyboard.createCursorKeys();
 	},
 
 	update: function()
@@ -77,14 +73,23 @@ Main.prototype = {
 			//Gives the sprite an initial velocity of 20 pixels/s
 			this.movePlayer();
 		}
+
+		if 	(this.player.body.velocity.x < 0)
+		{// flip character left
+			this.player.scale.x = -1;
+		}
+		else if (this.player.body.velocity.x > 0)
+		{// flip right
+			this.player.scale.x = 1;
+		}
 	},
 
 	createButtons: function()
 	{
 		//Initialize the buttons needed (BROKEN)
-		this.buttonGo = game.add.button(game.world.centerX - 95, 400, "button_goSprite", this.setButtonLogic, this);
+		this.buttonGo = game.add.button(200, 200, "button_goSprite", this.setButtonLogic, this);
 
-        //Will load other buttons for sprite here
+		//Will load other buttons for sprite here
 
 		//Place button on the screen at X and Y coordinates
 		this.buttonGo.anchor.setTo(0,-2.5);
@@ -101,12 +106,15 @@ Main.prototype = {
 
 	createBackground: function()
 	{
+		//levelName is the string that is used to determine the level based on the level counter
+		var levelName = "Level"+getCurrentLevel();
+
 		// initialised tilemap with matching tileset
-		var mymap = this.game.add.tilemap('Level1');
+		var mymap = this.game.add.tilemap(levelName);
 		mymap.addTilesetImage('tset_world1');
 
-		//Temporary colour for the background, similar to butt_1
-		//this.game.stage.backgroundColor = "#5cc5f2";
+		//Temporary colour for the background, similar to cloud_1
+		this.game.stage.backgroundColor = "#5cc5f2";
 
 		//creates layers matching the .json testlevel
 		layerbackground = mymap.createLayer('background');
@@ -139,10 +147,33 @@ Main.prototype = {
 		this.block.body.static = true;
 	},
 
+	objectLocations: function()
+	{
+
+		switch(getCurrentLevel())
+		{
+			case "1":
+				goal 		= this.game.add.sprite(this.game.world.width-100,400,"goal");
+				this.player = this.game.add.sprite(200, 489, "avatar");
+				break;
+			case "2":
+				goal 		= this.game.add.sprite(this.game.world.width-114,116,"goal");
+				this.player = this.game.add.sprite(500, 160, "avatar");
+				break;
+			case "3":
+				goal 		= this.game.add.sprite(0,400,"goal");
+				this.player = this.game.add.sprite(200, 290, "avatar");
+				break;
+			default:
+				goal 		= this.game.add.sprite(this.game.world.width-100,400,"goal");
+				this.player = this.game.add.sprite(200, 489, "avatar");
+				break;
+		}
+	},
+	
 	createPlayer: function() {
 
 		//places character in world
-		this.player = this.game.add.sprite(500, 160, "avatar");
 		this.game.physics.p2.enable(this.player);
 		//quality of life settings
 		this.player.anchor.setTo(0.5,0.5);
@@ -175,15 +206,8 @@ Main.prototype = {
 			default:
 				//Give the sprite a pathetic speed of 20 pixels/sec
 				this.player.body.velocity.x = 20;
-                break;
+				break;
 		}
-	},
-
-	//can set controls in update so this function not called
-	jump: function()
-    {
-		//preform jump
-		this.player.body.velocity.y = -350;
 	},
 
 	getSpeed: function()
@@ -215,12 +239,6 @@ Main.prototype = {
 		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
-	//currently not called
-	restartGame: function()
-    {
-		// restart the game after death
-		this.game.state.start('main');
-	},
 
     //Checks game state to see if player won.
     gameWin: function(PLAYER, GOAL)
@@ -231,39 +249,34 @@ Main.prototype = {
         var playerY = Math.floor(PLAYER.y-96);
         console.log("PX: "+ playerX +"PY: "+playerY );
 
-
-
-        //get position of Goal.
-        var goalX = Math.floor(GOAL.x);
-        var goalY = Math.floor(GOAL.y);
-        console.log("GX: "+ goalX + "GY: "+goalY);
-
-
-        //if time is more than 5 seconds you lose.
-        if(!timer.running)
-        {
-            window.location.href = 'Canvas_Page.html';
-           //lose game
-        }
-
-            //if player is near goal, you win :D
-        if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
-            window.location.href = 'Score_Page.html';
+        
+    //get position of Goal. 
+    var goalX = Math.floor(GOAL.x); 
+    var goalY = Math.floor(GOAL.y); 
+	console.log("GX: "+ goalX + "GY: "+goalY);
+    //if time is more than 5 seconds you lose. 
+    if(!timer.running){
+        window.location.href = 'Sprite_Page.html';
+       //lose game 
+    }
+        //if player is near goal, you win :D
+    if((playerX <= goalX+error && playerX >= goalX-error ) && (playerY <= goalY+error && playerY >= goalY-error) ){
+        window.location.href = 'Score_Page.html';
 
         }
     },
+    
+    //stop timer; 
+	endTimer: function()
+	{
+		timer.stop();
+		outOfTime = true;
 
-    //stop timer;
-    endTimer: function()
-    {
-        timer.stop();
-        outOfTime = true;
+		//Set sprite to no longer have a velocity when she has run out of time
+		this.confirmGoSprite = "STOP";
+	},
 
-        //Set sprite to no longer have a velocity when she has run out of time
-        this.confirmGoSprite = "STOP";
-    },
-
-    render: function ()
+    render: function () 
     {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
         if (timer.running)
@@ -285,14 +298,14 @@ Main.prototype = {
         return ":" + seconds.substr(-2);
     },
 
-    setButtonLogic: function()
-    {
+	setButtonLogic: function()
+	{
 		//Allow the sprite to go through its movement
 		this.confirmGoSprite = "GO";
 
 		//Greys out the start button
-		//this.buttonGo.visible =! this.buttonGo.visible;
-		this.buttonGo.tint = "#CCCCCC";
-        //this.buttonGo.setFrames(4,3,5);
-    },
+		this.buttonGo.visible =! this.buttonGo.visible;
+		//this.buttonGo.tint = "#CCCCCC";
+		//this.buttonGo.setFrames(4,3,5);
+	},
 };

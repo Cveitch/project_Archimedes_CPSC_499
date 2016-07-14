@@ -1,29 +1,41 @@
 //get canvas information
 var canvas = document.getElementById("Canvas"); 
 var canvas_Context = canvas.getContext("2d");
-canvas.height = window.screen.height;   
+
+canvas.height = window.screen.height;   //canvas.height * (canvas.clientWidth / canvas.clientHeight); 
 canvas.width = window.screen.width; 
 // array for x values
 var xVal = [0]; 
 var i = 0; 
+
+
 //Wiggle wiggle wiggle room for drawing, so that its not so strict. 
 var drawError = 30; 
 //Drawing tells if mouse button has been pressed. 
 var isDrawing; 
+
 // bool to tell if the user has been alerted to drawing backwards, so that it does not become annoying. 
 var hasBeenAlerted = false; 
+
+
 //set 0,0 so that it fits on any screen. 
 var startX = canvas.width - canvas.width; 
 var startY = canvas.height / 2; 
 var startLocation = false; 
+
 //distance between each segment
 var xSegmentLength = Math.floor(canvas.width / 50);
 //array for coords
 var Coords;  
+
 //array for just y values test
 var yCoords = [0]; 
+
 //checks to see if drawing has been done, and can send cords to the engine. 
 var updateReady = false; 
+
+
+
 //draw a starting location on the canvas. 
 var draw_Circle = function(X,Y)
 {
@@ -52,8 +64,10 @@ var setTouchDrawingTrue = function (e)
 }
 //sets drawing to false
 var setDrawingFalse = function (e) 
-{          
+{
+    //send array
     isDrawing = false; 
+    //storeDS(yCoords);
 }
 //draw on Touchscreens 
 var touchDraw = function (e)
@@ -61,6 +75,7 @@ var touchDraw = function (e)
     //prevents scrolling
     event.preventDefault(); 
     //add to array 
+    //xVal.push(e.touches[0].clientX-this.offsetLeft);
     xVal.push(e.touches[0].clientX-this.offsetLeft);
     //check X value 
     if(xVal[i] < e.touches[0].clientX-this.offsetLeft)
@@ -107,8 +122,8 @@ var errorAlert = function()
     
     if(!hasBeenAlerted)
     {
-    window.alert("Cannot draw backwards");
-    hasBeenAlerted = true; 
+        window.alert("Cannot draw backwards");
+        hasBeenAlerted = true; 
     }  
 }
 
@@ -128,7 +143,7 @@ var canvasClear = function()
     draw_Circle(startX, startY); 
 }
 
-//generates Cordanates. 
+//generates Coordinates. 
 var cordGenerator = function(yPixels)
 {
     //send Y corrds to array. 
@@ -136,20 +151,21 @@ var cordGenerator = function(yPixels)
     i++;           
 }
 
+
 //send coords to storage. 
-var sendCoords = function()
-{
-    storeDS(yCoords);     
+var sendCoords = function(){
+
+   storeDS(yCoords);
 }
 
 //resize the Canvas to fit the screen. 
 var resize = function()
 {
-    arrayReset(); 
-    setCanvasSize(); 
-    startX = canvas.width - canvas.width; 
+    arrayReset();
+    setCanvasSize();
+    startX = canvas.width - canvas.width;
     startY = canvas.height / 2;
-    draw_Circle(startX, startY); 
+    draw_Circle(startX, startY);
 }
 //reset arrays
 var arrayReset = function()
