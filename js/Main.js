@@ -286,6 +286,8 @@ Main.prototype = {
     //Button to make the sprite move
 	setSpriteToGo: function()
 	{
+		//turns the button invisible
+		this.buttonSprite.visible =! this.buttonSprite.visible;
 		//Allow the sprite to go through its movement
 		this.confirmGoSprite = "GO";
 	},
@@ -293,6 +295,8 @@ Main.prototype = {
     //Button to go to the canvas page to draw out velocity graph
 	goToCanvas: function()
 	{
+		//turns the button invisible
+		this.buttonCanvas.visible =! this.buttonCanvas.visible;
 		//Go to Canvas page to permit drawing
 		window.location.href = 'Canvas_Page.html';
 	},
@@ -300,9 +304,10 @@ Main.prototype = {
     //Button to go to the score screen to view progress
 	goToScore: function()
 	{
-        //Set winnings to neutral
-        localStorage.win = null;
-
+		//turns the button invisible
+		this.buttonScore.visible =! this.buttonScore.visible;
+        	//Set winnings to neutral
+		 localStorage.win = null;
 		//Go to Canvas page to permit drawing
 		window.location.href = 'Score_Page.html';
 	},
