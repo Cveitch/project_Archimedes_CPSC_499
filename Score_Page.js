@@ -1,8 +1,4 @@
 /**
- * Created by DavisGoulet on 2016-06-19.
- */
-
-/**
  * Loads the score page.
  * @param {integer} levelAttempts
  */
@@ -298,11 +294,7 @@ function getDefinitions(buttonValue)
 }
 
 //this is used to exit out of the popup menu by trying to go to Score_Page.html but this triggers the loadstop function in menu functions
-function closeBrowser(){
-
+function closeBrowser()
+{
     window.location.href = 'Score_Page.html';
-}
-
-    //Resets the variables used to generate the equations.
-    resetVariables()
 }
