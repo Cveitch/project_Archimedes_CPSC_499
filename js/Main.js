@@ -177,7 +177,7 @@ Main.prototype = {
 		{
 			case "STOP":
 				//Give the sprite zero velocity
-				this.player.body.velocity.x = 0;
+				this.player.body.velocity.x = this.nextSpeed;
 				break;
 			case "GO":
 				//Give the sprite zero velocity

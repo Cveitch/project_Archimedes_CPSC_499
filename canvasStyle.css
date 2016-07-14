@@ -54,8 +54,8 @@ button
 {
     background-color: aqua;
     border-radius: 90px 90px 90px 90px;
-    -moz-border-radius: 0px 90px 90px 0px;
-    -webkit-border-radius: 0px 0px 90px 0px;
+    -moz-border-radius: 90px 90px 90px 90px;
+    -webkit-border-radius: 90px 90px 90px 90px;
     background:#d8c23f;
     z-index: 1;
     position: absolute;
@@ -68,8 +68,8 @@ button
 {
     background-color: aqua;
     border-radius: 90px 90px 90px 90px;
-    -moz-border-radius: 90px 90px 0 0;
-    -webkit-border-radius: 90px 90px 0 0;
+    -moz-border-radius: 90px 90px 90px 90px;
+    -webkit-border-radius: 90px 90px 90px 90px;
     background:#d8c23f;
     z-index: 1;
     position: absolute;
