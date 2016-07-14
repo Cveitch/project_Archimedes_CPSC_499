@@ -50,7 +50,7 @@ function signIn(buttonID)
  */
 function continueToGame()
 {
-    window.location.href = "../Sprite_Page.html";
+    window.location.href = "Sprite_Page.html";
 }
 
 /**
