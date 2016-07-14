@@ -202,7 +202,7 @@ Main.prototype = {
 			//if(speedValues[this.arrayIndex] !== null)
 			if(this.arrayIndex < this.speedValues.length)
 			{
-				this.nextSpeed = this.speedValues[this.arrayIndex];
+				this.nextSpeed = this.speedValues[this.arrayIndex]*2;
 			}
 			else
 			{
