@@ -16,9 +16,9 @@ Preload.prototype = {
 		//This is the button used to start the sprite on its adventure down the world in the Sprite page
 		this.game.load.image	("button_goSprite", "assets/images/spr_button.png");
 		//This is the button used to jump to the Canvas page from the Sprite page for the first time
-		this.game.load.image	("button_goCanvas", "assets/images/spr_button3.png");
+		this.game.load.image	("button_goCanvas", "assets/images/spr_button5.png");
 		//This is the button used to jump to the Sprite page from the Canvas page
-		this.game.load.image	("button_goScore", "assets/images/spr_button2.png");
+		this.game.load.image	("button_goScore", "assets/images/spr_button4.png");
 	},
 
 	create: function()
