@@ -102,7 +102,7 @@ var touchDraw = function (e)
     //if current value is less than or equal to old value than erase the canvas. 
     else if(xVal[i] >= e.touches[0].clientX-this.offsetLeft + drawError || xVal[i] < e.touches[0].clientX-this.offsetLeft - drawError )
     {
-        canvasClear();     
+        errorAlert();     
     }
 }
 //dynamic canvas size
@@ -118,8 +118,12 @@ var errorAlert = function()
     setDrawingFalse();
     if(!hasBeenAlerted)
     {
-        window.alert("Cannot draw backwards");
-        hasBeenAlerted = true; 
+        var r = window.confirm("You cannot draw backards"); 
+        if(r == true){
+            canvasRedraw();
+        } else {
+            canvasRedraw(); 
+        }
     }  
 }
 
