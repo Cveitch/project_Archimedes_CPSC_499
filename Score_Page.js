@@ -50,5 +50,12 @@ function replayLevel()
  */
 function nextLevel()
 {
+    //Set a counter for the amount of times player replays the level
+    localStorage.attempt = 0;
+
+    //Set up the next level
+    var nextLevel = parseInt(localStorage.level) + 1;
+    localStorage.level = nextLevel;
+
     window.location.href = 'Sprite_Page.html'
 }

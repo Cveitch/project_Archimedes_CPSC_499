@@ -7,6 +7,9 @@
 
     <script type='text/javascript' >
         var jump = true;
+
+        //Set the first level
+        localStorage.level = 1;
     </script>
 
     <script type = "text/javascript" src = "js/Phaser.js"></script>
@@ -27,7 +30,6 @@
     </style>
 
     <script>
-
         function initiate()
         {
             //Create a new game that fills the screen
@@ -46,7 +48,7 @@
     </script>
 </head>
 
-<body onload="getUsername('usernameLabel')">
+<body onload="getUsername('usernamLabel')">
     <!--Gives a value to the page number, used in context switches-->
     <!--AD: Start the booting sequence-->
     <script>
@@ -60,9 +62,6 @@
         {
             //Creating the local storage object to hold the data structure created from the canvas page
             localStorage.ds = JSON.stringify(ds);
-
-            //Set a counter for the amount of times player replays the level
-            localStorage.attempt = 0;
 
             //Start the game
             initiate();

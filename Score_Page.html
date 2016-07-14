@@ -16,7 +16,12 @@
 <body onload="displayUsername('usernameLabel'); updatePageInfo()" class="pageBackground">
 
     <!--Gives a value to the page number, used in context switches-->
-    <script>var PAGE = "SCORE";</script>
+    <script>
+        var PAGE = "SCORE";
+        var winTitle = "Congratulations!"
+        var lossTitle = "git gud sun";
+        var neutralTitle = "Hey there!";
+    </script>
 
     <div class="centerBoxHorizontal" align="center" >
 
@@ -31,6 +36,25 @@
         <!--main info section of the page-->
         <div style="margin-bottom: 5%">
             <h1 id="titleMessage" class="heading standardFormat" >Congratulations</h1>
+
+            <script>
+                if (localStorage.win == "true")
+                {
+                    //Set the title to congratulate the player
+                    document.getElementById("titleMessage").innerHTML = winTitle;
+                }
+                else if(localStorage.win == "false")
+                {
+                    //Set the title to tell the player to git gud
+                    document.getElementById("titleMessage").innerHTML = lossTitle;
+                }
+                else
+                {
+                    //Set the title to show a neutral message if player enters Score page before win/loss events are
+                    // triggered
+                    document.getElementById("titleMessage").innerHTML = neutralTitle;
+                }
+            </script>
             <p id="levelMessage" class="standardFormat" style="font-size: 35px"></p>
             <p id="attemptMessage" class="standardFormat" style="font-size: 25px"></p>
             <button onclick="replayLevel()" id="replayButton" class="standardButton standardFormat">Replay</button>
