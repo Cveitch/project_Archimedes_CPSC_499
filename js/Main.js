@@ -9,7 +9,7 @@ var timerEvent;
 //if out of time turn false
 var outOfTime;
 //Var for how much time you have to clear the level.
-var timeAllowed = 15;
+var timeAllowed = 5;
 
 Main.prototype = {
 
@@ -128,7 +128,7 @@ Main.prototype = {
 	
 	objectLocations: function()
 	{
-
+        //Loads corresponding level based on getCurrentLevel() request
 		switch(getCurrentLevel())
 		{
 			case "1":
@@ -149,7 +149,8 @@ Main.prototype = {
 				break;
 		}
 	},
-	
+
+    //Creates instance of a player
 	createPlayer: function()
 	{
 		//places character in world
@@ -166,6 +167,7 @@ Main.prototype = {
 		this.player.body.fixedRotation=true;
 	},
 
+    //Moves a player
 	movePlayer: function()
 	{
         //check win condition;
@@ -188,6 +190,7 @@ Main.prototype = {
 		}
 	},
 
+    //Sets the current speed of the player from the d.s.
 	getSpeed: function()
 	{
 		//Retrieve queue/array of the speed values
@@ -217,7 +220,6 @@ Main.prototype = {
 		this.labelIndex.text =  "step..."+this.arrayIndex;
 	},
 
-
     //Checks game state to see if player won.
     gameWin: function(PLAYER, GOAL)
     {
@@ -235,8 +237,7 @@ Main.prototype = {
     	//if time is more than 5 seconds you lose.
     	if(!timer.running)
 		{
-			var new_value = parseInt(localStorage.attempt) + 1;
-			localStorage.attempt = new_value;
+			localStorage.attempt =  parseInt(localStorage.attempt) + 1;
 			localStorage.win = false;
 			window.location.href = 'Score_Page.html';
 		}
@@ -281,6 +282,7 @@ Main.prototype = {
 		return ":" + seconds.substr(-2);
 	},
 
+    //Button to make the sprite move
 	setSpriteToGo: function()
 	{
 		//Allow the sprite to go through its movement
@@ -291,6 +293,7 @@ Main.prototype = {
 		this.buttonSprite.tint = "#CCCCCC";
 	},
 
+    //Button to go to the canvas page to draw out velocity graph
 	goToCanvas: function()
 	{
 		//Greys out the start button
@@ -301,6 +304,7 @@ Main.prototype = {
 		window.location.href = 'Canvas_Page.html';
 	},
 
+    //Button to go to the score screen to view progress
 	goToScore: function()
 	{
 		//Greys out the start button

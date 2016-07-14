@@ -17,20 +17,24 @@ function loadScorePage()
 function updatePageInfo()
 {
     var attemptString = "Attempts: " + getLevelAttempts();
-    var levelString = "Level " + getCurrentLevel() + " complete!";
+
+    //Display level message based on completion of level
+    if(localStorage.win === "false")
+    {
+        var levelString = "Level " + getCurrentLevel() + " incomplete!";
+    }
+    else if(localStorage.win === "null")
+    {
+        var levelString = "Level " + getCurrentLevel() + " still not complete!";
+    }
+    else
+    {
+        var levelString = "Level " + getCurrentLevel() + " complete!";
+    }
 
     document.getElementById("attemptMessage").innerHTML = attemptString;
     document.getElementById("levelMessage").innerHTML = levelString;
 }
-
-//Get the current attempts for the current level
-function getLevelAttempts()
-{
-    var levelAttempts = parseInt(sessionStorage.attempt);
-    
-    return localStorage.attempt;
-}
-
 
 /**
  * Reloads the previous level.
@@ -39,7 +43,6 @@ function replayLevel()
 {
     //Resets the variables used to generate the equations.
     resetVariables()
-    resetLevelAttempts();
     //Go back to the Sprite page
     window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
 }
@@ -53,7 +56,7 @@ function nextLevel()
     resetVariables()
     resetLevelAttempts();
     increaseLevel();
-    window.location.href = "../Sprite_Page.html";
+    window.location.href = 'Sprite_Page.html';
 }
 
 //this brings up the popup menu for the players data
@@ -219,7 +222,6 @@ function getDefinitions(buttonValue)
         " within a domain boundary. Using our velocity example, if we take" +
         " the integral of the function shown on the graph, the resulting area" +
         " is the distance made over a period of time.";
-
 
     switch (buttonValue)
     {

@@ -47,14 +47,14 @@ function increaseLevel()
     var currentLevel = sessionStorage.getItem("currentLevel");
 
     //If the current level is null, then initialize level counter.
-    if(currentLevel === null)
+    if(currentLevel !== null)
     {
-        initializeLevelCounter();
+        currentLevel++;
     }
     //Otherwise increment level counter.
     else
     {
-        currentLevel++;
+        initializeLevelCounter();
     }
     sessionStorage.setItem("currentLevel", currentLevel)
 }
@@ -85,21 +85,21 @@ function initializeLevelCounter()
 }
 
 /**
- * Retuns the current attempts at the level.
+ * Returns the current attempts at the level.
  */
 function getLevelAttempts()
 {
     var levelAttempts = sessionStorage.getItem("levelAttempts");
 
-    //If the value is null, then this is the first time that it is being called so
+    //If the value is null, then this is the first time that it is being called to
     // reset value.
-    if(levelAttempts === null)
+    if(levelAttempts !== null)
     {
-        resetLevelAttempts();
+        sessionStorage.setItem("levelAttempts", localStorage.attempt);
     }
     else
     {
-        sessionStorage.setItem("levelAttempts", localStorage.attempts);
+        resetLevelAttempts();
     }
 
     return sessionStorage.getItem("levelAttempts");
@@ -111,14 +111,14 @@ function getLevelAttempts()
 function increaseLevelAttempts()
 {
     var levelAttempts = sessionStorage.getItem("levelAttempts");
-    
+
     //If the value is null, then this is the first time that it is being called so 
     // reset value.
     if(levelAttempts === null)
     {
         resetLevelAttempts();
     }
-    
+
     //Increments counter then re-saves it.
     levelAttempts++;
     sessionStorage.setItem("levelAttempts", levelAttempts);
@@ -129,5 +129,6 @@ function increaseLevelAttempts()
  */
 function resetLevelAttempts()
 {
-    sessionStorage.setItem("levelAttempts", 0);
+    localStorage.attempt = 0;
+    sessionStorage.setItem("levelAttempts", localStorage.attempt);
 }
