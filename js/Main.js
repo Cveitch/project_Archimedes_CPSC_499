@@ -128,48 +128,48 @@ Main.prototype = {
 	
 	objectLocations: function()
 	{
+
 		switch(getCurrentLevel())
 		{
 			case "1":
-				goal 		= this.game.add.sprite(this.game.world.width-100,400,"goal");
+				this.goal 	= this.game.add.sprite(this.game.world.width-100,400,"goal");
 				this.player = this.game.add.sprite(200, 489, "avatar");
 				break;
 			case "2":
-				goal 		= this.game.add.sprite(this.game.world.width-114,116,"goal");
+				this.goal 	= this.game.add.sprite(this.game.world.width-114,116,"goal");
 				this.player = this.game.add.sprite(500, 160, "avatar");
 				break;
 			case "3":
-				goal 		= this.game.add.sprite(0,400,"goal");
+				this.goal 	= this.game.add.sprite(0,400,"goal");
 				this.player = this.game.add.sprite(200, 290, "avatar");
 				break;
 			default:
-				goal 		= this.game.add.sprite(this.game.world.width-100,400,"goal");
+				this.goal 	= this.game.add.sprite(this.game.world.width-100,400,"goal");
 				this.player = this.game.add.sprite(200, 489, "avatar");
 				break;
 		}
 	},
 	
-	createPlayer: function() {
-
+	createPlayer: function()
+	{
 		//places character in world
 		this.game.physics.p2.enable(this.player);
-		//quality of life settings
+
+		//Follow player
 		this.player.anchor.setTo(0.5,0.5);
 		this.game.camera.follow(this.player);
+
 		//gives player a circle hitbox (radius,offestx,offsety)
 		this.player.body.setCircle(44,0,0);
+
 		//wouldn't want the character tumbling over
 		this.player.body.fixedRotation=true;
 	},
 
 	movePlayer: function()
 	{
-		//Makes sprite jump (temporary measure)
-		var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		spaceKey.onDown.add(this.jump, this);
-
         //check win condition;
-        this.gameWin(this.player,goal);
+        this.gameWin(this.player,this.goal);
 
 		switch(this.confirmGoSprite)
 		{

@@ -22,7 +22,6 @@ Preload.prototype = {
 
 	create: function()
     {
-        alert("Here2");
 		this.game.state.start("Main");
 	}
 }
