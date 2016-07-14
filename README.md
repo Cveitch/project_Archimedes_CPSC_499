@@ -5,7 +5,7 @@ What currently works:
 +Switching between pages without causing the physics engine to load info to other pages that should only be specific to
 ONE page
 +Solved a work around when switching between pages by having each page jump to another (SPRITE<->CANVAS). Error 404
-occurs whenever Buttons.js is involved somehow.
+occurs whenever Comparison.js is involved somehow.
 
 What currently doesn't work:
 -Physics engine keeps reloading its settings whenever Sprite page is activated; should just keep the previous settings

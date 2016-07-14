@@ -24,44 +24,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Score_Page.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/Score_Page.js">
+      <file leaf-file-name="Sprite_Page.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1468526049000" expanded="true" signature="2314:2331" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="2743:2756" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="2999:3012" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="3259:3272" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="4699:4716" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="5027:5040" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="5283:5296" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="5537:5550" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="5789:5802" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="6041:6054" ph="..." />
-                <marker date="1468526049000" expanded="true" signature="6290:6303" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="280" column="47" selection-start-line="280" selection-start-column="47" selection-end-line="280" selection-end-column="47" />
+            <state relative-caret-position="675">
+              <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Score_Page.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Score_Page.html">
+      <file leaf-file-name="Boot.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/Boot.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
+            <state relative-caret-position="120">
+              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Comparison.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/Comparison.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -96,7 +83,6 @@
         <option value="$PROJECT_DIR$/Splash_Page.html" />
         <option value="$PROJECT_DIR$/Drawing.js" />
         <option value="$PROJECT_DIR$/Canvas_Page.html" />
-        <option value="$PROJECT_DIR$/Sprite_Page.html" />
         <option value="$PROJECT_DIR$/js/Boot.js" />
         <option value="$PROJECT_DIR$/js/Preload.js" />
         <option value="$PROJECT_DIR$/js/UserInfo.js" />
@@ -104,6 +90,8 @@
         <option value="$PROJECT_DIR$/Score_Page.html" />
         <option value="$PROJECT_DIR$/js/Score_Page.js" />
         <option value="$PROJECT_DIR$/js/Main.js" />
+        <option value="$PROJECT_DIR$/js/Buttons.js" />
+        <option value="$PROJECT_DIR$/Sprite_Page.html" />
       </list>
     </option>
   </component>
@@ -282,7 +270,7 @@
       <workItem from="1468468628512" duration="876000" />
       <workItem from="1468469548762" duration="170000" />
       <workItem from="1468469727024" duration="1099000" />
-      <workItem from="1468524129703" duration="2101000" />
+      <workItem from="1468524129703" duration="2530000" />
     </task>
     <task id="LOCAL-00001" summary="Merge remote-tracking branch 'origin/DAVIS_1' into TIM_1&#10;&#10;# Conflicts:&#10;#&#9;Canvas_Page.html&#10;">
       <created>1466241127978</created>
@@ -316,7 +304,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22391000" />
+    <option name="totallyTimeSpent" value="22820000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -325,6 +313,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15329626" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24954791" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -337,7 +326,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -567,14 +555,6 @@
     <entry file="file://$PROJECT_DIR$/Drawing.js" />
     <entry file="file://$PROJECT_DIR$/Buttons.js" />
     <entry file="file://$PROJECT_DIR$/UserInfo.js" />
-    <entry file="file://$PROJECT_DIR$/js/Boot.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/UserInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1950">
@@ -618,14 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Splash_Page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -665,8 +637,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="4200">
           <caret line="280" column="47" selection-start-line="280" selection-start-column="47" selection-end-line="280" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/Boot.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/Comparison.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sprite_Page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="52" selection-start-line="45" selection-start-column="52" selection-end-line="45" selection-end-column="52" />
           <folding />
         </state>
       </provider>
