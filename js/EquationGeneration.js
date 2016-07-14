@@ -13,46 +13,39 @@ function resetVariables()
 
 /**
  * Wrapper to load the interpolation equation.
- * @param containerID
+ * @return {String} equation
  */
-function loadInterpolation(containerID)
+function getInterpolation()
 {
     //arrayValues contains 2 arrays, the first holding x values, the second y values.
     var arrayValues = getDataPoints();
-    console.log(arrayValues[0].toString()+" "+arrayValues[1].toString());
-    formatAndDisplay(containerID,interpolate(arrayValues[0],arrayValues[1]));
+    //console.log(arrayValues[0].toString()+" "+arrayValues[1].toString());
+    return ("`"+interpolate(arrayValues[0],arrayValues[1])+"`");
 }
 
 /**
  * Wrapper to load the integral equation.
- * @param containerID
+ * @return {String} equation
  */
-function loadIntegral(containerID)
+function getIntegral()
 {
-    formatAndDisplay(containerID,integrate());
+    return ("`"+integrate()+"`");
 }
 
 /**
  * Wrapper to load the derivative equation.
- * @param containerID
+ * @return {String} equation
  */
-function loadDerivative(containerID)
+function getDerivative()
 {
-    formatAndDisplay(containerID,differentiate());
+    return ("`"+differentiate()+"`");
 }
 
 /**
- * Sets the equation to the given container and tells MathJax to
- * recheck the page for any new formatting.
- * @param containerID
- * @param equation
+ * Tells MathJax to format any text in ``
  */
-function formatAndDisplay(containerID, equation)
+function format()
 {
-    //Display the equation to the element given by the ID.
-    //Any text between a set of `` will be formatted in MathJax.
-    document.getElementById(containerID).innerHTML = ("`" + equation + "`");
-
     //Configures MathJax to desired properties.
     //Should give warning of unresolved variable in an IDE since the MathJax object
     //only exists when the Score_Page is loaded.
