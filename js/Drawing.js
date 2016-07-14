@@ -3,7 +3,9 @@ var canvas = document.getElementById("Canvas");
 var canvas_Context = canvas.getContext("2d");
 canvas.height = window.screen.height;   
 canvas.width = window.screen.width; 
-var button1 = document.getElementById("goButton"); 
+var button1 = document.getElementById("goButton");
+var button2 = document.getElementById("resetButton"); 
+var button3 = document.getElementById("canvasButton"); 
 // array for x values
 var xVal = [0]; 
 var i = 0; 
@@ -57,12 +59,17 @@ var setDrawingFalse = function (e)
     isDrawing = false;
     //show buttons
     button1.style.visibility = "visible";
+    button2.style.visibility = "visible";
+    button3.style.visibility = "visible";
 }
 //draw on Touchscreens 
 var touchDraw = function (e)
 {
     //hide buttons
     button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
+
     //prevents scrolling
     event.preventDefault(); 
     //add to array 
