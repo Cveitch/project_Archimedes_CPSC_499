@@ -34,7 +34,6 @@ function replayLevel()
 {
     //Resets the variables used to generate the equations.
     resetVariables();
-    localStorage.attempt++;
     //Go back to the Sprite page
     window.location.href = 'Sprite_Page.html'+'#'+'FALSE';
 }
@@ -46,9 +45,8 @@ function nextLevel()
 {
     //Resets the variables used to generate the equations.
     resetVariables();
-    resetLevelAttempts();
     increaseLevel();
-    localStorage.attempt++;
+    localStorage.attempt = 0;
     window.location.href = 'Sprite_Page.html';
 }
 
