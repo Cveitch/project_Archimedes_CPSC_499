@@ -3,17 +3,13 @@ var Main = function(game)
 	//This function allows "Main" to be accessed by the game instance
 };
 
-/variables to keep track of time.
+//variables to keep track of time.
 var timer;
-var timer2; 
 var timerEvent;
-var timer2Event; 
 //if out of time turn false
 var outOfTime;
 //Var for how much time you have to clear the level.
 var timeAllowed = 25;
-var delayTime = 999; 
-var time = true; 
 
 Main.prototype = {
 
@@ -37,9 +33,13 @@ Main.prototype = {
 
         //start timer
         timer = game.time.create();
-        timer.start(); 
-         //delayed event
-        timerEvent = timer. add(Phaser.Timer.SECOND * delayTime, this.endTimer, this);
+
+		//delayed event
+        timerEvent = timer. add(Phaser.Timer.SECOND * timeAllowed, this.endTimer, this);
+
+		//start timer
+        timer.start();
+        outOfTime = false;
 
         //Enable the physics to start
         this.createPhysics();
@@ -168,9 +168,8 @@ Main.prototype = {
 	},
 
     //Moves a player
-movePlayer: function()
+	movePlayer: function()
 	{
-      
         //check win condition;
         this.gameWin(this.player,this.goal);
 
@@ -183,14 +182,6 @@ movePlayer: function()
 			case "GO":
 				//Give the sprite zero velocity
 				this.player.body.velocity.x = this.nextSpeed;
-                  //put time here
-                timer2 = game.time.create();
-                timer2.start(); 
-                
-                //delayed event
-                timer2Event = timer2. add(Phaser.Timer.SECOND * timeAllowed, this.endTimer, this);
-
-
 				break;
 			default:
 				//Give the sprite a pathetic speed of 20 pixels/sec
@@ -275,7 +266,7 @@ movePlayer: function()
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
         if (timer.running)
         {
-            
+            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), this.game.world.width/2, 30, "#d8c23f");
         }
         else
         {
