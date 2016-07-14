@@ -146,7 +146,20 @@ var canvasClear = function()
     canvasRedraw(); 
 }
 //Clear the canvas without popup
+var canvasRedraw = function()
+{
+ //clear canvas
+    canvas_Context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas_Context.beginPath();
+    //reset start local
+    startLocation = false; 
+    setDrawingFalse();  
+    arrayReset(); 
+    //redraw start location bubble and X line
+    draw_Circle(startX, startY); 
 
+
+}
 
 //generates Coordinates. 
 var cordGenerator = function(yPixels)
