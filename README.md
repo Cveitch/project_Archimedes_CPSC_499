@@ -9,7 +9,8 @@ occurs whenever Comparison.js is involved somehow.
 
 What currently doesn't work:
 -Physics engine keeps reloading its settings whenever Sprite page is activated; should just keep the previous settings
-form the first time it is loaded
+form the first time it is loaded (fixed!)
+-The game isn't resizing to the device window despite being told to resize to the viewing window (initialized in Sprite_Page.html).
 
 //--How things work--//:
 
@@ -39,30 +40,26 @@ and into create():
 
 5) Jumping into Preload.js, "Preload" (which is represented as the Preload variable called earlier in state.add) loads
 up:
-    this.game.load.image("betty", "assets/betty.png");
-    this.game.load.physics("sprite_physics", "assets/sprite_physics.json");
-    <!--This is where the sprites are loaded to be used by the game instance-->
-    <!--The second line is creating the physics and collision parameters to the sprite in the .json file-->
+    this.game.load.image("example_sprite_image", "dir/to/example_sprite_image.png");
+    this.game.load.tilemap("example_level", "dir/to/example_level.json", null, Phaser.Tilemap.TILE_JSON);
+    <!--This is where sprites, images, and tile sets (level layout) are loaded to be used by the game instance-->
+    <!--The second line is creating the physics and collision parameters of the level-->
 
     this.game.state.start("Main");
     <!--As you can guess, we are jumping into Main.js-->
 
-6) Jumping into Main.js, "Main" (which is represented as the Main variable called earlier in state.add) loads
-up and steps through all the functions in sequential order:
-    this.game.stage.backgroundColor = '#ccddff';
-    <!--This creates a blue-ish background-->
+Jumping into Main.js, "Main" (which is represented as the Main variable called earlier in state.add) loads
+up and steps through all the functions in sequential order. These include functions creating the physics for the world, the background, the player (sprite), levels, and buttons.
+
+6) createPhysics() sets up the physics to be used throughout the entire game. This is where the P2 physics engine is activated to be 	    used throughout the game. 
 
     this.game.physics.startSystem(Phaser.Physics.P2JS);.
     <!--This line allows for the P2 engine to be engaged-->
 
-    this.game.physics.p2.gravity.y = 1000;
+    this.game.physics.p2.gravity.y = 1400;
     <!--Once the P2 engine has been activated, you can set the gravity of the game instance envrionment-->
 
-    this.createBlock();
-    this.createPlayer();
-    <!--Both of these lines are called to create a block that acts as a ceiling tile and a sprite, respectively-->
-
-7) createBlock() creates a sprite created through bitmapping and not through any imports of sprite files.
+7) createBackground() enables the level and the rest of the game world to be loaded.
     var blockShape = this.game.add.bitmapData(this.game.world.width, 200);
     <!--Creates a blockShape variable that is the width of the game's display in terms of pixels and 200 pixels in length-->
 
@@ -89,68 +86,91 @@ up and steps through all the functions in sequential order:
     rectangle is set to the top left corner of the game's display. This will cause it to appear like a tiled roof-->
 
 8) createPlayer() creates a sprite using the sprite files preloaded from the Preload.js:
-    this.player = this.game.add.sprite(200, 400, 'betty');
-    <!--Adding the sprite "betty" to the player instance in order to be used a sprite-->
 
-    this.game.physics.p2.enable([this.player], false);
-    <!--same as above in createBlock(), but the boolean expression can be toggled to debug the physics of "betty" if
-    true-->
+    this.game.physics.p2.enable(this.player);
+    <!--places character in world-->
 
-    this.player.body.clearShapes();
-    <!--This ensures that there aren't any mass properties and bounding radius from the person instance, only using
-    "betty"'s properties denoted in the preloaded .json file-->
-
-    this.player.body.loadPolygon("sprite_physics", "betty");
-    <!--This loads up the physics properties given in the .json file for "betty"-->
+    this.player.anchor.setTo(0.5,0.5);
+    <!--Sets the sprite at an x and y placement from its original initiation-->
     
-9) getSpeed() pulls the latest speed present from a queue/array and then to be updated as the next speed for the sprite to have. The latest speed is saved as the nextSpeed object:
-	if(this.arrayMoment % 50 === 0)
-	{
-		//if(speedValues[this.arrayIndex] !== null)
-		if(this.arrayIndex < speedValues.length)
-		{
-			this.nextSpeed = speedValues[this.arrayIndex];
-		}
-		else
-		{
-			//sets the speed to the degault setting
-			this.nextSpeed = 0;
-		}
-		this.arrayIndex += 1;
-	}
-	<!--Block of code that needs some explaining-->
-
-    if(this.arrayMoment % 50 === 0){...}
-    <!--This condition passes whenever update() iterates
-    every 50 cycles and then allows the next speed should be removed from the data structure-->
-
-    if(this.arrayIndex < speedValues.length){...}
-    <!--This condition activates only when the arrayIndex is lower the length than the length of the data structure-->
+    this.game.camera.follow(this.player);;
+    <!--Camera follows the player throughout the world-->
     
-    this.nextSpeed = speedValues[this.arrayIndex];
-    <!--When the arrayIndex is still smaller than the data structure's length, the nextSpeed is pulled from the d.s.-->
+    this.player.body.setCircle(44,0,0)
+    <!--Gives the player a hitbox (radius, offestx, offsety)-->
 
-    this.nextSpeed = 0;
-    <!--When the arrayIndex is larger or equal to the d.s.'s length, the nextSpeed is set to the default speed of 150-->
+    this.player.body.fixedRotation=true;
+    <!--wouldn't want the character tumbling over-->
 
-10) movePlayer() is pretty self-explanatory: this is the function that will set the velocity taken by getSpeed() to the sprite:
-    //If the queue is empty OR if the velocity is 0
-	if(this.nextSpeed === 0)
+9) createButtons() sets up the buttons to be used in-game. The functions button_goSprite(), button_goCanvas(), and button_goScore() are called when their respective buttons are pressed.
+    
+    <!--Create the buttons in the game-->
+    createButtons: function()
+    {
+	this.buttonSprite = this.game.add.button(this.game.world.centerX-50, this.game.world.centerY+240, "button_goSprite",
+	      this.setSpriteToGo, this);
+      	this.buttonCanvas = this.game.add.button(this.game.world.centerX+375, this.game.world.centerY-300, "button_goCanvas", this.goToCanvas, this);
+      	this.buttonScore  = this.game.add.button(this.game.world.centerX-500, this.game.world.centerY-300, "button_goScore", this.goToScore, this);
+    },
+
+10) getSpeed() pulls the latest speed present from a queue/array and then to be updated as the next speed for the sprite to have. The latest speed is saved as the nextSpeed object:
+    if(this.arrayMoment % 50 === 0)
+    {
+	if(this.arrayIndex < speedValues.length)
 	{
-		//Sprite speed
-		this.player.body.velocity.x = 150;
+		this.nextSpeed = speedValues[this.arrayIndex];
 	}
 	else
 	{
-		this.player.body.velocity.x = this.nextSpeed;
+		//sets the speed to the degault setting
+		this.nextSpeed = 0;
 	}
-	<!--Core of how movePlayer() works-->
+	this.arrayIndex += 1;
+    }
+    this.arrayMoment += 1;
+
+11) movePlayer() is pretty self-explanatory: this is the function that will set the velocity taken by getSpeed() to the sprite.
+    
+    this.gameWin(this.player,this.goal);
+    <!--This checks to see if the player has reached the goal-->
+
+    switch(this.confirmGoSprite)
+    {
+    	<!--The velocity is measured using pixels per second-->
+      	case "STOP"
+         this.player.body.velocity.x = this.nextSpeed;
+         break;
+      	case "GO":
+         this.player.body.velocity.x = this.nextSpeed;
+         break;
+      	default:
+	 this.player.body.velocity.x = 20;
+	 break;
+   }
+
+12) objectLocations() is a case statement function that loads up the goal and sprite image from Preload.js to be activated in      game:
+
+   <!--Loads corresponding level based on getCurrentLevel() request-->
+   switch(getCurrentLevel())
+   {
+   	case "1":
+      	 this.goal  = this.game.add.sprite(this.game.world.width-100,400,"goal");
+      	 this.player = this.game.add.sprite(200, 489, "avatar");
+	 break;
+   	case "2":
+      	 this.goal  = this.game.add.sprite(this.game.world.width-114,116,"goal");
+       	 this.player = this.game.add.sprite(500, 160, "avatar");
+      	 break;
+   	case "3":
+      	 this.goal  = this.game.add.sprite(0,400,"goal");
+      	 this.player = this.game.add.sprite(200, 290, "avatar");
+      	 break;
+   	default:
+      	 this.goal  = this.game.add.sprite(this.game.world.width-100,400,"goal");
+      	 this.player = this.game.add.sprite(200, 489, "avatar");
+      	 break;
+   }
 	
-	if(this.nextSpeed === 0){...}
-	<!--This condition allows for the default velocity setting-->
-	
-	this.player.body.velocity.x = this.nextSpeed;
-	<!--If the default condition is not set as 0, then the player velocity is set as the value removed from the d.s.-->
 
 Credit where it's due:
 
